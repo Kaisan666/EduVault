@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "mysql+mysqlconnector://root:123456789@localhost:3310/EduVault>"
+SQLALCHEMY_DATABASE_URL = "postgresql+psycopg2://postgres:123456789@localhost:3315/EduVault>"
 # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
 
 engine = create_engine(
