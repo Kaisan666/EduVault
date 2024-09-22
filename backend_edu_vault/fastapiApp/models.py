@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -18,6 +18,7 @@ class Person(Base):
 
     student = relationship("Student", back_populates="person" )
     lecturer = relationship("Lecturer", back_populates="person")
+    user = relationship("User", back_populates="person")
 
 class Student(Base):
     __tablename__ = 'students'
@@ -67,5 +68,40 @@ class Department(Base):
 
     lecturers = relationship("Lecturer",back_populates="department" )
 
+association_table_roles_users = Table('role_user', Base.metadata,
+Column('user_id', Integer, ForeignKey('users.id')),
+Column('role_id', Integer, ForeignKey('roles.id'))
+)
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    login = Column(String(128))
+    password = Column(String(256))
+    person_id = Column(Integer, ForeignKey("persons.id"), unique=True)
+
+    person = relationship("Person", back_populates="user")
+    roles = relationship("Role", secondary=association_table_roles_users, back_populates="users")
+
+
+association_table_roles_permissions = Table("role_permission", Base.metadata,
+Column("role_id", Integer, ForeignKey('roles.id')),
+      Column("permission_id", Integer, ForeignKey('permissions.id')))
+
+class Role(Base):
+    __tablename__ = "roles"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(128))
+    code = Column(Integer)
+
+    users = relationship('User', secondary=association_table_roles_users, back_populates="roles" )
+    permissions = relationship('Permission', secondary=association_table_roles_permissions, back_populates="roles")
+
+class Permission(Base):
+    __tablename__ = "permissions"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256))
+    code = Column(Integer)
+
+    roles = relationship("Role", secondary=association_table_roles_permissions, back_populates="permissions")
 
 
