@@ -1,8 +1,8 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Table
 from sqlalchemy.orm import relationship
 
-from .database import Base
-
+from sqlalchemy.ext.declarative import declarative_base
+Base = declarative_base()
 class Person(Base):
     __tablename__ = 'persons'
 
@@ -16,7 +16,7 @@ class Person(Base):
     student_id = Column(Integer, ForeignKey('students.id'), unique=True, nullable=True)
     lecturer_id = Column(Integer, ForeignKey('lecturers.id'), unique=True, nullable=True)
 
-    student = relationship("Student", back_populates="person" )
+    student = relationship("Student", back_populates="person")
     lecturer = relationship("Lecturer", back_populates="person")
     user = relationship("User", back_populates="person")
 
@@ -31,6 +31,11 @@ class Student(Base):
 
     group = relationship("Group", back_populates="students")
 
+association_table_discipline_group = Table("discipline_group", Base.metadata,
+Column("group_id", Integer, ForeignKey('groups.id')),
+        Column('discipline_id', Integer, ForeignKey('disciplines.id')))
+
+
 class Group(Base):
     __tablename__ = 'groups'
     id = Column(Integer, primary_key=True)
@@ -38,7 +43,7 @@ class Group(Base):
     specialization_id = Column(Integer, ForeignKey("specializations.id"))
     students = relationship("Student", back_populates="group" )
     specialization = relationship("Specialization", back_populates="groups")
-
+    disciplines = relationship("Discipline", secondary=association_table_discipline_group, back_populates="groups")
 class Specialization(Base):
     __tablename__ = "specializations"
     id = Column(Integer, primary_key=True)
@@ -103,5 +108,36 @@ class Permission(Base):
     code = Column(Integer)
 
     roles = relationship("Role", secondary=association_table_roles_permissions, back_populates="permissions")
+
+
+
+class Discipline(Base):
+    __tablename__ = "disciplines"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256))
+
+    laboratories = relationship("Laboratory", back_populates="discipline")
+
+association_table_file_laboratory = Table("file_laboratory", Base.metadata,
+        Column("file_id", Integer, ForeignKey("files.id")),
+        Column("laboratory_id", Integer, ForeignKey("laboratories.id")))
+
+class Laboratory(Base):
+    __tablename__ = "laboratories"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256))
+    description = Column(String(512))
+    discipline_id = Column(Integer, ForeignKey('disciplines.id'))
+
+    discipline = relationship("Discipline", back_populates="laboratories")
+    files = relationship("File", secondary=association_table_file_laboratory, back_populates="laboratory")
+
+class File(Base):
+    __tablename__= "files"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(256))
+    url = Column(String(2048))
+
+
 
 
