@@ -1,0 +1,48 @@
+.disciplineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.disciplineBox {
+    border: 4px solid #09600862;
+    border-radius: 40px;
+    padding: 20px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+
+}
+
+.disciplineItem {
+    background-color: #2f802e7e; 
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 50px 20px;
+    margin: 20px;
+    text-align: center;
+    flex: 0 1 calc(25% - 20px); 
+    box-sizing: border-box; 
+}
+
+.loadMore {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #008CBA; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.loadMore:hover {
+    background-color: #005f73; 
+}
+.lab{
+    font-size: 24px;
+    color: #20994496;
+}
