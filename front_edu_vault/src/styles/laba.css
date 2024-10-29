@@ -1,0 +1,65 @@
+.labwork-card {
+    border-radius: 35px;
+    border: 2px solid #0e6235a9;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(33, 143, 35, 0.384);
+    margin: 20px auto; /* Центрирование карточки */
+    max-width: 1300px; /* Ограничение максимальной ширины */
+    margin-top: 50px;
+}
+
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .download-button {
+    background-color: rgba(16, 91, 16, 0.573);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 30px 75px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .lab-title {
+    margin-left: 20px;
+  }
+  
+  .pdf-container {
+    margin-top: 20px; 
+    overflow-y: scroll; 
+}
+
+.pdf-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 28px; 
+    width: 8px; 
+    height: 10px;
+    background: #ffffff00; 
+    border-radius: 20px; 
+}
+
+.pdf-container::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.pdf-container::-webkit-scrollbar-track {
+    background: #f1f1f100;
+}
+
+.pdf-container::-webkit-scrollbar-thumb {
+    background-color: #395334; 
+    border-radius: 20px; 
+}
+
+.pdf-container::-webkit-scrollbar-thumb:hover {
+    background-color: #094c0462;  
+}
+
+  

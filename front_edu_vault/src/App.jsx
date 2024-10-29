@@ -7,11 +7,13 @@ import Switcher from './components/switcher'
 import Main from './page/main';
 import DisciplineCard from './components/DisciplineCard';
 import LabWorksPage from './page/laboratory_work';
+import LabWorkCard from './components/laba';
+import LabPage from './page/laba_page';
 function App() {
 
   return (
     <>
-     <LabWorksPage/> 
+     <LabPage/> 
     </>
   )
 }
