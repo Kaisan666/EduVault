@@ -6,11 +6,12 @@ import  DisciplineList from './components/main_user'
 import Switcher from './components/switcher'
 import Main from './page/main';
 import DisciplineCard from './components/DisciplineCard';
+import LabWorksPage from './page/laboratory_work';
 function App() {
 
   return (
     <>
-     <DisciplineCard/> 
+     <LabWorksPage/> 
     </>
   )
 }
