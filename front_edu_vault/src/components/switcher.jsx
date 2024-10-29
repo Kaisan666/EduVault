@@ -1,24 +1,20 @@
+// Switcher.js
 import React from 'react';
-import '../styles/switcher.module.css';
+import { useTheme } from './Context'; 
+import styles from '../styles/switcher.module.css';
 
-const Switch = ({ isOn, handleToggle }) => {
-    return (
-      <>
-        <input
-          checked={isOn}
-          onChange={handleToggle}
-          className="react-switch-checkbox"
-          id={`react-switch-new`}
-          type="checkbox"
-        />
-        <label
-          className="react-switch-label"
-          htmlFor={`react-switch-new`}
-        >
-          <span className={`react-switch-button`} />
-        </label>
-      </>
-    );
-  };
-  
-  export default Switch;
+const Switcher = () => {
+  const { isDarkTheme, toggleTheme } = useTheme();
+
+  return (
+    <>
+      <div 
+        className={`${styles.toggle} ${isDarkTheme ? styles.dark : styles.light}`} 
+        onClick={toggleTheme}
+      ></div>
+      <span className={styles.label}>{isDarkTheme ? '' : ''}</span>
+    </>
+  );
+};
+
+export default Switcher;

@@ -1,7 +1,5 @@
 import React from 'react';
 import styles from '../styles/main_user.module.css'; 
-import Header from './header';
-import Footer from './footer ';
 
 const disciplines = [
     'ПРОГРАММНАЯ ИНЖЕНЕРИЯ',
@@ -23,8 +21,6 @@ const DisciplineList = () => {
 
     return (
        <>
-       
-          <Header/>
             <div className={styles.disciplineContainer}>
                 <h2>ПРИКЛАДНАЯ ИНФОРМАТИКА ПИ2201-04</h2>
                 <h3 className={styles.lab}>ЛАБОРАТОРНЫЕ РАБОТЫ</h3>
@@ -37,7 +33,6 @@ const DisciplineList = () => {
                     ))}
                 </div>
             </div>
-            <Footer/>
             </>
     );
 };

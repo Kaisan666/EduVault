@@ -3,12 +3,14 @@ import Header from './components/header';
 import LoginForm from './components/entrance';
 import Entrance from './page/page_input';
 import  DisciplineList from './components/main_user'
-import Switch from './components/switcher'
+import Switcher from './components/switcher'
+import Main from './page/main';
+import DisciplineCard from './components/DisciplineCard';
 function App() {
 
   return (
     <>
-     <Switch/> 
+     <DisciplineCard/> 
     </>
   )
 }

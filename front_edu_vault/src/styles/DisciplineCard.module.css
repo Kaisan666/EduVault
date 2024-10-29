@@ -1,0 +1,58 @@
+.card {
+    border: 2px solid #54804D;
+    border-radius: 28px;
+    padding: 16px;
+    margin: 16px 100px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивание по левому краю */
+    height: 50vh; 
+    margin-top: 190px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px; /* Отступ снизу для заголовка */
+}
+
+.greenSquare {
+    display: flex;
+    flex-direction: column;
+    background-color: #2f802e86; /* Цвет фона для выделения */
+    padding: 38px;
+    border-radius: 28px;
+}
+
+.disciplineName {
+    font-weight: bold; /* Жирный шрифт для имени дисциплины */
+    font-size: 20px; /* Размер шрифта */
+    color: #ffffff;
+}
+
+.disciplineId {
+    color: #00000000; /* Цвет для ID дисциплины */
+    font-size: 1px;
+}
+
+.labList {
+    list-style-type: none; /* Убирает маркеры списка */
+    padding: 0; /* Убирает отступы */
+    margin: 0; /* Убирает отступы */
+}
+
+.labItem {
+    display: flex;
+    align-items: center; /* Центрирует иконку и текст по вертикали */
+    margin: 30px 0; /* Отступы между элементами списка */
+    font-size: 28px; /* Размер шрифта */
+    color: #4B9F3E;
+}
+
+.fileIcon {
+    width: 24px; /* Ширина изображения */
+    height: 24px; /* Высота изображения */
+    margin-left: 8px; /* Отступ слева от названия лабораторной работы */
+    vertical-align: middle; /* Выравнивание по вертикали */
+}
