@@ -19,23 +19,26 @@ const disciplines = [
 ];
 
 const DisciplineList = () => {
-    const visibleDisciplines = disciplines.length; // Показываем все дисциплины
+    const visibleDisciplines = disciplines.length; 
 
     return (
+       <>
        
-          
+          <Header/>
             <div className={styles.disciplineContainer}>
-                <h2>id факультета + поток(группы)</h2>
+                <h2>ПРИКЛАДНАЯ ИНФОРМАТИКА ПИ2201-04</h2>
                 <h3 className={styles.lab}>ЛАБОРАТОРНЫЕ РАБОТЫ</h3>
                 <div className={styles.disciplineBox}>
+                    
                     {disciplines.slice(0, visibleDisciplines).map((discipline, index) => (
-                        <div key={discipline} className={styles.disciplineItem}> {/* Используем discipline как ключ */}
+                        <div key={discipline} className={styles.disciplineItem}> {}
                             {discipline}
                         </div>
                     ))}
                 </div>
             </div>
-          
+            <Footer/>
+            </>
     );
 };
 
