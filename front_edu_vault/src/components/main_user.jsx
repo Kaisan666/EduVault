@@ -22,8 +22,8 @@ const DisciplineList = () => {
     return (
        <>
             <div className={styles.disciplineContainer}>
-                <h2>ПРИКЛАДНАЯ ИНФОРМАТИКА ПИ2201-04</h2>
-                <h3 className={styles.lab}>ЛАБОРАТОРНЫЕ РАБОТЫ</h3>
+                <h2 className={styles.lab}>ФАКУЛЬТЕТ ПРИКЛАДНОЙ ИНФОРМАТИКИ ПИ2201-04</h2>
+                <h2 className={styles.lab}>ЛАБОРАТОРНЫЕ РАБОТЫ</h2>
                 <div className={styles.disciplineBox}>
                     
                     {disciplines.slice(0, visibleDisciplines).map((discipline, index) => (

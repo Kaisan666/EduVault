@@ -9,11 +9,12 @@ import DisciplineCard from './components/DisciplineCard';
 import LabWorksPage from './page/laboratory_work';
 import LabWorkCard from './components/laba';
 import LabPage from './page/laba_page';
+import LoginFormAdmin from './components/admin_entrance';
 function App() {
 
   return (
     <>
-     <LabPage/> 
+     <LoginFormAdmin/> 
     </>
   )
 }

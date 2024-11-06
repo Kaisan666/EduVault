@@ -13,10 +13,23 @@ const LoginForm = () => {
     setLoading(true);
     setError('');
 
-    // Логика для входа
     try {
-      await fakeLogin(username, password);
-      console.log('Успешный вход');
+     
+      const response = await fetch('/api/student/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Ошибка при входе');
+      }
+      alert('Успешный вход!');
+    
     } catch (err) {
       setError('Неверный логин или пароль');
     } finally {
@@ -24,23 +37,12 @@ const LoginForm = () => {
     }
   };
 
-  const fakeLogin = (username, password) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (username === 'user' && password === 'pass') {
-          resolve();
-        } else {
-          reject(new Error('Неверные данные'));
-        }
-      }, 1000);
-    });
-  };
-
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit} className={styles.loginForm}>
-        <img src={logo} alt="Логотип" className={styles.logo} /> {/* Добавлено изображение */}
+        <img src={logo} alt="Логотип" className={styles.logo} />
         {error && <p className={styles.error}>{error}</p>}
+
         <div>
           <label htmlFor="username"></label>
           <input

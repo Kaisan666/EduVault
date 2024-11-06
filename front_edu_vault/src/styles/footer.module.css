@@ -1,13 +1,7 @@
-.footer {
-    background-color: rgba(47, 128, 46, 0.8); 
-    color: white;
-    padding: 10px 0; 
-    position: relative;
-    width: 100%;
-    bottom: 0;
-    margin-top: 120px;
-    
-
+.footerImage {
+    width: 1900px; 
+    height: 190px; 
+    margin-top: -10px;
 }
 
 .container {

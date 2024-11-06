@@ -1,56 +1,50 @@
-.header {
-    background-color: rgba(47, 128, 46, 0.7); 
-    height: 90px; 
-    color: white;
-    display: flex; 
-    justify-content: space-between;
-    align-items: center; 
-    padding: 0; 
-    margin: 0; 
+
+.headerContainer {
+    display: flex; /* Используйте flexbox для выравнивания элементов */
+    align-items: center; /* Центрирование по вертикали */
+    justify-content: space-between; /* Распределение пространства между элементами */
+}
+.headerImageContainer {
+    position: relative; 
 }
 
-.logoContainer { 
-    display: flex; 
+.headerImage {
+    width: 1900px; 
+    height: 190px; 
+}
+
+.logoContainer {
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    display: flex;
     align-items: center; 
 }
 
 .logo {
-    height: 100%;
+    width: 70px; 
+    height: 90px; 
 }
 
-.brandName { 
-    color: #ffffff; 
-    font-weight: bold; 
-    font-size: 24px; 
-    margin-left: 10px; 
+.brandName {
+    font-size: 28px; 
+    font-weight: bold;
+    margin-left: 5px; 
+    color: #ffffff;
+    margin-top: 5px;
 }
 
 .logoutButton {
-    background-color: #ffffff00; 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px; 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
 }
 
-.logoutButton:hover {
-    background-color: #ffffff00; 
-}
-
-.navList { 
-    list-style-type: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-}
-
-.navItem {
-    margin-right: 20px; 
-}
-
-.navItem a { 
-    color: white; 
-    text-decoration: none; 
-    font-weight: bold;
+.userIcon {
+    width: 40px; 
+    height: auto; 
+    margin-top: 15px;
 }

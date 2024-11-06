@@ -5,7 +5,7 @@ import Header from '../components/header';
 import DisciplineList from '../components/main_user';
 import Footer from '../components/footer ';
 import styles from '../styles/main.module.css'; 
-import Switcher from '../components/switcher';
+//import Switcher from '../components/switcher';
 
 const MainContent = () => {
   const { isDarkTheme } = useTheme();
@@ -18,7 +18,7 @@ const MainContent = () => {
     <div className={styles.mainContainer}>
       <Header />
       <div className={styles.content}>
-        <Switcher />
+        
         <DisciplineList />
       </div>
       <Footer />
