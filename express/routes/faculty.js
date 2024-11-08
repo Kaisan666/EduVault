@@ -1,8 +1,9 @@
 import { Router } from "express";
-export const router = Router()
+export const facultyRouter = Router()
+import { facultyController } from "../contollers/facultyController.js";
 
-router.post("/create-faculty")
-router.get("/all-faculties")
-router.get("/:facultyId")
-router.put('/edit-faculty')
-router.delete('/delete-faculty')
+facultyRouter.post("/create-faculty", facultyController.create)
+facultyRouter.get("/all-faculties", facultyController.showAll)
+facultyRouter.get("/:facultyId", facultyController.showOne)
+facultyRouter.put('/:facultyId', facultyController.update)
+facultyRouter.delete('/:facultyId', facultyController.delete)
