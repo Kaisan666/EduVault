@@ -79,8 +79,9 @@ const Secretary = sequelize.define("secretary", {
 })
 
 
-Faculty.hasOne(Secretary)
+Faculty.hasMany(Secretary)
 Secretary.belongsTo(Faculty)
+
 User.hasOne(Secretary)
 Secretary.belongsTo(User)
 
@@ -90,7 +91,7 @@ Student.belongsTo(User)
 User.hasOne(Teacher)
 Teacher.belongsTo(User)
 
-Department.hasMany(Teacher)
+Department.hasMany(Teacher) 
 Teacher.belongsTo(Department)
 
 User.belongsToMany(Role, {through : "user_role"})
