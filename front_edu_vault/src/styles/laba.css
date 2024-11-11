@@ -1,65 +1,123 @@
 .labwork-card {
-    border-radius: 35px;
-    border: 2px solid #0e6235a9;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(33, 143, 35, 0.384);
-    margin: 20px auto; /* Центрирование карточки */
-    max-width: 1300px; /* Ограничение максимальной ширины */
-    margin-top: 50px;
+  border-radius: 35px;
+  border: 2px solid #0e6235a9;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(33, 143, 35, 0.384);
+  margin: 20px auto;
+  max-width: 1300px;
+  margin-top: 50px;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
-  
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .download-button {
-    background-color: rgba(16, 91, 16, 0.573);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 30px 75px;
-    cursor: pointer;
-    font-size: 24px;
-  }
-  
-  .lab-title {
-    margin-left: 20px;
-  }
-  
-  .pdf-container {
-    margin-top: 20px; 
-    overflow-y: scroll; 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
-.pdf-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 28px; 
-    width: 8px; 
-    height: 10px;
-    background: #ffffff00; 
-    border-radius: 20px; 
+.download-button {
+  background-color: rgba(16, 91, 16, 0.573);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 30px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.lab-title {
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.pdf-container {
+  margin-top: 20px;
+  position: relative;
+}
+
+.pdf-container iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
 }
 
 .pdf-container::-webkit-scrollbar {
-    width: 8px; 
+  width: 8px;
 }
 
 .pdf-container::-webkit-scrollbar-track {
-    background: #f1f1f100;
+  background: #f1f1f100;
 }
 
 .pdf-container::-webkit-scrollbar-thumb {
-    background-color: #395334; 
-    border-radius: 20px; 
+  background-color: #395334;
+  border-radius: 20px;
 }
 
 .pdf-container::-webkit-scrollbar-thumb:hover {
-    background-color: #094c0462;  
+  background-color: #094c0462;
 }
 
-  
+@media (max-width: 480px) {
+  .labwork-card {
+      padding: 15px;
+      margin: 15px 10px;
+  }
+
+  .download-button {
+      padding: 12px 20px;
+      font-size: 16px;
+  }
+
+  .lab-title {
+      font-size: 18px;
+  }
+
+  .pdf-container iframe {
+      height: 400px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .labwork-card {
+      padding: 20px;
+      margin: 20px auto;
+  }
+
+  .download-button {
+      padding: 15px 30px;
+      font-size: 18px;
+  }
+
+  .lab-title {
+      font-size: 22px;
+  }
+
+  .pdf-container iframe {
+      height: 450px;
+  }
+}
+
+@media (min-width: 769px) {
+  .labwork-card {
+      max-width: 1200px;
+      padding: 30px;
+  }
+
+  .download-button {
+      padding: 18px 40px;
+      font-size: 20px;
+  }
+
+  .lab-title {
+      font-size: 26px;
+  }
+
+  .pdf-container iframe {
+      height: 500px;
+  }
+}

@@ -8,16 +8,29 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.headerContainer}>
-                <img src={headerImage} alt="Заголовочное изображение" className={styles.headerImage} />
+                <img 
+                    src={headerImage} 
+                    alt="Заголовочное изображение" 
+                    className={styles.headerImage} 
+                />
                 <div className={styles.logoContainer}>
-                    <img src={logo} alt="Логотип" className={styles.logo} />
-                    <span className={styles.brandName}>EduVault</span> 
+                    <img 
+                        src={logo} 
+                        alt="Логотип" 
+                        className={styles.logo} 
+                    />
+                    <span className={styles.brandName}>EduVault</span>
                 </div>
                 <button className={styles.logoutButton}>
-                    <img src={userIcon} alt="Выйти" className={styles.userIcon} />
+                    <img 
+                        src={userIcon} 
+                        alt="Выйти" 
+                        className={styles.userIcon} 
+                    />
                 </button>
             </div>
         </header>
     );
 };
+
 export default Header;

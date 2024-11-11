@@ -1,18 +1,16 @@
 import React from 'react';
 import Header from '../components/header';
 import DisciplineCard from '../components/DisciplineCard';
-import Footer from '../components/footer '; // Убедитесь, что здесь нет лишнего пробела
+import Footer from '../components/footer '; 
 
 const labWorks = [
   { id: 1, title: '', description: '' },
 ];
-
 const LabWorksPage = () => {
   return (
-    <div>
+    <div className="app">
       <Header />
       <main>
-        <h1></h1> {}
         <div className="labwork-list">
           {labWorks.map(labWork => (
             <DisciplineCard 

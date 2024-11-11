@@ -1,86 +1,184 @@
-.card {
+/* Основной контейнер для всей страницы */
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  /* Основной блок с контентом */
+  main {
+    flex: 1; /* Занимает оставшееся место */
+    padding: 20px;
+  }
+  
+  .labwork-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* Стили для карточки дисциплины */
+  .card {
     border: 2px solid #54804D;
     border-radius: 28px;
     padding: 16px;
-    margin: 16px 100px;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Выравнивание по левому краю */
-    height: 50vh; 
-    margin-top: 130px;  overflow-y: scroll; 
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 28px; 
-    width: 8px; 
-    height: 10px;
-    background: #ffffff00; 
-    border-radius: 20px; 
-}
-
-.card::-webkit-scrollbar {
-    width: 8px; 
-}
-
-.card::-webkit-scrollbar-track {
-    background: #f1f1f100;
-}
-
-.card::-webkit-scrollbar-thumb {
-    background-color: #395334; 
-    border-radius: 20px; 
-}
-
-.card::-webkit-scrollbar-thumb:hover {
-    background-color: #094c0462;  
-}
-
-.header {
+    align-items: flex-start;
+    margin: 16px;
+    height: auto; /* Убираем фиксированную высоту */
+    min-width: 260px; /* Минимальная ширина */
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  /* Стили для header в карточке */
+  .header {
     display: flex;
     align-items: center;
-    margin-bottom: 16px; /* Отступ снизу для заголовка */
-}
-
-.greenSquare {
+    margin-bottom: 16px;
+  }
+  
+  .greenSquare {
     display: flex;
     flex-direction: column;
-    background-color: #2f802e86; /* Цвет фона для выделения */
-    padding: 38px;
+    background-color: #2f802e86;
+    padding: 30px;
     border-radius: 28px;
-}
-
-.disciplineName {
-    font-weight: bold; /* Жирный шрифт для имени дисциплины */
-    font-size: 20px; /* Размер шрифта */
+    width: 100%;
+  }
+  
+  /* Стиль для названия дисциплины */
+  .disciplineName {
+    font-weight: bold;
+    font-size: 20px;
     color: #ffffff;
-}
-
-.disciplineId {
-    color: #00000000; /* Цвет для ID дисциплины */
-    font-size: 1px;
-}
-
-.labList {
-    list-style-type: none; /* Убирает маркеры списка */
-    padding: 0; /* Убирает отступы */
-    margin: 0; /* Убирает отступы */
-}
-
-.labItem {
+    margin-bottom: 10px;
+  }
+  
+  /* Стили для списка лабораторных работ */
+  .labList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .labItem {
     display: flex;
-    align-items: center; /* Центрирует иконку и текст по вертикали */
-    margin: 30px 0; /* Отступы между элементами списка */
-    font-size: 28px; /* Размер шрифта */
+    align-items: center;
+    margin: 15px 0;
+    font-size: 18px;
     color: #4B9F3E;
-}
-
-.fileIcon {
-    width: 30px; /* Ширина изображения */
-    height:33px; /* Высота изображения */
-     margin-left: 8px; /* Отступ слева от названия лабораторной работы */
-    vertical-align: middle; /* Выравнивание по вертикали */
-}
+    width: 100%;
+  }
+  
+  .fileIcon {
+    width: 24px;
+    height: 24px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media (max-width: 600px) {
+    .card {
+      margin: 8px;
+      padding: 12px;
+    }
+  
+    .greenSquare {
+      padding: 20px;
+    }
+  
+    .disciplineName {
+      font-size: 18px;
+    }
+  
+    .labItem {
+      font-size: 16px;
+    }
+  
+    .fileIcon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  /* Адаптивность для планшетов и средних экранов */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .card {
+      margin: 16px;
+      padding: 16px;
+    }
+  
+    .greenSquare {
+      padding: 25px;
+    }
+  
+    .disciplineName {
+      font-size: 22px;
+    }
+  
+    .labItem {
+      font-size: 20px;
+    }
+  
+    .fileIcon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  /* Адаптивность для ноутбуков и больших экранов */
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    .card {
+      margin: 16px;
+      padding: 20px;
+    }
+  
+    .greenSquare {
+      padding: 30px;
+    }
+  
+    .disciplineName {
+      font-size: 24px;
+    }
+  
+    .labItem {
+      font-size: 22px;
+    }
+  
+    .fileIcon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  
+/* Адаптивность для больших экранов (ПК) */
+@media (min-width: 1441px) {
+    .card {
+      margin: 16px 30px; /* Уменьшаем отступы */
+      padding: 16px;     /* Уменьшаем внутренние отступы */
+    }
+  
+    .greenSquare {
+      padding: 25px;     /* Уменьшаем внутренние отступы в зеленом блоке */
+    }
+  
+    .disciplineName {
+      font-size: 24px;    /* Уменьшаем размер шрифта для названия дисциплины */
+    }
+  
+    .labItem {
+      font-size: 22px;    /* Уменьшаем размер шрифта для элемента списка */
+    }
+  
+    .fileIcon {
+      width: 28px;        /* Уменьшаем размер иконок */
+      height: 28px;       /* Уменьшаем размер иконок */
+    }
+  }
+  

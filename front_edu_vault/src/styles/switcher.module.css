@@ -1,48 +1,50 @@
+/* src/styles/switcher.module.css */
+
+.switcherWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .toggle {
   width: 60px;
   height: 30px;
-  border-radius: 15px;
-  background-color: #ccc;
+  border-radius: 30px;
   position: relative;
-  cursor: pointer;
+  background-color: #ddd;
   transition: background-color 0.3s ease;
+  margin-right: 10px;
 }
 
-.light {
-  background-color: #f0f0f0;
+.toggle.light {
+  background-color: #ddd;
 }
 
-.dark {
+.toggle.dark {
   background-color: #333;
 }
 
 .toggle::before {
   content: '';
   position: absolute;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
   background-color: white;
+  border-radius: 50%;
   transition: transform 0.3s ease;
 }
 
-.light::before {
+.toggle.light::before {
   transform: translateX(0);
 }
 
-.dark::before {
+.toggle.dark::before {
   transform: translateX(30px);
 }
 
 .label {
-  margin-left: 10px;
   font-size: 16px;
-  color: #000;
-}
-body.light {
-  background-color: #ffffff; 
-}
-
-body.dark {
-  background-color: #121212; 
+  color: #333;
 }

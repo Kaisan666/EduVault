@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/DisciplineCard.module.css';
-import icon from '../images/icon.png'; // Импорт изображения
+import icon from '../images/icon.png'; 
 
 const DisciplineCard = () => {
-  const disciplineData = {
-    name: "ПРОГРАММНАЯ ИНЖЕНЕРИЯ",
-    id: "123",
-    labs: [
-      { name: "Лабораторная работа №1", icon: icon }, 
-      { name: "Лабораторная работа №2", icon: icon },
-      { name: "Лабораторная работа №3", icon: icon },
-      { name: "Лабораторная работа №4", icon: icon },
-    ],
-  };
+  const [disciplineData, setDisciplineData] = useState(null);
+
+ 
+  useEffect(() => {
+    
+    fetch() 
+      .then((response) => response.json())
+      .then((data) => setDisciplineData(data))
+      .catch((error) => console.error('Ошибка при загрузке данных:', error));
+  }, []);
+
+  if (!disciplineData) {
+    return <div>Загрузка...</div>;
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -25,7 +30,9 @@ const DisciplineCard = () => {
         {disciplineData.labs.map((lab, index) => (
           <li key={index} className={styles.labItem}>
             {lab.name}
-            <img src={lab.icon} alt="file icon" className={styles.fileIcon} />
+            <a href={lab.fileUrl} target="_blank" rel="noopener noreferrer">
+              <img src={icon} alt="file icon" className={styles.fileIcon} />
+            </a>
           </li>
         ))}
       </ul>

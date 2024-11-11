@@ -1,36 +1,68 @@
-.footerImage {
-    width: 1900px; 
-    height: 190px; 
-    margin-top: -10px;
+.footer {
+    width: 100%;
+    margin-top: 190px;
 }
 
-.container {
+.footerContainer {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
+    align-items: center;
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+    position: relative;
+    width: 100%;
+}
+
+.footerImageContainer {
+    width: 100%;
+    height: auto;
+}
+
+.footerImage {
+    width: 100%; 
+    height: 190px; 
+    object-fit: cover;
 }
 
 .logoContainer {
-    margin: 20px 0; 
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем логотип внутри контейнера */
+    z-index: 10;
+    width: 100%; /* Обеспечиваем, что контейнер занимает всю ширину */
 }
 
 .logo {
-    max-width: 100px; 
-    height: auto; 
-}
-   
-
-
-.app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
+    width: 100px;
+    height: 80px;
 }
 
-main {
-    flex: 1; 
+@media (max-width: 768px) {
+    .footerImage {
+        height: 150px; 
+    }
+
+    .logoContainer {
+        bottom: 15px;
+    }
+
+    .logo {
+        width: 60px; /* Уменьшаем размер логотипа на мобильных устройствах */
+        height: 50px;
+    }
 }
 
+@media (max-width: 480px) {
+    .footerImage {
+        height: 50px; 
+    }
+
+    .logoContainer {
+        bottom: 10px;
+    }
+
+    .logo {
+        width: 50px; /* Еще меньше для маленьких экранов */
+        height: 40px;
+    }
+}
