@@ -8,7 +8,7 @@
     background-color: #ffffff34;
     padding: 15px;
     border-radius: 1px;
-    border: 1px solid #266935;
+    border: 1px solid #3e835873;
     height: 100vh;
   }
   
@@ -18,7 +18,7 @@
   }
   
   .directionItem {
-    background-color: #4CAF50;
+    background-color: #3e835873;
     color: white;
     padding: 10px;
     margin: 5px 0;
@@ -28,7 +28,7 @@
   
   .addDirectionButton {
     padding: 10px 20px;
-    background-color: #68c28a91;
+    background-color: #3e835873;
     color: white;
     border: none;
     border-radius: 5px;
@@ -62,7 +62,7 @@
   .modalHeading {
     font-size: 22px;
     margin-bottom: 20px;
-    color: #28803e;
+    color: #3e835873;
   }
   
   .input {
@@ -92,7 +92,7 @@
   
   .cancelButton {
     padding: 10px 20px;
-    background-color: #dc354673;
+    background-color: #c21c2d8a;
     color: white;
     border: none;
     border-radius: 5px;

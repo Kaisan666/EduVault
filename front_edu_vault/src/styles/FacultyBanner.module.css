@@ -1,23 +1,23 @@
 /* Стили для .facultyBanner */
 .facultyBanner {
-    width: 100%; /* Задаем ширину 100%, чтобы элемент занимал всю ширину родителя */
+    width: 100%; 
     height: 100px;
     border: 1px solid #000;
-    color: rgb(48, 151, 70);
+    color: #3e835873;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 24px;
     font-weight: bold;
-    box-sizing: border-box; /* Чтобы учесть padding и border при вычислении ширины */
+    box-sizing: border-box;
   }
   
-  /* Стили для .logoutButton */
+
   .logoutButton {
     padding: 4px 8px;
-    width: 60px;
+    width: 80px;
     font-size: 14px;
-    background-color: #5c5c5c;
+    background-color: #3e835873;
     color: white;
     border: none;
     border-radius: 4px;
@@ -30,7 +30,7 @@
   
   /* Эффект при наведении на кнопку */
   .logoutButton:hover {
-    background-color: #ff6b6b;
+    background-color: #3e8358f8;
   }
   
   /* Адаптивность для мобильных устройств */
