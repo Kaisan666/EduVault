@@ -7,7 +7,8 @@ const d = {
 class SpecialtyController {
     
     async create(req, res) {
-        const {facultyId,name} = req.body;
+        const {facultyId} = req.params
+        const {name} = req.body;
 
         if (!name){
             return res.status(400).json({error : "название факультета обязательно"})
@@ -16,7 +17,7 @@ class SpecialtyController {
             const result = await sequelize.query(
                 `INSERT INTO specialties ("name", "facultyId", "createdAt", "updatedAt") 
                  VALUES (:name, :id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
-                {replacements: {id : facultyId,name: name,}});
+                {replacements: {id : facultyId ,name: name,}});
             res.status(201).json(result[0])
         } catch(e){
             res.status(500).json({error : e.message})
@@ -25,28 +26,25 @@ class SpecialtyController {
 
     }
     async showAll(req, res) {
-        const {facultyId} = req.body
+        const {facultyId} = req.params
         try {
             const result = await sequelize.query(`
-                select s.name as specialtyName, s.id, s."createdAt", s."updatedAt", f.name as facultyName
-                from  specialties as s JOIN faculties as f on s."facultyId" = f.id where f.id = :id
+                select * from specialties where "facultyId" = :id
                 `,
             {replacements : {id : facultyId}})
-            res.status(201).json(result[0][0])
+            res.status(201).json(result[0])
         } catch (error) {
             res.status(500).json({error : error.message})
         }
     }
     async showOne(req, res) {
         const {specialtyId} = req.params
-        const {facultyId} = req.body
         console.log(req.params);
         try {
             const result = await sequelize.query(
-                `select s.name as specialtyName, s.id, s."createdAt", s."updatedAt", f.name as facultyName
-                from  specialties as s JOIN faculties as f on s."facultyId" = f.id where f.id = :facultyId and s.id = :specialtyId`, 
+                `select * from specilaties where id = :id`, 
                 {
-                    replacements: {facultyId : facultyId, specialtyId: specialtyId},
+                    replacements: {id : specialtyId},
                     type: QueryTypes.SELECT
                 }
             );
@@ -57,35 +55,28 @@ class SpecialtyController {
     } 
     async update(req, res) {
         const {specialtyId} = req.params;
-        const {name, facultyId} = req.body;
+        const {name} = req.body;
         if (!name){
             return res.status(400).json({error : "сначала задайте нужно название направления"})
         }
         try {
             const result = await sequelize.query(
-                ` UPDATE specialties AS s
-            SET 
-                name = :name, 
-                "updatedAt" = CURRENT_TIMESTAMP
-            WHERE 
-                s.id = :id 
-                AND s."facultyId" = (SELECT id FROM faculties WHERE id = :facultyId)
+                ` update specilties as s set "name" = :name, "updatedAt" = CURRENT_TIMESTAMP where id = :id
             RETURNING *;`,
-                    {replacements : {name : name, facultyId : facultyId, id : specialtyId}}
+                    {replacements : {name : name, id : specialtyId}}
                 )
-            res.status(201).json(result[0][0])
+            res.status(201).json(result[0])
         } catch (error) {
             res.status(500).json({error : error.message})
         }}
     async delete(req, res) {
         const {specialtyId} = req.params
-        const {facultyId} = req.body
         console.log(req.params);
         try {
             const result = await sequelize.query(
-                'Delete from faculties where id = :id', 
+                'Delete from specialties where id = :id', 
                 {
-                    replacements: { id: facultyId }
+                    replacements: { id: specialtyId }
                 }
             );
             res.status(201).json("Факультет удален")

@@ -1,9 +1,10 @@
 import { Router } from "express";
-export const router = Router()
+export const groupRouter = Router()
+import { groupController } from "../contollers/groupController.js";
 
 
-router.post("/create-group")
-router.get("/all-groups")
-router.get("/group:Id")
-router.put('/edit-group')
-router.delete('/delete-group')
+groupRouter.post("/create-group/:specialtyId", groupController.create)
+groupRouter.get("/all-groups/:specialtyId", groupController.showOne)
+groupRouter.get("/show-one/:groupId", groupController.showAll)
+groupRouter.put('/update/:groupId', groupController.update)
+groupRouter.delete('/delete/:groupId', groupController.delete)
