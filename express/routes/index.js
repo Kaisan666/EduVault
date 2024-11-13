@@ -4,11 +4,13 @@ import {userRouter} from "./user.js"
 import {facultyRouter} from "./faculty.js"
 import { specialtyRouter } from "./specialty.js";
 import { groupRouter } from "./group.js";
+import { studentRouter } from "./student.js";
 
 router.use("/user", userRouter)
 router.use("/group",groupRouter)
 router.use("/faculty",facultyRouter)
 router.use("/specialty", specialtyRouter)
+router.use("/student", studentRouter)
 // router.use("/discipline",)
 // router.use("/laboratory",)
 // router.use("/file",)
