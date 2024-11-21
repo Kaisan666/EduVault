@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styles from '../styles/main_admin.module.css';
 
+
 function AdminMenu() {
+  
   const [faculties, setFaculties] = useState([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newFacultyName, setNewFacultyName] = useState('');
+  useEffect(() => {
+    const fetchFaculties = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/faculty/all-faculties');
+        if (response.status === 200) {
+          setFaculties(response.data);
+        } else {
+          console.error('Ошибка при загрузке факультетов');
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+      }
+    };
+  
+    fetchFaculties();
+  }, []);
+  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -21,14 +42,11 @@ function AdminMenu() {
     };
 
     try {
-      const response = await fetch('URL_бэка', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newFaculty),
-      });
+      const response = await axios.post('http://localhost:5000/api/faculty/create-faculty', newFaculty);
 
-      if (response.ok) {
-        const savedFaculty = await response.json();
+      if (response.status === 200 || response.status === 201) {
+        const savedFaculty = response.data[0];
+        console.log('Saved Faculty:', savedFaculty); // Добавьте этот лог
         setFaculties([...faculties, { id: savedFaculty.id, name: savedFaculty.name }]);
         closeModal();
       } else {
