@@ -1,0 +1,50 @@
+/* src/styles/switcher.module.css */
+
+.switcherWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle {
+  width: 60px;
+  height: 30px;
+  border-radius: 30px;
+  position: relative;
+  background-color: #ddd;
+  transition: background-color 0.3s ease;
+  margin-right: 10px;
+}
+
+.toggle.light {
+  background-color: #ddd;
+}
+
+.toggle.dark {
+  background-color: #333;
+}
+
+.toggle::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle.light::before {
+  transform: translateX(0);
+}
+
+.toggle.dark::before {
+  transform: translateX(30px);
+}
+
+.label {
+  font-size: 16px;
+  color: #333;
+}

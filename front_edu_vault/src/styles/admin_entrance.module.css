@@ -1,0 +1,63 @@
+.formContainer {
+  background-image: url('../images/fon.png'); /* Добавляем фоновое изображение */
+  background-size: cover; /* Покрывает весь контейнер */
+  background-position: center; /* Центрирует изображение */
+  background-repeat: no-repeat; /* Изображение не повторяется */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Контейнер занимает всю высоту экрана */
+}
+  .loginForm {
+    background-color: rgba(0, 0, 0, 0.608); 
+    padding: 30px;  
+    border-radius: 40px;
+    width: 400px; 
+    height: 750px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+ .h2 {
+    text-align: center; 
+    font-size: 24px; 
+    margin-bottom: 20px; 
+  }
+  
+  .inputField {
+    margin-bottom: 20px; 
+    width: 300px; 
+    padding: 10px;
+    font-size: 16px; 
+    box-sizing: border-box; 
+    height: 40px;
+  }
+  
+  .submitButton {
+    margin-top: 15px; 
+    background-color: rgba(67, 148, 67, 0.658); 
+    color: white; 
+    border: none; 
+    padding: 15px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    width: 100%; 
+    font-size: 16px; 
+  }
+  
+  .submitButton:disabled {
+    background-color: gray; 
+  }
+  
+  .error {
+    color: rgb(255, 255, 255); 
+    text-align: center; 
+    margin-top: 10px; 
+  }
+  
+  .logo {
+    width: 150px; 
+    margin-bottom: 20px; 
+  }
+  
