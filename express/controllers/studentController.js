@@ -1,22 +1,31 @@
 import { QueryTypes } from "sequelize";
 import { sequelize } from "../db.js";
 import bcrypt from "bcrypt"
-const jwt = requre("jsonwebtoken")
+// const jwt = require("jsonwebtoken")
+import jwt from 'jsonwebtoken';
+const generateJWT = (id, login, roleId) => {
+    jwt.sign({id, login, roleId},
+        process.env.SECRET_KEY,
+        {expiresIn : "24h"})
+}
 class StudentController {
     async create(req, res) {
         const {groupId} = req.params
         const {firstName, lastName, middleName, login, password} = req.body;
+        const roleId = 1
+        const middleNameValue = middleName ? middleName : null;
 
         // if (!name){
         //     return res.status(400).json({error : "номер группы обязателен"})
         // }
+        console.log(password)
         const hashpass = await bcrypt.hash(password, 5)
         try{
             const usercreation = await sequelize.query(
-                `INSERT INTO users ("firstName", "lastName", "middleName", "login", "password", "createdAt", "updatedAt") 
-                 VALUES (:firstName, :lastName, :middleName, :login, :password, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+                `INSERT INTO users ("firstName", "lastName", "middleName", "login", "password", "roleId", "createdAt", "updatedAt") 
+                 VALUES (:firstName, :lastName, :middleName, :login, :password, :roleId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
                   RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
-                  {replacements: {firstName : firstName , lastName : lastName, middleName : middleName, login : login, password : hashpass}});
+                  {replacements: {firstName : firstName , lastName : lastName, middleName : middleName, login : login, password : hashpass, roleId: roleId}});
             const id = usercreation[0][0].id  
             const studentcreation = await sequelize.query(`
                 
@@ -26,10 +35,11 @@ class StudentController {
             const student = await sequelize.query(
                 `select * from users join students on students."userId" = users."id" where users."id" = :id`
             , {replacements : {id : id}})
-            const jwt = jwt.sign()
-                res.status(201).json(student[0])
+            const token = generateJWT(usercreation[0].id,usercreation[0].login, usercreation[0].roleId )
+            // res.status(201).json(student[0])
             const i = usercreation[0].id
             console.log(i)
+            return res.json({token})
         } catch(e){
             res.status(500).json({error : e.message})
         }

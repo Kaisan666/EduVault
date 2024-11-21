@@ -1,6 +1,6 @@
 import { Router } from "express";
 export const specialtyRouter = Router()
-import { specialtyController } from "../contollers/specialtyController.js";
+import { specialtyController } from "../controllers/specialtyController.js";
 
 specialtyRouter.post("/create-specialty/:facultyId", specialtyController.create)
 specialtyRouter.get("/all-specialties/:facultyId", specialtyController.showAll)

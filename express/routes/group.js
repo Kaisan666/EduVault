@@ -1,6 +1,6 @@
 import { Router } from "express";
 export const groupRouter = Router()
-import { groupController } from "../contollers/groupController.js";
+import { groupController } from "../controllers/groupController.js";
 
 
 groupRouter.post("/create-group/:specialtyId", groupController.create)

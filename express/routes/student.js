@@ -1,6 +1,6 @@
 import { Router } from "express";
 export const studentRouter = Router()
-import { studentController } from "../contollers/studentController.js";
+import { studentController } from "../controllers/studentController.js";
 
 
 studentRouter.post("/create-student/:groupId", studentController.create)
