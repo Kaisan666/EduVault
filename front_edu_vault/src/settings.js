@@ -1,0 +1,1 @@
+export const getUrl= (relativePath) =`https://gsveheizej.api.quickmocker.com/${relativePath}`;

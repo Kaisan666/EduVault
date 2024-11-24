@@ -18,7 +18,7 @@ const LoginForm = () => {
       const response = await fetch('/api/student/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json',// полный путь сделать
         },
         body: JSON.stringify({ username, password }),
       });
