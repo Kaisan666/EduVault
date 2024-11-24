@@ -6,7 +6,7 @@ const d = {
     'updatedAt': sequelize.literal('CURRENT_TIMESTAMP')
 }
 
-class SpecialtyController {
+class CourseController {
     /**
      * @swagger
      * /api/specialty/create-specialty/{facultyId}:
@@ -263,4 +263,4 @@ class SpecialtyController {
     }
 }
 
-export const specialtyController = new SpecialtyController();
+export const courseController = new CourseController();

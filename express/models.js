@@ -26,6 +26,12 @@ const Specialty = sequelize.define("specialty", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
     name : {type : DataTypes.STRING(128), allowNull : false}
 })
+
+const Course = sequelize.define("course", {
+    id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
+    number : {type : DataTypes.INTEGER, allowNull : false}
+})
+
 const Faculty = sequelize.define("faculty", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
     name : {type: DataTypes.STRING(128), allowNull : false}
@@ -97,14 +103,19 @@ Teacher.belongsTo(Department)
 Role.hasMany(User)
 User.belongsTo(Role)
 
+
+
 Role.belongsToMany(Permission, {through : "role_permission"})
 Permission.belongsToMany(Role, {through : "role_permission"})
 
 Group.hasMany(Student)
 Student.belongsTo(Group)
 
-Specialty.hasMany(Group)
-Group.belongsTo(Specialty)
+Specialty.hasMany(Course)
+Course.belongsTo(Specialty)
+
+Course.hasMany(Group)
+Group.belongsTo(Course)
 
 Faculty.hasMany(Specialty)
 Specialty.belongsTo(Faculty)
@@ -122,6 +133,7 @@ export const models = {
     User,
     Student, 
     Group,
+    Course,
 Specialty,
 Faculty,
 Discipline,

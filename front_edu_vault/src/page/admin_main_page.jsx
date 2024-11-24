@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer ';
 import styles from '../styles/admin_main_page.module.css';
+import axios from 'axios';
 
 const Admin_main_page = () => {
   const [faculties, setFaculties] = useState([]);
@@ -14,8 +15,9 @@ const Admin_main_page = () => {
   const fetchFaculties = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/faculties');
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5000/api/faculty/all-faculties`)
+      const data = response.data
+      console.log(data)
       setFaculties(data);
     } catch (error) {
       console.error('Ошибка при получении факультетов:', error);
@@ -27,8 +29,8 @@ const Admin_main_page = () => {
   const fetchDirections = async (facultyId) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/directions?facultyId=${facultyId}`);
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5000/api/specialty/all-specialties/${facultyId}`)
+      const data = response.data
       setDirections(data);
     } catch (error) {
       console.error('Ошибка при получении направлений:', error);

@@ -19,11 +19,17 @@ import FacultyBanner from './components/FacultyBanner';
 import AdminDirectionSecretary from './page/AdminDirectionSecretary';
  import Secretary_Direction_Main from './components/Secretary_Direction_Main';
 import Secretary_Direction from './page/Secretary_Direction_Main';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
 
   return (
     <>
-     <AdminMenu/> 
+      <Router>
+      <Routes>
+        <Route path="/" element={<AdminMenu />} />
+        <Route path="/specialties/:facultyId" element={<FacultyDetails />} />
+      </Routes>
+    </Router>
     </>
   )
 }
