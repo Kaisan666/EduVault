@@ -1,0 +1,167 @@
+/* src/styles/Courses.module.css */
+.coursesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .directionFrame {
+    width: 100%;
+    max-width: 1850px;
+    padding: 25px;
+    background-color: #ffffff00;
+    border: 2px solid #3a4e4273;
+    border-radius: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .directionFrame h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #3e835873;
+  }
+  
+  .coursesList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+  }
+  
+  .courseItem {
+    background-color: #5a9e5148;
+    padding: 15px;
+    margin: 20px 0; /* Увеличиваем расстояние между элементами */
+    width: 100%;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #3e835873; /* Добавляем границу для лучшей визуальной отличимости */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .deleteButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .addCourseForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Увеличиваем максимальную ширину */
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .addButton,
+  .confirmButton,
+  .cancelButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .addButton {
+    background-color: #38a05070;
+    color: white;
+    margin-top: 20px;
+  }
+  
+  .confirmButton {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .cancelButton {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Медиа-запросы для адаптации */
+  @media (max-width: 1200px) {
+    .directionFrame {
+      max-width: 100%;
+      padding: 20px;
+    }
+  
+    .courseItem {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .directionFrame {
+      padding: 15px;
+    }
+  
+    .directionFrame h1 {
+      font-size: 20px;
+    }
+  
+    .courseItem {
+      padding: 10px;
+      font-size: 14px;
+      margin: 15px 0; /* Уменьшаем расстояние между элементами */
+    }
+  
+    .inputField,
+    .addButton,
+    .confirmButton,
+    .cancelButton {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .directionFrame {
+      padding: 10px;
+    }
+  
+    .directionFrame h1 {
+      font-size: 18px;
+    }
+  
+    .courseItem {
+      padding: 8px;
+      font-size: 12px;
+      margin: 10px 0; /* Уменьшаем расстояние между элементами */
+    }
+  
+    .inputField,
+    .addButton,
+    .confirmButton,
+    .cancelButton {
+      font-size: 12px;
+      padding: 6px;
+    }
+  }
+  

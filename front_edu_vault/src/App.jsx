@@ -3,9 +3,15 @@ import Entrance from './page/page_input';
 import LabWorksPage from './page/laboratory_work';
 import LabPage from './page/laba_page';
 import AdminDirectionSecretary from './page/AdminDirectionSecretary';
-import Admin_main_page from './page/admin_main_page';
+//import Admin_main_page from './page/admin_main_page';
 import Secretary_Direction from './page/Secretary_Direction_Main';
+import AdminMenuF from './page/AdminMenu';
 
+
+
+
+import Groups from './components/Groups';
+import Courses from './components/Courses';
 import DisciplineCard from './components/DisciplineCard';
 import LabWorkCard from './components/laba';
 //import LoginFormAdmin from './components/admin_entrance'; 
@@ -24,7 +30,7 @@ function App() {
 
   return (
     <>
-     <AdminMenu /> 
+     <Groups/> 
     </>
   )
 }
