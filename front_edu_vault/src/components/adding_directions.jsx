@@ -59,12 +59,12 @@ function FacultyDetails() {
   return (
     <div className={styles.facultyContainer}>
       <div className={styles.sidebar}>
-        {directions.map((direction) => (<div className={styles.directionItem}key={direction.id}>
-          
-            <Link to={`/courses/all-courses/${direction.id}`}>
+        {directions.map((direction) => (
+          <Link to={`/courses/${direction.id}`}>
+          <div className={styles.directionItem}key={direction.id}>
               {direction.name}
-            </Link>
         </div>
+            </Link>
         ))}
         <button onClick={openModal} className={styles.addDirectionButton}>
           Добавить направление

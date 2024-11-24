@@ -20,6 +20,7 @@ import AdminDirectionSecretary from './page/AdminDirectionSecretary';
  import Secretary_Direction_Main from './components/Secretary_Direction_Main';
 import Secretary_Direction from './page/Secretary_Direction_Main';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Courses from './components/courses';
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AdminMenu />} />
         <Route path="/specialties/:facultyId" element={<FacultyDetails />} />
+        <Route path="/courses/:specialtyId" element={<Courses />} />
       </Routes>
     </Router>
     </>

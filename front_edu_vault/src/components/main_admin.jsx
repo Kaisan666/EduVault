@@ -63,8 +63,10 @@
         <div className={styles.menu}>
           <h3 className={styles.heading}>Факультеты</h3>
           {faculties.map((faculty) => (
-            <Link key={faculty.id} to={`/specialties/${faculty.id}`} className={styles.facultyItem}>
+            <Link to={`/specialties/${faculty.id}`} >
+            <div key={faculty.id} className={styles.facultyItem}>
             {faculty.name}
+          </div>
           </Link>
           ))}
         </div>

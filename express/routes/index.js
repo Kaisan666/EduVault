@@ -4,6 +4,7 @@ import { facultyRouter } from "./faculty.js";
 import { specialtyRouter } from "./specialty.js";
 import { groupRouter } from "./group.js";
 import { studentRouter } from "./student.js";
+import { courseRouter } from "./course.js";
 
 const router = Router();
 
@@ -52,10 +53,13 @@ router.use("/specialty", specialtyRouter);
  */
 router.use("/student", studentRouter);
 
+router.use("/course", courseRouter)
+
 // router.use("/discipline",)
 // router.use("/laboratory",)
 // router.use("/file",)
 // router.use("/department",)
 // router.use("/file",)
+
 
 export { router };
