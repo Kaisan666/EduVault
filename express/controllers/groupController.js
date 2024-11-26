@@ -3,10 +3,10 @@ import { sequelize } from "../db.js";
 
 class GroupController {
     async create(req, res) {
-        const {specialtyId} = req.params
-        const {number} = req.body;
+        const {courseId} = req.params
+        const {name} = req.body;
 
-        if (!number){
+        if (!name){
             return res.status(400).json({error : "номер группы обязателен"})
         }
         try{

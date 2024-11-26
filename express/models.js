@@ -19,17 +19,24 @@ const Student = sequelize.define("student", {
 
 const Group = sequelize.define("group", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
-    group_number : {type : DataTypes.INTEGER, allowNull : false}
+    name : {type : DataTypes.STRING, allowNull : false, unique : true}
 })
 
 const Specialty = sequelize.define("specialty", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
-    name : {type : DataTypes.STRING(128), allowNull : false}
+    name : {type : DataTypes.STRING(128), allowNull : false, unique : true}
 })
 
 const Course = sequelize.define("course", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
     number : {type : DataTypes.INTEGER, allowNull : false}
+}, {
+    indexes: [
+        {
+            unique: true,
+            fields: ['number', 'specialtyId']
+        }
+    ]
 })
 
 const Faculty = sequelize.define("faculty", {
