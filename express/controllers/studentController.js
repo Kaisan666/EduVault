@@ -29,8 +29,8 @@ class StudentController {
             const id = usercreation[0][0].id  
             const studentcreation = await sequelize.query(`
                 
-                insert into students ("course", "userId", "groupId", "createdAt", "updatedAt") values
-                 (3, :userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+                insert into students ("userId", "groupId", "createdAt", "updatedAt") values
+                 (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
                 {replacements : {userId : id, groupId : groupId}})  
             const student = await sequelize.query(
                 `select * from users join students on students."userId" = users."id" where users."id" = :id`
@@ -47,12 +47,12 @@ class StudentController {
 
     }
     async showAll(req, res) {
-        const {specialtyId} = req.params
+        const {groupId} = req.params
         try {
             const result = await sequelize.query(`
-                select * from groups where "specialty" = :id
+                select * from students s join users u on s.userId = u.id where s.groupId = :id
                 `,
-            {replacements : {id : specialtyId}})
+            {replacements : {id : groupId}})
             res.status(201).json(result[0])
         } catch (error) {
             res.status(500).json({error : error.message})
@@ -75,20 +75,25 @@ class StudentController {
         }
     } 
     async update(req, res) {
-        const {groupId} = req.params;
-        const {name} = req.body;
-        if (!name){
-            return res.status(400).json({error : "сначала задайте нужно название направления"})
+        const {studentId} = req.params;
+        const updates = req.body;
+        if (updates.length === 0){
+            return res.status(400).json({error : "надо ввести хоть что то"})
         }
         try {
-            const result = await sequelize.query(
-                ` UPDATE groups AS s 
-                    SET "name" = :name, "updatedAt" = CURRENT_TIMESTAMP 
-                    WHERE id = :id 
-                    RETURNING *;`,
-                    {replacements : {name : name, id : groupId}}
-                )
-            res.status(201).json(result[0][0])
+            // Динамическое формирование SQL-запроса
+        const fields = Object.keys(updates).map(key => `"${key}" = :${key}`).join(', ');
+        const replacements = { ...updates, id: studentId, updatedAt: sequelize.fn('CURRENT_TIMESTAMP') };
+
+        const result = await sequelize.query(
+            `UPDATE users AS s
+             SET ${fields}, "updatedAt" = :updatedAt
+             WHERE id = :id
+             RETURNING *;`,
+            { replacements: replacements }
+        );
+
+        res.status(200).json(result[0][0]);
         } catch (error) {
             res.status(500).json({error : error.message})
         }}
