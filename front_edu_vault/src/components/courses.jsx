@@ -1,109 +1,115 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import styles from '../styles/adding_directions.module.css';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// src/components/Courses.js
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/Courses.module.css';
 
-function Courses() {
-  const { specialtyId } = useParams();
-  console.log(specialtyId);
+const Courses = ({ facultyId }) => {
   const [courses, setCourses] = useState([]);
-  const [newCourseNumber, setNewCourseNumber] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newCourse, setNewCourse] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
+  const [facultyDetails, setFacultyDetails] = useState(''); // Обновляем состояние для имени направления
 
-  // Загрузка всех курсов для специальности при монтировании компонента
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/api/course/all-courses/${specialtyId}`);
-        console.log(response);
-        if (response.status === 200) {
-          setCourses(response.data);
-        } else {
-          console.error('Ошибка при загрузке курсов');
-        }
-      } catch (error) {
-        console.error('Ошибка:', error);
-      }
-    };
-
+    fetchFacultyDetails();
     fetchCourses();
-  }, [specialtyId]);
+  }, [facultyId]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setNewCourseNumber('');
-  };
-
-  const handleAddCourse = useCallback(async () => {
-    const newCourse = { number: newCourseNumber };
-
+  const fetchFacultyDetails = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/course/create-course/${specialtyId}`, newCourse);
-      if (response.status === 200 || response.status === 201) {
-        const savedCourse = response.data[0];
-        setCourses((prevCourses) => [...prevCourses, savedCourse]);
-        closeModal();
-      } else {
-        console.error('Ошибка при добавлении курса');
-      }
+      const response = await fetch(`/api/faculties/${facultyId}`);
+      const data = await response.json();
+      setFacultyDetails(data.name);
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error('Ошибка при получении информации о направлении:', error);
     }
-  }, [newCourseNumber, specialtyId]);
+  };
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    if (value > 0 && value <= 10) {
-      setNewCourseNumber(value);
+  const fetchCourses = async () => {
+    try {
+      const response = await fetch(`/api/faculties/${facultyId}/courses`);
+      const data = await response.json();
+      setCourses(data);
+    } catch (error) {
+      console.error('Ошибка при получении курсов:', error);
     }
+  };
+
+  const handleAddCourse = async () => {
+    if (newCourse.trim()) {
+      try {
+        const response = await fetch(`/api/faculties/${facultyId}/courses`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: newCourse }),
+        });
+        const newCourseData = await response.json();
+        setCourses([...courses, newCourseData]);
+        setNewCourse('');
+        setIsAdding(false);
+      } catch (error) {
+        console.error('Ошибка при добавлении курса:', error);
+      }
+    }
+  };
+
+  const handleDeleteCourse = async (courseId) => {
+    try {
+      await fetch(`/api/faculties/${facultyId}/courses/${courseId}`, {
+        method: 'DELETE',
+      });
+      setCourses(courses.filter(course => course.id !== courseId));
+    } catch (error) {
+      console.error('Ошибка при удалении курса:', error);
+    }
+  };
+//
+  const handleCancel = () => {
+    setNewCourse('');
+    setIsAdding(false);
   };
 
   return (
-    <div className={styles.facultyContainer}>
-      <div className={styles.sidebar}>
-        {courses.map((course) => (
-          <Link to={`/group/all-groups/${course.id}`} key={course.id}>
-            <div className={styles.directionItem}>
-              {course.number}
-            </div>
-          </Link>
-        ))}
-        <button onClick={openModal} className={styles.addDirectionButton}>
-          Добавить курс
-        </button>
+    <div className={styles.coursesContainer}>
+      <div className={styles.directionFrame}>
+        <h1>{facultyDetails}</h1>
       </div>
-
-      {isModalOpen && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <h2 className={styles.modalHeading}>Добавить курс</h2>
-            <input
-              type="number"
-              placeholder="Номер курса"
-              value={newCourseNumber}
-              onChange={handleInputChange}
-              className={styles.input}
-              min="1"
-              max="10"
-            />
-            <div className={styles.modalButtonContainer}>
-              <button onClick={handleAddCourse} className={styles.confirmButton}>
-                Добавить
-              </button>
-              <button onClick={closeModal} className={styles.cancelButton}>
-                Отмена
-              </button>
-            </div>
+      <h2>Курсы</h2>
+      <ul className={styles.coursesList}>
+        {courses.map(course => (
+          <li key={course.id} className={styles.courseItem}>
+            {course.name}
+            <button onClick={() => handleDeleteCourse(course.id)} className={styles.deleteButton}>
+              Удалить
+            </button>
+          </li>
+        ))}
+      </ul>
+      {isAdding ? (
+        <div className={styles.addCourseForm}>
+          <input
+            type="text"
+            value={newCourse}
+            onChange={(e) => setNewCourse(e.target.value)}
+            placeholder="Введите название курса"
+            className={styles.inputField}
+          />
+          <div className={styles.buttonContainer}>
+            <button onClick={handleAddCourse} className={styles.confirmButton}>
+              Добавить курс
+            </button>
+            <button onClick={handleCancel} className={styles.cancelButton}>
+              Отмена
+            </button>
           </div>
         </div>
+      ) : (
+        <button onClick={() => setIsAdding(true)} className={styles.addButton}>
+          Добавить курс
+        </button>
       )}
     </div>
   );
-}
+};
 
 export default Courses;

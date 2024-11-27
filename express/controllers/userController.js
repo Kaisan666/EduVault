@@ -33,10 +33,20 @@ class UserController {
 
     }
     async showOne(req, res) {
+        const {userId} = req.params;
+        try {
+            const result = await sequelize.query(`
+                select * from users where id = :id
+                `,
+            {replacements : {id : userId}})
+            res.status(201).json(result[0])
+        } catch (error) {
+            res.status(500).json({error : error.message})
+        }
 
     }
     async editUser(req, res) {
-
+        
     }
     async deleteUser(req, res) {
 

@@ -10,42 +10,53 @@ const generateJWT = (id, login, roleId) => {
 }
 class StudentController {
     async create(req, res) {
-        const {groupId} = req.params
-        const {firstName, lastName, middleName, login, password} = req.body;
-        const roleId = 1
-        const middleNameValue = middleName ? middleName : null;
+        const { groupId } = req.params;
+        const { firstName, lastName, middleName, login, password, roleId } = req.body;
 
-        // if (!name){
-        //     return res.status(400).json({error : "номер группы обязателен"})
-        // }
-        console.log(password)
-        const hashpass = await bcrypt.hash(password, 5)
-        try{
-            const usercreation = await sequelize.query(
-                `INSERT INTO users ("firstName", "lastName", "middleName", "login", "password", "roleId", "createdAt", "updatedAt") 
-                 VALUES (:firstName, :lastName, :middleName, :login, :password, :roleId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-                  RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
-                  {replacements: {firstName : firstName , lastName : lastName, middleName : middleName, login : login, password : hashpass, roleId: roleId}});
-            const id = usercreation[0][0].id  
-            const studentcreation = await sequelize.query(`
-                
-                insert into students ("userId", "groupId", "createdAt", "updatedAt") values
-                 (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
-                {replacements : {userId : id, groupId : groupId}})  
-            const student = await sequelize.query(
-                `select * from users join students on students."userId" = users."id" where users."id" = :id`
-            , {replacements : {id : id}})
-            const token = generateJWT(usercreation[0].id,usercreation[0].login, usercreation[0].roleId )
-            // res.status(201).json(student[0])
-            const i = usercreation[0].id
-            console.log(i)
-            return res.json({token})
-        } catch(e){
-            res.status(500).json({error : e.message})
+        // Проверка наличия обязательных полей
+        if (!firstName || !lastName || !login || !password || !roleId || !groupId) {
+            return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
         }
 
+        const hashpass = await bcrypt.hash(password, 5);
 
+        try {
+            // Динамическое формирование SQL-запроса
+            const fields = ['"firstName"', '"lastName"', '"login"', '"password"', '"roleId"', '"createdAt"', '"updatedAt"'];
+            const values = [firstName, lastName, login, hashpass, roleId, 'CURRENT_TIMESTAMP', 'CURRENT_TIMESTAMP'];
+            const replacements = { firstName, lastName, login, password: hashpass, roleId };
+
+            if (middleName) {
+                fields.splice(2, 0, '"middleName"');
+                values.splice(2, 0, middleName);
+                replacements.middleName = middleName;
+            }
+
+            const usercreation = await sequelize.query(
+                `INSERT INTO users (${fields.join(', ')}) VALUES (${values.map((_, i) => `:${Object.keys(replacements)[i]}`).join(', ')}) RETURNING *`,
+                { replacements }
+            );
+
+            const id = usercreation[0][0].id;
+
+            const studentcreation = await sequelize.query(
+                `INSERT INTO students ("userId", "groupId", "createdAt", "updatedAt") VALUES (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+                { replacements: { userId: id, groupId } }
+            );
+
+            const student = await sequelize.query(
+                `SELECT * FROM users JOIN students ON students."userId" = users."id" WHERE users."id" = :id`,
+                { replacements: { id } }
+            );
+
+            const token = generateJWT(usercreation[0][0].id, usercreation[0][0].login, roleId);
+
+            return res.json({ token });
+        } catch (e) {
+            res.status(500).json({ error: e.message });
+        }
     }
+
     async showAll(req, res) {
         const {groupId} = req.params
         try {
@@ -58,22 +69,6 @@ class StudentController {
             res.status(500).json({error : error.message})
         }
     }
-    async showOne(req, res) {
-        const {groupId} = req.params
-        console.log(req.params);
-        try {
-            const result = await sequelize.query(
-                `select * from groups where id = :id`, 
-                {
-                    replacements: {id : groupId},
-                    type: QueryTypes.SELECT
-                }
-            );
-            res.status(201).json(result[0])
-        } catch (error) {
-            res.status(500).json({error : error.message})
-        }
-    } 
     async update(req, res) {
         const {studentId} = req.params;
         const updates = req.body;
@@ -97,22 +92,48 @@ class StudentController {
         } catch (error) {
             res.status(500).json({error : error.message})
         }}
-    async delete(req, res) {
-        const {groupId} = req.params
-        console.log(req.params);
-        try {
-            const result = await sequelize.query(
-                'Delete from group where id = :id', 
-                {
-                    replacements: { id: groupId }
+        async delete(req, res) {
+            const { studentId } = req.params;
+    
+            const transaction = await sequelize.transaction();
+    
+            try {
+                // Удаление записи из таблицы students
+                const studentResult = await sequelize.query(
+                    'DELETE FROM students WHERE "userId" = :id RETURNING *;',
+                    {
+                        replacements: { id: studentId },
+                        type: QueryTypes.DELETE,
+                        transaction: transaction
+                    }
+                );
+    
+                if (studentResult.length === 0) {
+                    await transaction.rollback();
+                    return res.status(404).json({ error: "Студент не найден" });
                 }
-            );
-            res.status(201).json("Факультет удален")
-        } catch (error) {
-            res.status(500).json({error : error.message})
+    
+                // Удаление записи из таблицы users
+                const userResult = await sequelize.query(
+                    'DELETE FROM users WHERE "id" = :id RETURNING *;',
+                    {
+                        replacements: { id: studentId },
+                        type: QueryTypes.DELETE,
+                        transaction: transaction
+                    }
+                );
+    
+                if (userResult.length === 0) {
+                    await transaction.rollback();
+                    return res.status(404).json({ error: "Пользователь не найден" });
+                }
+    
+                await transaction.commit();
+                res.status(200).json({ message: "Студент и пользователь успешно удалены" });
+            } catch (error) {
+                await transaction.rollback();
+                res.status(500).json({ error: error.message });
+            }
         }
     }
-
-
-}
 export const studentController = new StudentController()
