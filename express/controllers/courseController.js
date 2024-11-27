@@ -77,13 +77,13 @@ class CourseController {
     }
 
     async delete(req, res) {
-        const { specialtyId } = req.params;
+        const { courseId } = req.params;
         console.log(req.params);
         try {
             const result = await sequelize.query(
                 'DELETE FROM courses WHERE id = :id',
                 {
-                    replacements: { id: specialtyId }
+                    replacements: { id: courseId }
                 }
             );
             res.status(200).json("Специальность удалена");

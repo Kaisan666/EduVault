@@ -1,8 +1,12 @@
 // src/components/Courses.js
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Courses.module.css';
+import axios from 'axios';
+import { useParams } from "react-router"
+import { Link } from 'react-router-dom';
 
-const Courses = ({ facultyId }) => {
+const Courses = () => {
+ const {specialtyId} = useParams()
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState('');
   const [isAdding, setIsAdding] = useState(false);
@@ -11,12 +15,14 @@ const Courses = ({ facultyId }) => {
   useEffect(() => {
     fetchFacultyDetails();
     fetchCourses();
-  }, [facultyId]);
+  }, []);
 
   const fetchFacultyDetails = async () => {
     try {
-      const response = await fetch(`/api/faculties/${facultyId}`);
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5000/api/specialty/show-one/${specialtyId}`)
+      console.log(specialtyId)
+      const data = response.data
+      console.log(data)
       setFacultyDetails(data.name);
     } catch (error) {
       console.error('Ошибка при получении информации о направлении:', error);
@@ -25,25 +31,42 @@ const Courses = ({ facultyId }) => {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch(`/api/faculties/${facultyId}/courses`);
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5000/api/course/all-courses/${specialtyId}`)
+      const data = response.data
       setCourses(data);
     } catch (error) {
       console.error('Ошибка при получении курсов:', error);
     }
   };
 
+  // const handleAddCourse = async () => {
+  //   if (newCourse.trim()) {
+  //     try {
+  //       const response = await fetch(`/api/faculties/${facultyId}/courses`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({ name: newCourse }),
+  //       });
+  //       const newCourseData = await response.json();
+  //       setCourses([...courses, newCourseData]);
+  //       setNewCourse('');
+  //       setIsAdding(false);
+  //     } catch (error) {
+  //       console.error('Ошибка при добавлении курса:', error);
+  //     }
+  //   }
+  // };
   const handleAddCourse = async () => {
     if (newCourse.trim()) {
       try {
-        const response = await fetch(`/api/faculties/${facultyId}/courses`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name: newCourse }),
+        const response = await axios.post(`http://localhost:5000/api/course/create-course/${specialtyId}`, {
+          number: newCourse
         });
-        const newCourseData = await response.json();
+        const data = response.data[0]
+        console.log(response.data[0])
+        const newCourseData = data
         setCourses([...courses, newCourseData]);
         setNewCourse('');
         setIsAdding(false);
@@ -51,19 +74,24 @@ const Courses = ({ facultyId }) => {
         console.error('Ошибка при добавлении курса:', error);
       }
     }
+  }
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    // Проверка на цифры и диапазон от 1 до 8
+    if (/^\d*$/.test(value) && (value === '' || (Number(value) >= 1 && Number(value) <= 8))) {
+      setNewCourse(value);
+    }
   };
 
   const handleDeleteCourse = async (courseId) => {
     try {
-      await fetch(`/api/faculties/${facultyId}/courses/${courseId}`, {
-        method: 'DELETE',
-      });
+      await axios.delete(`http://localhost:5000/api/course/${courseId}`)
       setCourses(courses.filter(course => course.id !== courseId));
     } catch (error) {
       console.error('Ошибка при удалении курса:', error);
     }
   };
-//
   const handleCancel = () => {
     setNewCourse('');
     setIsAdding(false);
@@ -78,7 +106,9 @@ const Courses = ({ facultyId }) => {
       <ul className={styles.coursesList}>
         {courses.map(course => (
           <li key={course.id} className={styles.courseItem}>
-            {course.name}
+            <Link to={`/groups/${course.id}`}>
+            <div className={styles.courseNumberWrapper}>{course.number}</div>
+          </Link>
             <button onClick={() => handleDeleteCourse(course.id)} className={styles.deleteButton}>
               Удалить
             </button>
@@ -88,12 +118,14 @@ const Courses = ({ facultyId }) => {
       {isAdding ? (
         <div className={styles.addCourseForm}>
           <input
-            type="text"
-            value={newCourse}
-            onChange={(e) => setNewCourse(e.target.value)}
-            placeholder="Введите название курса"
-            className={styles.inputField}
-          />
+        type="text"
+        value={newCourse}
+        onChange={handleChange}
+        placeholder="Введите номер курса"
+        className={styles.inputField}
+        pattern="[1-8]" // HTML5 pattern для ограничения ввода только цифр от 1 до 8
+        title="Введите число от 1 до 8"
+      />
           <div className={styles.buttonContainer}>
             <button onClick={handleAddCourse} className={styles.confirmButton}>
               Добавить курс

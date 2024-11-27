@@ -77,7 +77,10 @@
     justify-content: space-between;
     width: 100%;
   }
-  
+  .courseNumberWrapper{
+    width: 500px;
+    text-align: start;
+  }
   .addButton,
   .confirmButton,
   .cancelButton {
@@ -88,20 +91,29 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
   .addButton {
     background-color: #38a05070;
     color: white;
     margin-top: 20px;
+  }
+  .addButton:hover{
+    background-color: #125221c2;
   }
   
   .confirmButton {
     background-color: #28a745;
     color: white;
   }
+  .confirmButton:hover{
+    background-color: #155324;
+  }
   
   .cancelButton {
     background-color: #dc3545;
+    color: white;
+  }
+  .cancelButton:hover {
+    background-color: #8a202b;
     color: white;
   }
   

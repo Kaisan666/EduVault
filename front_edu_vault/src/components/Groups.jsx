@@ -1,8 +1,11 @@
 // src/components/Groups.js
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Groups.module.css';
-
-const Groups = ({ courseId }) => {
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+const Groups = () => {
+  const {courseId} = useParams()
   const [groups, setGroups] = useState([]);
   const [newGroup, setNewGroup] = useState('');
   const [isAdding, setIsAdding] = useState(false);
@@ -11,10 +14,11 @@ const Groups = ({ courseId }) => {
   useEffect(() => {
     fetchCourseDetails();
     fetchGroups();
-  }, [courseId]);
+  }, []);
 
   const fetchCourseDetails = async () => {
     try {
+      const response = await axios.get(`http://localhost:5000/api/group/show-all/${courseId}`)
       const response = await fetch(`/api/courses/${courseId}`);
       const data = await response.json();
       setCourseDetails(data.name);
