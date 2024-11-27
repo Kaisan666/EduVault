@@ -11,9 +11,9 @@ class GroupController {
         }
         try{
             const result = await sequelize.query(
-                `INSERT INTO groups ("group_number", "specialtyId", "createdAt", "updatedAt") 
-                 VALUES (:number, :id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
-                {replacements: {id : specialtyId,number: number,}});
+                `INSERT INTO groups ("name", "courseId", "createdAt", "updatedAt") 
+                 VALUES (:name, :id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
+                {replacements: {id : courseId,name: name,}});
             res.status(201).json(result[0])
         } catch(e){
             res.status(500).json({error : e.message})
@@ -22,12 +22,12 @@ class GroupController {
 
     }
     async showAll(req, res) {
-        const {specialtyId} = req.params
+        const {courseId} = req.params
         try {
             const result = await sequelize.query(`
-                select * from groups where "specialty" = :id
+                select * from groups where "courseId" = :id
                 `,
-            {replacements : {id : specialtyId}})
+            {replacements : {id : courseId}})
             res.status(201).json(result[0])
         } catch (error) {
             res.status(500).json({error : error.message})

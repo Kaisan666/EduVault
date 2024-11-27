@@ -11,57 +11,55 @@ const generateJWT = (id, login, roleId) => {
 class StudentController {
     async create(req, res) {
         const { groupId } = req.params;
-        const { firstName, lastName, middleName, login, password, roleId } = req.body;
+    const { firstName, lastName, middleName, login, password, roleId } = req.body;
 
-        // Проверка наличия обязательных полей
-        if (!firstName || !lastName || !login || !password || !roleId || !groupId) {
-            return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
-        }
-
-        const hashpass = await bcrypt.hash(password, 5);
-
-        try {
-            // Динамическое формирование SQL-запроса
-            const fields = ['"firstName"', '"lastName"', '"login"', '"password"', '"roleId"', '"createdAt"', '"updatedAt"'];
-            const values = [firstName, lastName, login, hashpass, roleId, 'CURRENT_TIMESTAMP', 'CURRENT_TIMESTAMP'];
-            const replacements = { firstName, lastName, login, password: hashpass, roleId };
-
-            if (middleName) {
-                fields.splice(2, 0, '"middleName"');
-                values.splice(2, 0, middleName);
-                replacements.middleName = middleName;
-            }
-
-            const usercreation = await sequelize.query(
-                `INSERT INTO users (${fields.join(', ')}) VALUES (${values.map((_, i) => `:${Object.keys(replacements)[i]}`).join(', ')}) RETURNING *`,
-                { replacements }
-            );
-
-            const id = usercreation[0][0].id;
-
-            const studentcreation = await sequelize.query(
-                `INSERT INTO students ("userId", "groupId", "createdAt", "updatedAt") VALUES (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
-                { replacements: { userId: id, groupId } }
-            );
-
-            const student = await sequelize.query(
-                `SELECT * FROM users JOIN students ON students."userId" = users."id" WHERE users."id" = :id`,
-                { replacements: { id } }
-            );
-
-            const token = generateJWT(usercreation[0][0].id, usercreation[0][0].login, roleId);
-
-            return res.json({ token });
-        } catch (e) {
-            res.status(500).json({ error: e.message });
-        }
+    // Проверка наличия обязательных полей
+    if (!firstName || !lastName || !login || !password || !roleId || !groupId) {
+        return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
     }
+
+    const hashpass = await bcrypt.hash(password, 5);
+
+    try {
+        // Динамическое формирование SQL-запроса
+        let fields = ['"firstName"', '"lastName"', '"login"', '"password"', '"roleId"'];
+        let values = { firstName, lastName, login, password: hashpass, roleId };
+
+        if (middleName) {
+            fields.push('"middleName"');
+            values.middleName = middleName;
+        }
+
+        const usercreation = await sequelize.query(
+            `INSERT INTO users (${fields.join(', ')}, "createdAt", "updatedAt") VALUES (${Object.keys(values).map(key => `:${key}`).join(', ')}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+            { replacements: values }
+        );
+
+        const id = usercreation[0][0].id;
+
+        const studentcreation = await sequelize.query(
+            `INSERT INTO students ("userId", "groupId", "createdAt", "updatedAt") VALUES (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+            { replacements: { userId: id, groupId } }
+        );
+
+        const student = await sequelize.query(
+            `SELECT * FROM users JOIN students ON students."userId" = users."id" WHERE users."id" = :id`,
+            { replacements: { id } }
+        );
+
+        const token = generateJWT(usercreation[0][0].id, usercreation[0][0].login, roleId);
+
+        return res.json({ token });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+}
 
     async showAll(req, res) {
         const {groupId} = req.params
         try {
             const result = await sequelize.query(`
-                select * from students s join users u on s.userId = u.id where s.groupId = :id
+                select * from students s join users u on s."userId" = u.id where s."groupId" = :id
                 `,
             {replacements : {id : groupId}})
             res.status(201).json(result[0])

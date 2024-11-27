@@ -13,8 +13,7 @@ const User = sequelize.define("user", {
 
 })
 const Student = sequelize.define("student", {
-    id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
-    course : {type : DataTypes.INTEGER, allowNull : false}
+    id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true}
 })
 
 const Group = sequelize.define("group", {

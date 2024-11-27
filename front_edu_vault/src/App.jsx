@@ -20,6 +20,7 @@ import Secretary_Direction from './page/Secretary_Direction_Main';
 import Groups from './components/Groups'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Courses from './components/courses';
+import AddStudents from './page/AddingStudents/AddStudents';
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/specialties/:facultyId" element={<FacultyDetails />} />
         <Route path="/courses/:specialtyId" element={<Courses />} />
         <Route path="/groups/:courseId" element={<Groups/>}/>
+        <Route path="/students/:groupId" element={<AddStudents/>}/>
       </Routes>
     </Router>
     </>

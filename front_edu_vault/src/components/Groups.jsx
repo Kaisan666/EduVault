@@ -18,10 +18,10 @@ const Groups = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/group/show-all/${courseId}`)
-      const response = await fetch(`/api/courses/${courseId}`);
-      const data = await response.json();
-      setCourseDetails(data.name);
+      const response = await axios.get(`http://localhost:5000/api/course/${courseId}`)
+      // const response = await fetch(`/api/courses/${courseId}`);
+      const data = response.data
+      setCourseDetails(data.number);
     } catch (error) {
       console.error('Ошибка при получении информации о курсе:', error);
     }
@@ -29,8 +29,9 @@ const Groups = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await fetch(`/api/courses/${courseId}/groups`);
-      const data = await response.json();
+      const response = await axios.get(`http://localhost:5000/api/group/show-all/${courseId}`)
+      const data = response.data
+      console.log(data)
       setGroups(data);
     } catch (error) {
       console.error('Ошибка при получении групп:', error);
@@ -39,23 +40,20 @@ const Groups = () => {
 
   const handleAddGroup = async () => {
     if (newGroup.trim()) {
-      try {
-        const response = await fetch(`/api/courses/${courseId}/groups`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ name: newGroup }),
-        });
-        const newGroupData = await response.json();
-        setGroups([...groups, newGroupData]);
-        setNewGroup('');
-        setIsAdding(false);
-      } catch (error) {
-        console.error('Ошибка при добавлении группы:', error);
-      }
+        try {
+            const response = await axios.post(`http://localhost:5000/api/group/create-group/${courseId}`, {
+                name: newGroup
+            });
+            const newGroupData = response.data[0]; // Полный объект группы
+            console.log(newGroupData);
+            setGroups([...groups, newGroupData]); // Добавляем весь объект группы
+            setNewGroup('');
+            setIsAdding(false);
+        } catch (error) {
+            console.error('Ошибка при добавлении группы:', error);
+        }
     }
-  };
+};
 
   const handleDeleteGroup = async (groupId) => {
     try {
@@ -82,7 +80,11 @@ const Groups = () => {
       <ul className={styles.groupsList}>
         {groups.map(group => (
           <li key={group.id} className={styles.groupItem}>
-            {group.name}
+            <Link to={`/students/${group.id}`}>
+              <div>
+                {group.name}
+                </div>
+            </Link>
             <button onClick={() => handleDeleteGroup(group.id)} className={styles.deleteButton}>
               Удалить
             </button>
