@@ -1,16 +1,18 @@
-import Main from './page/main';
-import Entrance from './page/page_input';
-import LabWorksPage from './page/laboratory_work';
-import LabPage from './page/laba_page';
-import AdminDirectionSecretary from './page/AdminDirectionSecretary';
+import Main from './page/main'; // главгая стр с дисциплинами 
+import Entrance from './page/page_input'; // вход
+import LabWorksPage from './page/laboratory_work'; // список лаб по определенной жисциплине 
+import LabPage from './page/laba_page'; // определенная лаба ( например лаба 1)
+import AdminDirectionSecretary from './page/AdminDirectionSecretary'; // страница где добавляем направления и серкетарией 
 //import Admin_main_page from './page/admin_main_page';
 import Secretary_Direction from './page/Secretary_Direction_Main';
-import AdminMenuF from './page/AdminMenu';
-import Groups from './components/Groups';
-import Courses from './components/Courses';
+import AdminMenuF from './page/AdminMenu';// добавляем факультеты
+import Groups from './components/Groups'; // группы
+import Courses from './components/Courses'; // курсы
+import LK from './page/lk';//личный кабинет
 
 
 
+import PersonalCabinet from './components/PersonalCabinet';
 import DisciplineCard from './components/DisciplineCard';
 import LabWorkCard from './components/laba';
 //import LoginFormAdmin from './components/admin_entrance'; 
@@ -29,7 +31,7 @@ function App() {
 
   return (
     <>
-     <Groups/> 
+     <LK/> 
     </>
   )
 }

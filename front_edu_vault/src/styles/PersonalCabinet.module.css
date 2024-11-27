@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #115739;
+    border-radius: 8px;
+    background-color: #266c4123;
+  }
+  
+  .avatarContainer {
+    margin-right: 20px;
+  }
+  
+  .avatar {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .infoContainer {
+    flex: 1;
+  }
+  
+  .infoContainer h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .infoContainer p {
+    margin: 5px 0;
+  }
+  
