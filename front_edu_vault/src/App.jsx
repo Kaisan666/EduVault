@@ -28,11 +28,17 @@ function App() {
     <>
       <Router>
       <Routes>
-        <Route path="/" element={<AdminMenuF />} />
+
+       <Route path="/" element={<AdminMenu />} />  
         <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
         <Route path="/courses/:specialtyId" element={<Courses />} />
         <Route path="/groups/:courseId" element={<Groups/>}/>
         <Route path="/students/:groupId" element={<AddStudents/>}/>
+        
+      
+        {/*<Route path="/" element={<Entrance />} />*/}
+        <Route path="/main" element={<Main />} />
+        <Route path="/disciplines/:disciplineId" element={<Main />} />
       </Routes>
     </Router>
     </>

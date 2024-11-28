@@ -1,27 +1,180 @@
-/* src/styles/Groups.module.css */
+/* Контейнер для групп */
 .groupsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9; /* Светлый фон */
+  min-height: 100vh;
+}
+
+/* Оформление для блока курса */
+.courseFrame {
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px;
+  background-color: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Заголовок блока курса */
+.courseFrame h1 {
+  font-size: 28px;
+  margin: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Список групп */
+.groupsList {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 1000px; /* Увеличиваем максимальную ширину */
+}
+
+/* Элемент группы */
+.groupItem {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 15px 0;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.groupItem:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Кнопка удаления группы */
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Форма добавления группы */
+.addGroupForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+/* Поле ввода */
+.inputField {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #4CAF50; /* Зеленая рамка при фокусе */
+}
+
+/* Контейнер для кнопок */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Оформление кнопок */
+.addButton,
+.confirmButton,
+.cancelButton {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
+}
+
+/* Кнопка добавления группы */
+.addButton {
+  background-color: #38a050;
+  color: white;
+}
+
+.addButton:hover {
+  background-color: #2e7d32;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Кнопка подтверждения */
+.confirmButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.confirmButton:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Кнопка отмены */
+.cancelButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
   .courseFrame {
-    width: 100%;
-    max-width: 1850px;
+    max-width: 100%;
     padding: 25px;
-    background-color: #ffffff00;
-    border: 2px solid #3a4e4273;
-    border-radius: 1px;
-    margin-bottom: 20px;
-    text-align: center;
   }
-  
+
+  .groupItem {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .courseFrame {
+    padding: 20px;
+  }
+
   .courseFrame h1 {
     font-size: 24px;
-    margin: 0;
-    color: #3e835873;
   }
   
   .groupsList {
@@ -35,115 +188,40 @@
     align-self: start;
   }
   .groupItem {
-    background-color: #5a9e5148;
     padding: 15px;
-    margin: 20px 0;
-    width: 100%;
-    max-width: 800px;
-    border-radius: 5px;
-    text-align: center;
-    border: 1px solid #3e835873;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .deleteButton {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
     font-size: 14px;
+    margin: 15px 0;
   }
-  
-  .addGroupForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
+
+  .inputField,
   .addButton,
   .confirmButton,
   .cancelButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 14px;
+    padding: 10px;
   }
-  
-  .addButton {
-    background-color: #38a05070;
-    color: white;
-    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .courseFrame {
+    padding: 15px;
   }
-  
-  .confirmButton {
-    background-color: #28a745;
-    color: white;
+
+  .courseFrame h1 {
+    font-size: 20px;
   }
-  
+
+  .groupItem {
+    padding: 10px;
+    font-size: 12px;
+    margin: 10px 0;
+  }
+
+  .inputField,
+  .addButton,
+  .confirmButton,
   .cancelButton {
-    background-color: #dc3545;
-    color: white;
+    font-size: 12px;
+    padding: 8px;
   }
-  
-  /* Медиа-запросы для адаптации */
-  @media (max-width: 1200px) {
-    .groupItem {
-      max-width: 100%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .groupItem {
-      padding: 10px;
-      font-size: 14px;
-      margin: 15px 0;
-    }
-  
-    .inputField,
-    .addButton,
-    .confirmButton,
-    .cancelButton {
-      font-size: 14px;
-      padding: 8px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .groupItem {
-      padding: 8px;
-      font-size: 12px;
-      margin: 10px 0;
-    }
-  
-    .inputField,
-    .addButton,
-    .confirmButton,
-    .cancelButton {
-      font-size: 12px;
-      padding: 6px;
-    }
-  }
-  
+}

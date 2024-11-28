@@ -15,7 +15,7 @@ const LabPage = () => {
 
   return (
     <div>
-      <Header />
+      <Header /> 
       <div className="labwork-container">
         {labWorks.length > 0 ? (
           labWorks.map((lab) => (

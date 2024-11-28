@@ -1,179 +1,215 @@
-/* src/styles/Courses.module.css */
+/* Контейнер для курсов */
 .coursesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9; /* Светлый фон для всей страницы */
+  min-height: 100vh;
+}
+
+/* Оформление для блока направления */
+.directionFrame {
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px;
+  background-color: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Заголовок блока направления */
+.directionFrame h1 {
+  font-size: 26px;
+  margin: 0;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* Список курсов */
+.coursesList {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 1000px; /* Увеличиваем максимальную ширину */
+}
+
+/* Элемент списка курса */
+.courseItem {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 15px 0;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.courseItem:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Кнопка удаления курса */
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+
+/* Форма добавления курса */
+.addCourseForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+/* Поле ввода */
+.inputField {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #4CAF50; /* Зеленая рамка при фокусе */
+}
+
+/* Контейнер для кнопок */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Оформление кнопок */
+.addButton,
+.confirmButton,
+.cancelButton {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
+}
+
+/* Кнопка добавления курса */
+.addButton {
+  background-color: #38a050;
+  color: white;
+}
+
+.addButton:hover {
+  background-color: #2e7d32;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Кнопка подтверждения */
+.confirmButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.confirmButton:hover {
+  background-color: #218838;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Кнопка отмены */
+.cancelButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #c82333;
+  transform: scale(1.05); /* Легкое увеличение */
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
   .directionFrame {
-    width: 100%;
-    max-width: 1850px;
-    padding: 25px;
-    background-color: #ffffff00;
-    border: 2px solid #3a4e4273;
-    border-radius: 1px;
-    margin-bottom: 20px;
-    text-align: center;
+    max-width: 100%;
+    padding: 20px;
   }
-  
-  .directionFrame h1 {
-    font-size: 24px;
-    margin: 0;
-    color: #3e835873;
-  }
-  
-  .coursesList {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-    max-width: 800px; /* Увеличиваем максимальную ширину */
-  }
-  
+
   .courseItem {
-    background-color: #5a9e5148;
-    padding: 15px;
-    margin: 20px 0; /* Увеличиваем расстояние между элементами */
-    width: 100%;
-    max-width: 800px; /* Увеличиваем максимальную ширину */
-    border-radius: 5px;
-    text-align: center;
-    border: 1px solid #3e835873; /* Добавляем границу для лучшей визуальной отличимости */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 100%;
   }
-  
-  .deleteButton {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .directionFrame {
+    padding: 15px;
+  }
+
+  .directionFrame h1 {
+    font-size: 22px;
+  }
+
+  .courseItem {
+    padding: 15px;
     font-size: 14px;
   }
-  
-  .addCourseForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px; /* Увеличиваем максимальную ширину */
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  .courseNumberWrapper{
-    width: 500px;
-    text-align: start;
-  }
+
+  .inputField,
   .addButton,
   .confirmButton,
   .cancelButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 14px;
+    padding: 10px;
   }
-  .addButton {
-    background-color: #38a05070;
-    color: white;
-    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .directionFrame {
+    padding: 10px;
   }
-  .addButton:hover{
-    background-color: #125221c2;
+
+  .directionFrame h1 {
+    font-size: 18px;
   }
-  
-  .confirmButton {
-    background-color: #28a745;
-    color: white;
+
+  .courseItem {
+    padding: 10px;
+    font-size: 12px;
   }
-  .confirmButton:hover{
-    background-color: #155324;
-  }
-  
+
+  .inputField,
+  .addButton,
+  .confirmButton,
   .cancelButton {
-    background-color: #dc3545;
-    color: white;
+    font-size: 12px;
+    padding: 8px;
   }
-  .cancelButton:hover {
-    background-color: #8a202b;
-    color: white;
-  }
-  
-  /* Медиа-запросы для адаптации */
-  @media (max-width: 1200px) {
-    .directionFrame {
-      max-width: 100%;
-      padding: 20px;
-    }
-  
-    .courseItem {
-      max-width: 100%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .directionFrame {
-      padding: 15px;
-    }
-  
-    .directionFrame h1 {
-      font-size: 20px;
-    }
-  
-    .courseItem {
-      padding: 10px;
-      font-size: 14px;
-      margin: 15px 0; /* Уменьшаем расстояние между элементами */
-    }
-  
-    .inputField,
-    .addButton,
-    .confirmButton,
-    .cancelButton {
-      font-size: 14px;
-      padding: 8px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .directionFrame {
-      padding: 10px;
-    }
-  
-    .directionFrame h1 {
-      font-size: 18px;
-    }
-  
-    .courseItem {
-      padding: 8px;
-      font-size: 12px;
-      margin: 10px 0; /* Уменьшаем расстояние между элементами */
-    }
-  
-    .inputField,
-    .addButton,
-    .confirmButton,
-    .cancelButton {
-      font-size: 12px;
-      padding: 6px;
-    }
-  }
-  
+}
