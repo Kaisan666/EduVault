@@ -38,7 +38,7 @@
   background-color: #ffffff34;
   padding: 15px;
   border-radius: 1px;
-  border: 1px solid #3e835873;
+  border: 1px solid #105229a7;
   height: 100vh;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .directionItem {
-  background-color: #3e835873;
+  background-color: #134f2ab6;
   color: white;
   padding: 10px;
   margin: 5px 0;
@@ -58,7 +58,7 @@
 
 .addDirectionButton {
   padding: 10px 20px;
-  background-color: #3e835873;
+  background-color: #114f19cd;
   color: white;
   border: none;
   border-radius: 5px;
