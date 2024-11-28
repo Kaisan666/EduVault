@@ -7,15 +7,15 @@
 .disciplineBox {
     border: 4px solid #29422881;
     border-radius: 40px;
-    padding: 30px;
+    padding: 20px; /* Уменьшены отступы */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 900px;
+    max-width: 800px; /* Уменьшена максимальная ширина */
     margin: 0 auto;
-    height: 500px;
+    height: 450px; /* Уменьшен размер */
     overflow-y: auto;
-    position: relative; /* Для позиционирования pseudo-элемента */
+    position: relative;
 }
 
 .disciplineBox::before {
@@ -30,8 +30,8 @@
 }
 
 .disciplineBox::-webkit-scrollbar {
-    width: 10px;
-    padding-right: 15px;
+    width: 8px; /* Уменьшен размер скроллбара */
+    padding-right: 10px;
 }
 
 .disciplineBox::-webkit-scrollbar-thumb {
@@ -51,10 +51,10 @@
 .disciplineItem {
     color: #ffffff;
     border-radius: 20px;
-    padding: 50px 20px;
-    margin: 20px;
+    padding: 40px 15px; /* Уменьшены отступы внутри элементов */
+    margin: 15px; /* Уменьшен отступ между элементами */
     text-align: center;
-    flex: 0 1 calc(25% - 20px);
+    flex: 0 1 calc(33.333% - 20px); /* Уменьшен размер элементов */
     box-sizing: border-box;
     transition: transform 0.3s ease;
 }
@@ -73,7 +73,7 @@
 }
 
 .lab {
-    font-size: 24px;
+    font-size: 20px; /* Уменьшен размер шрифта */
     color: #0960088a;
     margin-top: 0;
     font-weight: bold;
@@ -81,68 +81,68 @@
 
 @media (max-width: 600px) {
     .disciplineBox {
-        padding: 15px;
+        padding: 10px; /* Уменьшены отступы */
         height: auto;
         max-width: 100%;
     }
 
     .disciplineItem {
-        flex: 0 1 100%;
-        padding: 30px 10px;
+        flex: 0 1 100%; /* Элементы теперь будут на всю ширину */
+        padding: 25px 10px; /* Уменьшены отступы */
     }
 
     .lab {
-        font-size: 20px;
+        font-size: 18px; /* Уменьшен размер шрифта */
     }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
     .disciplineBox {
-        padding: 10px;
+        padding: 15px; /* Уменьшены отступы */
         height: auto;
         max-width: 90%;
     }
 
     .disciplineItem {
-        flex: 0 1 calc(33.333% - 20px);
-        padding: 40px 15px;
+        flex: 0 1 calc(33.333% - 20px); /* Размер элементов для среднего экрана */
+        padding: 30px 15px; /* Уменьшены отступы */
     }
 
     .lab {
-        font-size: 22px;
+        font-size: 20px; /* Уменьшен размер шрифта */
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1440px) {
     .disciplineBox {
-        padding: 25px;
-        height: 500px;
-        max-width: 90%;
+        padding: 20px; /* Уменьшены отступы */
+        height: 450px; /* Уменьшен размер */
+        max-width: 80%; /* Уменьшена максимальная ширина */
     }
 
     .disciplineItem {
-        flex: 0 1 calc(25% - 20px);
-        padding: 50px 20px;
+        flex: 0 1 calc(25% - 20px); /* Элементы теперь с меньшим размером */
+        padding: 40px 15px; /* Уменьшены отступы */
     }
 
     .lab {
-        font-size: 24px;
+        font-size: 22px; /* Уменьшен размер шрифта */
     }
 }
 
 @media (min-width: 1441px) {
     .disciplineBox {
-        padding: 20px;
-        height: 500px;
-        max-width: 70%;
+        padding: 15px; /* Уменьшены отступы */
+        height: 450px; /* Уменьшен размер */
+        max-width: 70%; /* Уменьшена максимальная ширина */
     }
 
     .disciplineItem {
-        flex: 0 1 calc(25% - 20px);
-        padding: 50px 20px;
+        flex: 0 1 calc(25% - 20px); /* Элементы теперь с меньшим размером */
+        padding: 40px 15px; /* Уменьшены отступы */
     }
 
     .lab {
-        font-size: 24px;
+        font-size: 22px; /* Уменьшены шрифты */
     }
 }

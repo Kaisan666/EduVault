@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; // Импортируем useParams для получения параметров из URL
 import Header from '../components/header';
 import LabWorkCard from '../components/laba';
 import Footer from '../components/footer ';
 
 const LabPage = () => {
+  const { disciplineId } = useParams(); // Получаем параметр disciplineId из URL
   const [labWorks, setLabWorks] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/labs')
+    // Параметр disciplineId можно использовать для фильтрации данных или как часть URL
+    fetch(`http://localhost:3001/labs?disciplineId=${disciplineId}`)
       .then((response) => response.json())
       .then((data) => setLabWorks(data))
       .catch((error) => console.error('Ошибка загрузки лабораторных работ:', error));
-  }, []);
+  }, [disciplineId]); // Если disciplineId изменится, перезапустится запрос
 
   return (
     <div>

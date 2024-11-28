@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link для маршрутизации
 import styles from '../styles/main_user.module.css';
 
 const DisciplineList = () => {
@@ -9,16 +10,29 @@ const DisciplineList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseFaculties = await fetch('http://localhost:5000/api/faculties');
-        const dataFaculties = await responseFaculties.json();
-        setFaculties(dataFaculties);
+        // Симуляция получения данных о факультетах
+        const fakeFaculties = [
+          { id: 1, name: 'Факультет Информационных Технологий' },
+          { id: 2, name: 'Факультет Машиностроения' }
+        ];
+        setFaculties(fakeFaculties);
 
-        if (dataFaculties.length > 0) {
-          const facultyId = dataFaculties[0].id;
-          const responseDisciplines = await fetch(`http://localhost:5000/api/disciplines?facultyId=${facultyId}`);
-          const dataDisciplines = await responseDisciplines.json();
-          setDisciplines(dataDisciplines);
+        // Симуляция получения данных о дисциплинах для первого факультета
+        if (fakeFaculties.length > 0) {
+          const facultyId = fakeFaculties[0].id;
+          const fakeDisciplines = [
+            { id: 1, name: 'Программирование' },
+            { id: 2, name: 'Алгоритмы и структуры данных' },
+            { id: 3, name: 'Алгоритмы и структуры данных' },
+            { id: 4, name: 'Алгоритмы и структуры данных' },
+            { id: 5, name: 'Алгоритмы и структуры данных' },
+            { id: 6, name: 'Алгоритмы и структуры данных' },
+            { id: 7, name: 'Алгоритмы и структуры данных' },
+            { id: 8, name: 'Сетевые технологии' }
+          ];
+          setDisciplines(fakeDisciplines);
         }
+
         setLoading(false);
       } catch (error) {
         console.error('Ошибка при загрузке данных:', error);
@@ -46,7 +60,10 @@ const DisciplineList = () => {
         {disciplines.length > 0 ? (
           disciplines.map(discipline => (
             <div key={discipline.id} className={styles.disciplineItem}>
-              {discipline.name}
+              {/* Используем Link для перехода на страницу с лабораторными работами по дисциплине */}
+              <Link to={`/LabPage/${discipline.id}`} className={styles.disciplineLink}>
+                {discipline.name}
+              </Link>
             </div>
           ))
         ) : (
