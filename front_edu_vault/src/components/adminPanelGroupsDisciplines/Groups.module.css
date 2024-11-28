@@ -28,9 +28,12 @@
     list-style-type: none;
     padding: 0;
     width: 100%;
-    max-width: 800px;
+    max-width: 200px;
   }
-  
+  .groupsWrapper{
+    margin-right: auto;
+    align-self: start;
+  }
   .groupItem {
     background-color: #5a9e5148;
     padding: 15px;

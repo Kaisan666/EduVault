@@ -6,10 +6,13 @@ import { groupRouter } from "./group.js";
 import { studentRouter } from "./student.js";
 import { courseRouter } from "./course.js";
 import { secretaryRouter } from "./secretary.js";
+import { disciplineRouter } from "./discipline.js";
 
 const router = Router();
 
 router.use("/secretary", secretaryRouter)
+
+router.use(`/discipline`, disciplineRouter)
 
 /**
  * @swagger

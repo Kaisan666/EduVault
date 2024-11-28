@@ -1,9 +1,10 @@
 // src/components/Groups.js
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Groups.module.css';
+import styles from './Groups.module.css';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import DisciplinesInCourse from './disciplinesInCourse';
 const Groups = () => {
   const {courseId} = useParams()
   const [groups, setGroups] = useState([]);
@@ -72,11 +73,13 @@ const Groups = () => {
   };
 
   return (
+    
     <div className={styles.groupsContainer}>
       <div className={styles.courseFrame}>
         <h1>Курс: {courseDetails}</h1>
       </div>
       <h2>Группы</h2>
+      <div className={styles.groupsWrapper}>
       <ul className={styles.groupsList}>
         {groups.map(group => (
           <li key={group.id} className={styles.groupItem}>
@@ -86,7 +89,7 @@ const Groups = () => {
                 </div>
             </Link>
             <button onClick={() => handleDeleteGroup(group.id)} className={styles.deleteButton}>
-              Удалить
+            🗑️
             </button>
           </li>
         ))}
@@ -114,6 +117,8 @@ const Groups = () => {
           Добавить группу
         </button>
       )}
+    </div>
+  <DisciplinesInCourse/>
     </div>
   );
 };

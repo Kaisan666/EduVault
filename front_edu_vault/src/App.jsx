@@ -18,7 +18,7 @@ import FacultyBanner from './components/FacultyBanner';
 import AdminDirectionSecretary from './page/AdminDirectionSecretary';
  import Secretary_Direction_Main from './components/Secretary_Direction_Main';
 import Secretary_Direction from './page/Secretary_Direction_Main';
-import Groups from './components/Groups'
+import Groups from './components/adminPanelGroupsDisciplines/Groups'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Courses from './components/courses';
 import AddStudents from './page/AddingStudents/AddStudents';

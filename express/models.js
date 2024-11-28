@@ -126,8 +126,8 @@ Group.belongsTo(Course)
 Faculty.hasMany(Specialty)
 Specialty.belongsTo(Faculty)
 
-Group.belongsToMany(Discipline, {through : "discipline_group"})
-Discipline.belongsToMany(Group, {through : "discipline_group"})
+Course.hasMany(Discipline)
+Discipline.belongsTo(Course)
 
 Discipline.belongsToMany(Laboratory, {through : "discipline_laboratory"})
 Laboratory.belongsToMany(Discipline, {through : "discipline_laboratory"})
