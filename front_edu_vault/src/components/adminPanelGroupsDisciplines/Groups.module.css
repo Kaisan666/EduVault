@@ -8,7 +8,10 @@
   background-color: #f9f9f9; /* Светлый фон */
   min-height: 100vh;
 }
-
+.mainWrapper{
+  display: flex;
+  width: 100%;
+}
 /* Оформление для блока курса */
 .courseFrame {
   width: 100%;

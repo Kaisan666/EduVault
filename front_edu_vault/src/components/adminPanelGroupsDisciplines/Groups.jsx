@@ -79,46 +79,48 @@ const Groups = () => {
         <h1>Курс: {courseDetails}</h1>
       </div>
       <h2>Группы</h2>
-      <div className={styles.groupsWrapper}>
-      <ul className={styles.groupsList}>
-        {groups.map(group => (
-          <li key={group.id} className={styles.groupItem}>
-            <Link to={`/students/${group.id}`}>
-              <div>
-                {group.name}
-                </div>
-            </Link>
-            <button onClick={() => handleDeleteGroup(group.id)} className={styles.deleteButton}>
-            🗑️
-            </button>
-          </li>
-        ))}
-      </ul>
-      {isAdding ? (
-        <div className={styles.addGroupForm}>
-          <input
-            type="text"
-            value={newGroup}
-            onChange={(e) => setNewGroup(e.target.value)}
-            placeholder="Введите название группы"
-            className={styles.inputField}
-          />
-          <div className={styles.buttonContainer}>
-            <button onClick={handleAddGroup} className={styles.confirmButton}>
-              Добавить группу
-            </button>
-            <button onClick={handleCancel} className={styles.cancelButton}>
-              Отмена
-            </button>
+      <div className={styles.mainWrapper}>
+        <div className={styles.groupsWrapper}>
+        <ul className={styles.groupsList}>
+          {groups.map(group => (
+            <li key={group.id} className={styles.groupItem}>
+              <Link to={`/students/${group.id}`}>
+                <div>
+                  {group.name}
+                  </div>
+              </Link>
+              <button onClick={() => handleDeleteGroup(group.id)} className={styles.deleteButton}>
+              🗑️
+              </button>
+            </li>
+          ))}
+        </ul>
+        {isAdding ? (
+          <div className={styles.addGroupForm}>
+            <input
+              type="text"
+              value={newGroup}
+              onChange={(e) => setNewGroup(e.target.value)}
+              placeholder="Введите название группы"
+              className={styles.inputField}
+            />
+            <div className={styles.buttonContainer}>
+              <button onClick={handleAddGroup} className={styles.confirmButton}>
+                Добавить группу
+              </button>
+              <button onClick={handleCancel} className={styles.cancelButton}>
+                Отмена
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <button onClick={() => setIsAdding(true)} className={styles.addButton}>
-          Добавить группу
-        </button>
-      )}
-    </div>
-  {/* <DisciplinesInCourse/> */}
+        ) : (
+          <button onClick={() => setIsAdding(true)} className={styles.addButton}>
+            Добавить группу
+          </button>
+        )}
+            </div>
+          <DisciplinesInCourse/>
+      </div>
     </div>
   );
 };

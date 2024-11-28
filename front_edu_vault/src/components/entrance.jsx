@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import styles from '../styles/entrance.module.css'; 
-import logo from '../images/logo_entrance.png'; 
+import styles from '../styles/entrance.module.css';
+import logo from '../images/logo_entrance.png';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [data, setData] = useState({
+    password: "",
+    login: ""
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,22 +19,27 @@ const LoginForm = () => {
     setError('');
 
     try {
-     
-      const response = await fetch('/api/student/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',// полный путь сделать
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await axios.post(`http://localhost:5000/api/user/login`, data);
+      const responseData = response.data;
+      console.log(responseData);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Ошибка при входе');
+      if (response.status !== 200) {
+        throw new Error(responseData.message || 'Ошибка при входе');
       }
-      alert('Успешный вход!');
-    
+
+      // Сохраняем токен и роль в localStorage
+      localStorage.setItem('authToken', responseData.token);
+      localStorage.setItem('userRole', responseData.role);
+
+      // Перенаправляем пользователя на соответствующую страницу в зависимости от его роли
+      if (responseData.role === 'Студент') {
+        navigate('/main');
+      } else if (responseData.role === 'user') {
+        navigate('/dashboard');
+      } else {
+        navigate('/');
+      }
+
     } catch (err) {
       setError('Неверный логин или пароль');
     } finally {
@@ -49,8 +59,8 @@ const LoginForm = () => {
             type="text"
             id="username"
             placeholder="Логин"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={data.login}
+            onChange={(e) => setData({ ...data, login: e.target.value })}
             className={styles.inputField}
           />
         </div>
@@ -60,8 +70,8 @@ const LoginForm = () => {
             type="password"
             id="password"
             placeholder="Пароль"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
             className={styles.inputField}
           />
         </div>

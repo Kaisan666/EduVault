@@ -25,9 +25,14 @@ class UserController {
         if (!comparePassword) {
             return res.json({error : "Неправильный пароль"})
         }
+        const role = await sequelize.query(
+            `
+            select "name" from users u join roles r on u."roleId" = r.id where u.id = 3
+            `
+        )
         const token = generateJWT(user[0][0].id, user[0][0].login, user[0][0].roleId)
         console.log(token)
-        return res.json({token})
+        return res.json({token : token, role : role[0][0].name})
     }
     async check(req, res) {
 
