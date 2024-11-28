@@ -49,7 +49,7 @@ class StudentController {
 
         const token = generateJWT(usercreation[0][0].id, usercreation[0][0].login, roleId);
 
-        return res.json({ token });
+        return res.json(usercreation[0]);
     } catch (e) {
         res.status(500).json({ error: e.message });
     }

@@ -49,6 +49,7 @@ export default function AddStudent() {
       try {
         console.log(newStudent)
         const response = await axios.post(`http://localhost:5000/api/student/create-student/${groupId}`, newStudent);
+        console.log(response.data)
         const newStudentData = response.data[0]; // Полный объект группы
         console.log(newStudentData);
         setStudents([...students, newStudentData]); // Добавляем весь объект группы

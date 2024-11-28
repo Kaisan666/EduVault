@@ -3,20 +3,34 @@ import styles from '../styles/adding_directions.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import SecretaryRegistration from './SecretaryRegistration';
 
-function FacultyDetails() {
+function FacultyDetails({addSecretary, setAddSecretary, hideRegister }) {
   const { facultyId } = useParams();
   console.log(facultyId);
   const [directions, setDirections] = useState([]);
   const [newDirectionName, setNewDirectionName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [secretary, setSecretary] = useState([])
 
+
+  const handleDeleteGroup = async (secretaryId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/secretary/delete/${secretaryId}`)
+      setSecretary(secretary.filter(secretary => secretary.id !== secretaryId));
+    } catch (error) {
+      console.error('Ошибка при удалении группы:', error);
+    }
+  };
+  const createSecretary = (newSecretary) =>{
+    setSecretary([...secretary, newSecretary])
+  }
   // Загрузка всех специальностей для факультета при монтировании компонента
   useEffect(() => {
     const fetchDirections = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/specialty/all-specialties/${facultyId}`);
-        console.log(response)
+        console.log(response);
         if (response.status === 200) {
           setDirections(response.data);
         } else {
@@ -26,9 +40,23 @@ function FacultyDetails() {
         console.error('Ошибка:', error);
       }
     };
-
+    const fetchSecretaries = async() =>{
+      try{
+        const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`)
+        const data = response.data
+        console.log(data)
+        if (response.status === 201) {
+          setSecretary(data);
+        } else {
+          console.error('Ошибка при загрузке направлений');
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+      }
+    }
+    fetchSecretaries()
     fetchDirections();
-  }, [facultyId]);
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -60,11 +88,11 @@ function FacultyDetails() {
     <div className={styles.facultyContainer}>
       <div className={styles.sidebar}>
         {directions.map((direction) => (
-          <Link to={`/courses/${direction.id}`}>
-          <div className={styles.directionItem}key={direction.id}>
+          <Link to={`/courses/${direction.id}`} key={direction.id}>
+            <div className={styles.directionItem}>
               {direction.name}
-        </div>
-            </Link>
+            </div>
+          </Link>
         ))}
         <button onClick={openModal} className={styles.addDirectionButton}>
           Добавить направление
@@ -93,6 +121,31 @@ function FacultyDetails() {
           </div>
         </div>
       )}
+      
+      <div className={styles.wrapperOfMain}>
+      <div className={styles.secretariesList}>
+        {secretary.map((secretary) => (
+            <div  key={secretary.id} className={styles.secretariesListItem}>
+            <div>
+              <div>Имя: {secretary.firstName}</div>
+              <div>Фамилия: {secretary.lastName}</div>
+              <div>Отчество: {secretary.middleName}</div>
+              <div>Логин: {secretary.login}</div>
+              <div>Пароль: {secretary.password}</div>
+            </div>
+            <button onClick={() => handleDeleteGroup(secretary.id)} className={styles.deleteButton}>
+              Удалить
+            </button>
+            </div>
+            
+        ))}
+      </div>
+        <SecretaryRegistration
+        create={createSecretary}
+         addSecretary={addSecretary}
+         hideAddSecretary={hideRegister}/>
+        <button className={styles.addSecretaryBtn} onClick={() => setAddSecretary(true)}>Добавить секретаря</button>
+      </div>
     </div>
   );
 }

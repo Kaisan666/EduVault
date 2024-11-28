@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FacultyBanner from '../components/FacultyBanner';
-import SecretaryRegistration from '../components/SecretaryRegistration';
+
 import Footer from '../components/footer ';
 //import Header from '../components/header';
-import FacultyDetails from '../components/adding_directions';
+import FacultyDetails from '../components/facultyDetails';
 
 const AdminDirectionSecretary = () => {
+  const [addSecretary, setAddSecretary] = useState(false)
+  console.log(addSecretary)
+  function registerSecretary(){
+    setAddSecretary(true)
+  }
+  function hideRegister(){
+    setAddSecretary(false)
+  }
+
   return (
     <div>
      
-      <FacultyBanner facultyId="12345" />
-      <FacultyDetails />
-      <SecretaryRegistration />
+      <FacultyBanner />
+      <FacultyDetails
+      addSecretary={addSecretary}
+      setAddSecretary={registerSecretary}
+      hideRegister = {hideRegister}/>
+      
       <Footer />
     </div>
   );

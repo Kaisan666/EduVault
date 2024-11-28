@@ -5,8 +5,11 @@ import { specialtyRouter } from "./specialty.js";
 import { groupRouter } from "./group.js";
 import { studentRouter } from "./student.js";
 import { courseRouter } from "./course.js";
+import { secretaryRouter } from "./secretary.js";
 
 const router = Router();
+
+router.use("/secretary", secretaryRouter)
 
 /**
  * @swagger
