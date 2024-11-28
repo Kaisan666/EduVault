@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link
 import styles from '../styles/header.module.css'; 
 import logo from '../images/logo.png'; 
 import headerImage from '../images/header.png'; 
@@ -21,13 +22,15 @@ const Header = () => {
                     />
                     <span className={styles.brandName}>EduVault</span>
                 </div>
-                <button className={styles.logoutButton}>
-                    <img 
-                        src={userIcon} 
-                        alt="Выйти" 
-                        className={styles.userIcon} 
-                    />
-                </button>
+                <div className={styles.logoutButton}>
+                    <Link to="/PersonalCabinet"> {/* Переход на страницу личного кабинета */}
+                        <img 
+                            src={userIcon} 
+                            alt="Личный кабинет" 
+                            className={styles.userIcon} 
+                        />
+                    </Link>
+                </div>
             </div>
         </header>
     );

@@ -2,57 +2,75 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
+  
 }
 
 .loginForm {
-  background-color: rgba(0, 0, 0, 0.5); 
-  padding: 30px;  
-  border-radius: 40px;
-  width: 300px; 
-  height: 350px;
+  background-color: rgba(0, 0, 0, 0.6); /* Слегка затемненный фон */
+  padding: 40px;  /* Увеличил отступы для большего пространства */
+  border-radius: 15px;  /* Снижен радиус для более современного вида */
+  width: 320px;  /* Немного расширил форму */
+  height: auto; /* Убираем фиксированную высоту */
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавил тень для выделения */
 }
 
 h2 {
-  text-align: center; 
-  font-size: 24px; 
-  margin-bottom: 20px; 
+  text-align: center;
+  font-size: 28px;  /* Увеличил размер шрифта заголовка */
+  margin-bottom: 20px;
+  color: white;  /* Сделал цвет текста заголовка белым */
 }
 
 .inputField {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   width: 100%;
-  padding: 12px; 
-  font-size: 16px; 
-  box-sizing: border-box; 
+  padding: 12px;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;  /* Добавил границу для полей ввода */
+  border-radius: 5px;  /* Закругленные углы для полей */
+  background-color: #f9f9f9; /* Светлый фон для поля ввода */
+}
+
+.inputField:focus {
+  border-color: #4CAF50;  /* Цвет границы при фокусе */
+  outline: none;
 }
 
 .submitButton {
-  margin-top: 15px; 
-  background-color: green; 
-  color: white; 
-  border: none; 
-  padding: 15px; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  width: 100%; 
-  font-size: 16px; 
+  margin-top: 15px;
+  background-color: #4CAF50; /* Заменил на более яркий зеленый */
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+.submitButton:hover {
+  background-color: #45a049; /* Темнее при наведении */
 }
 
 .submitButton:disabled {
-  background-color: gray; 
+  background-color: #ccc;  /* Цвет кнопки при неактивности */
+  cursor: not-allowed;
 }
 
 .error {
-  color: red; 
-  text-align: center; 
-  margin-top: 10px; 
+  color: rgb(253, 253, 253);
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px; /* Сделал шрифт немного меньше */
 }
 
 .logo {
-  width: 150px; 
-  margin-bottom: 20px; 
+  width: 120px;  /* Уменьшил логотип для лучшего соотношения */
+  margin-bottom: 20px;
 }

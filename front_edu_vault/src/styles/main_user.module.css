@@ -1,9 +1,20 @@
+* {
+    font-family: 'Arial', sans-serif; /* Указываем желаемый шрифт */
+    
+    color: #ffffff;   /* Цвет шрифта — белый */
+    line-height: 1.5;  /* Интерлиньяж (междустрочный интервал) */
+    margin: 0; /* Убираем отступы по умолчанию */
+    padding: 0; /* Убираем отступы по умолчанию */
+  }
 .disciplineContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+a {
+    color: inherit;
+    text-decoration: none;
+  }
 .disciplineBox {
     border: 4px solid #29422881;
     border-radius: 40px;
@@ -54,6 +65,7 @@
     padding: 40px 15px; /* Уменьшены отступы внутри элементов */
     margin: 15px; /* Уменьшен отступ между элементами */
     text-align: center;
+    font-size: 18px;
     flex: 0 1 calc(33.333% - 20px); /* Уменьшен размер элементов */
     box-sizing: border-box;
     transition: transform 0.3s ease;
