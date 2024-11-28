@@ -6,14 +6,14 @@ import AdminMenu from '../components/main_admin';
 
 function AdminMenuF() {
   return (
-    <div className="App">
+    <>
       <Header />
       <main>
         <AdminMenu />
         
       </main>
       <Footer />
-    </div>
+      </>
   );
 }
 

@@ -47,6 +47,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+.addButton:hover{
+  background-color: #155d21d8;
+}
 
 .modal {
   position: fixed;
@@ -98,6 +101,9 @@
   font-weight: 600;
   cursor: pointer;
 }
+.confirmButton:hover{
+  background-color: #104b1eb5;
+}
 
 .cancelButton {
   padding: 10px 20px;
@@ -107,6 +113,9 @@
   border-radius: 5px;
   font-weight: 600;
   cursor: pointer;
+}
+.cancelButton:hover{
+  background-color: #66131bd0;
 }
 
 /* Медиа-запросы для адаптивности */
