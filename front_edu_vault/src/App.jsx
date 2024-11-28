@@ -29,7 +29,7 @@ function App() {
       <Router>
       <Routes>
 
-       <Route path="/" element={<AdminMenu />} />  
+       <Route path="/" element={<AdminMenuF />} />  
         <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
         <Route path="/courses/:specialtyId" element={<Courses />} />
         <Route path="/groups/:courseId" element={<Groups/>}/>

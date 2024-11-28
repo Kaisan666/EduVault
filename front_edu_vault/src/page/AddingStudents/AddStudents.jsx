@@ -69,6 +69,11 @@ export default function AddStudent() {
     }
   };
 
+  const deleteStudent = (userId) =>{
+    axios.delete(`http://localhost:5000/api/student/delete/${userId}`)
+    setStudents(students.filter(student => student.id !== userId));
+  }
+
   const handleCancel = () => {
     setIsAdding(false);
     setNewStudent({
@@ -99,7 +104,7 @@ export default function AddStudent() {
               <div>Пароль: {student.password}</div>
               <div>{student.roleId === 1 ? "Студент" : "Староста"}</div>
             </div>
-            <button onClick={() => handleDeleteStudent(student.id)} className={styles.deleteButton}>
+            <button onClick={() => deleteStudent(student.id)} className={styles.deleteButton}>
               Удалить
             </button>
           </li>

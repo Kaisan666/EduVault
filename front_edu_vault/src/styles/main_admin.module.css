@@ -5,7 +5,35 @@
   font-family: Arial, sans-serif;
   background-color: #ffffff; /* Светлый фон для контейнера */
 }
+.facultiesList{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: #45a049;
+  background-color: #4CAF50; /* Основной зеленый цвет */
+  color: white;
+  padding: 12px; /* Увеличен отступ для элементов меню */
+  margin: 5px 0;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.3s; /* Плавный переход при наведении */
+}
+.deleteBtn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
+.deleteBtn:hover {
+  background-color: #c82333;
+  transform: scale(1.05); /* Легкое увеличение */
+}
 .menu {
   width: 250px;
   overflow-y: auto;

@@ -56,7 +56,7 @@ const Groups = () => {
     }
 };
 
-  const handleDeleteGroup = async (groupId) => {
+  const handleDeleteGroup = async (groupId) => {  
     try {
       await fetch(`/api/courses/${courseId}/groups/${groupId}`, {
         method: 'DELETE',
@@ -118,7 +118,7 @@ const Groups = () => {
         </button>
       )}
     </div>
-  <DisciplinesInCourse/>
+  {/* <DisciplinesInCourse/> */}
     </div>
   );
 };

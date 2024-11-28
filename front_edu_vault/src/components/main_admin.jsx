@@ -58,17 +58,29 @@ function AdminMenu() {
     }
   };
 
+  const handleDeleteFaculty = async (facultyId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/faculty/${facultyId}`)
+      setFaculties(faculties.filter(faculty => faculty.id !== facultyId));
+    } catch (error) {
+      console.error('Ошибка при удалении группы:', error);
+    }
+  };
+
   return (
     <div className={styles.container}>
     
       <div className={styles.menu}>
         <h3 className={styles.heading}>Факультеты</h3>
         {faculties.map((faculty) => (
-          <Link to={`/specialties/${faculty.id}`} key={faculty.id}>
-            <div className={styles.facultyItem}>
-              {faculty.name}
-            </div>
-          </Link>
+          <div className={styles.facultiesList}>
+            <Link to={`/specialties/${faculty.id}`} key={faculty.id}>
+              <div className={styles.facultyItem}>
+                {faculty.name}
+              </div>
+            </Link>
+          <button className={styles.deleteBtn} onClick={() => handleDeleteFaculty(faculty.id)}>удалить</button>
+          </div>
         ))}
       </div>
 
