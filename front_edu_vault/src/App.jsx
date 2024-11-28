@@ -11,6 +11,7 @@ import LabPage from './page/laba_page';
 //import LoginFormAdmin from './components/admin_entrance'; 
  import Admin_main_page from './page/admin_main_page';
  import AdminMenu from './components/main_admin';
+ import AdminMenuF from './page/AdminMenu'
 //  import FacultyDetails from './components/adding_directions';
 import FacultyBanner from './components/FacultyBanner';
  import SecretaryRegistration from './components/SecretaryRegistration';
@@ -27,11 +28,17 @@ function App() {
     <>
       <Router>
       <Routes>
-        <Route path="/" element={<AdminMenu />} />
+
+       <Route path="/" element={<AdminMenu />} />  
         <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
         <Route path="/courses/:specialtyId" element={<Courses />} />
         <Route path="/groups/:courseId" element={<Groups/>}/>
         <Route path="/students/:groupId" element={<AddStudents/>}/>
+        
+      
+        {/*<Route path="/" element={<Entrance />} />*/}
+        <Route path="/main" element={<Main />} />
+        <Route path="/disciplines/:disciplineId" element={<Main />} />
       </Routes>
     </Router>
     </>
