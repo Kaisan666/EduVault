@@ -8,4 +8,16 @@
     flex: 1;
     padding: 20px;
   }
+  .logoutButton {
+    background-color: rgb(21, 111, 56); /* Красный цвет фона */
+    color: white; /* Белый текст */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px; /* Отступ сверху */
+  }
+  
+
   
