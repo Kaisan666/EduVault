@@ -1,33 +1,43 @@
 .container {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #115739;
-    border-radius: 8px;
-    background-color: #266c4123;
-  }
-  
-  .avatarContainer {
-    margin-right: 20px;
-  }
-  
-  .avatar {
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .infoContainer {
-    flex: 1;
-  }
-  
-  .infoContainer h2 {
-    margin: 0;
-    font-size: 24px;
-  }
-  
-  .infoContainer p {
-    margin: 5px 0;
-  }
-  
+  display: flex;
+  justify-content: flex-start; /* Сдвигаем все влево */
+  align-items: center;
+  min-height: 60vh;
+  padding: 10px;
+  background-color: #ffffff; /* Светлый фон для контраста */
+}
+
+.infoContainer {
+  background-color: #ffffff; /* Белый фон для блока информации */
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 400px;
+  margin-left: 20px; /* Отступ слева */
+  transition: transform 0.3s ease; /* Плавный эффект при наведении */
+}
+
+.infoContainer:hover {
+  transform: translateY(-5px); /* Подъем блока при наведении */
+}
+
+h2 {
+  font-size: 2rem;
+  color: #388e3c; /* Темно-зеленый цвет */
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #4caf50; /* Зеленый цвет */
+}
+
+strong {
+  color: #2e7d32; /* Более темный зеленый цвет для выделения */
+}
+
+.loading,
+.error {
+  font-size: 1.5rem;
+  color: #d32f2f; /* Красный цвет для ошибок */
+}

@@ -7,10 +7,8 @@ const PersonalCabinet = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Имитация задержки загрузки данных
     const fetchUserData = async () => {
       try {
-        // Мок-данные
         const data = {
           lastName: 'Иванов',
           firstName: 'Иван',
@@ -21,7 +19,6 @@ const PersonalCabinet = () => {
           group: 'ИВТ-301'
         };
 
-        // Имитация задержки
         await new Promise(resolve => setTimeout(resolve, 1000));
 
         setUserData(data);
