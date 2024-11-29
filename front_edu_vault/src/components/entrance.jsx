@@ -30,6 +30,7 @@ const LoginForm = () => {
       // Сохраняем токен и роль в localStorage
       localStorage.setItem('authToken', responseData.token);
       localStorage.setItem('userRole', responseData.role);
+      localStorage.setItem("facultyId", responseData.facultyId)
 
       // Перенаправляем пользователя на соответствующую страницу в зависимости от его роли
       if (responseData.role === 'Студент') {

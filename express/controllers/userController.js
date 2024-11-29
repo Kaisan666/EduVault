@@ -32,6 +32,21 @@ class UserController {
             `,
             {replacements : {id : user[0][0].id}}
         )
+        // if (role === "Студент" || role === "Староста"){
+        // const facultyId = await sequelize.query(
+        //     `
+        //     select groupId from students s join users u on s."userId" = u.id where u.id = :id
+        //     `,
+        //     {replacements : {id : user[0][0].id}}
+        // )}
+        // else if (role === "Секретарь"){
+        //     const facultyId = await sequelize.query(
+        //         `
+        //         select facultyId from secretaries s join users u on s."userId" = u.id where u.id = :id
+        //         `,
+        //         {replacements : {id : user[0][0].id}}
+        //     )
+        // }
         const token = generateJWT(user[0][0].id, user[0][0].login, user[0][0].roleId)
         console.log(token)
         return res.json({token : token, role : role[0][0].name})
