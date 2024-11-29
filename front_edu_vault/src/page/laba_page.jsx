@@ -7,18 +7,64 @@ import Footer from '../components/footer ';
 const LabPage = () => {
   const { disciplineId } = useParams(); // Получаем параметр disciplineId из URL
   const [labWorks, setLabWorks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);  // Состояние для загрузки
+  const [error, setError] = useState(null);  // Состояние для ошибок
 
   useEffect(() => {
-    // Параметр disciplineId можно использовать для фильтрации данных или как часть URL
-    fetch(`http://localhost:3001/labs?disciplineId=${disciplineId}`)
-      .then((response) => response.json())
-      .then((data) => setLabWorks(data))
-      .catch((error) => console.error('Ошибка загрузки лабораторных работ:', error));
+    setIsLoading(true);
+    setError(null);
+
+    // Заменяем реальный запрос на фейковые данные
+    const fakeData = [
+      {
+        id: 1,
+        labTitle: 'Лабораторная работа 1',
+        pdfUrl: 'https://example.com/lab1.pdf',
+        description: 'Описание лабораторной работы 1',
+        deadline: '2024-12-31T23:59:59Z',
+        reportUrl: 'https://example.com/report1.pdf',
+      },
+      {
+        id: 2,
+        labTitle: 'Лабораторная работа 2',
+        pdfUrl: 'https://example.com/lab2.pdf',
+        description: 'Описание лабораторной работы 2',
+        deadline: '2024-12-15T23:59:59Z',
+        reportUrl: 'https://example.com/report2.pdf',
+      },
+    ];
+
+    // Имитация загрузки данных с сервера
+    setTimeout(() => {
+      setLabWorks(fakeData);
+      setIsLoading(false);
+    }, 1000); // Подождем 1 секунду, чтобы симулировать задержку загрузки
+
   }, [disciplineId]); // Если disciplineId изменится, перезапустится запрос
+
+  if (isLoading) {
+    return (
+      <div>
+        <Header />
+        <p>Загружаем лабораторные работы...</p>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Header />
+        <p style={{ color: 'red' }}>Ошибка загрузки: {error}</p>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div>
-      <Header /> 
+      <Header />
       <div className="labwork-container">
         {labWorks.length > 0 ? (
           labWorks.map((lab) => (
@@ -33,7 +79,7 @@ const LabPage = () => {
             />
           ))
         ) : (
-          <p>Загружаем лабораторные работы...</p>
+          <p>Лабораторные работы не найдены для данной дисциплины.</p>
         )}
       </div>
       <Footer />

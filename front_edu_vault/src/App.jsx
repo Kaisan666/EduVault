@@ -34,7 +34,17 @@ const App = () => {
         <Route path="/groups/:courseId" element={<ProtectedRoute component={Groups} role="admin" />} />
         <Route path="/students/:groupId" element={<ProtectedRoute component={AddStudents} role="admin" />} />
         <Route path="/PersonalCabinet" element={<ProtectedRoute component={LK} role="user" />} />
-        <Route path="/" element={<Entrance />} />
+       {/* <Route path="/AdminMenuF" element={<AdminMenuF />} /> 
+        <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
+        <Route path="/courses/:specialtyId" element={<Courses />} />
+        <Route path="/groups/:courseId" element={<Groups/>}/>
+        <Route path="/students/:groupId" element={<AddStudents/>}/>
+        <Route path="/lab/:disciplineId" element={<LabPage/>}/>
+
+
+
+        <Route path="/PersonalCabinet" element={<LK/>}/>
+        <Route path="/" element={<Entrance />} /> */}
         <Route path="/main" element={<ProtectedRoute component={Main} role="Студент" />} />
         <Route path="/LabPage/:disciplineId" element={<ProtectedRoute component={LabWorksPage} role="Студент" />} />
       </Routes>
