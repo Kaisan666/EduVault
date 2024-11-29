@@ -5,10 +5,7 @@ import Footer from '../components/footer ';
 
 // Пример фейковых данных лабораторных работ
 const labWorks = [
-  { id: 1, title: 'Программирование на Python' },
-  { id: 2, title: 'Алгоритмы и структуры данных' },
-  { id: 3, title: 'Сетевые технологии' },
-  { id: 4, title: 'Машинное обучение' },
+  { id: 1, title: 'Программирование на Python' }
 ];
 
 const LabWorksPage = () => {

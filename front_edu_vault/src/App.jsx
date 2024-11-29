@@ -35,7 +35,10 @@ function App() {
         <Route path="/courses/:specialtyId" element={<Courses />} />
         <Route path="/groups/:courseId" element={<Groups/>}/>
         <Route path="/students/:groupId" element={<AddStudents/>}/>
-        
+        <Route path="/lab/:disciplineId" element={<LabPage/>}/>
+
+
+
         <Route path="/PersonalCabinet" element={<LK/>}/>
         <Route path="/" element={<Entrance />} />
         <Route path="/main" element={<Main />} />

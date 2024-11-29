@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link для перехода по маршруту
 import styles from '../styles/DisciplineCard.module.css';
 import icon from '../images/icon.png'; 
 
 const DisciplineCard = () => {
   const [disciplineData, setDisciplineData] = useState(null);
 
- 
+  // Имитируем загрузку данных
   useEffect(() => {
+    const data = {
+      id: 1,
+      name: 'Программирование на Python',
+      labs: [
+        {
+          name: 'Лабораторная работа 1',
+        },
+        {
+          name: 'Лабораторная работа 2',
+        }
+      ]
+    };
     
-    fetch() 
-      .then((response) => response.json())
-      .then((data) => setDisciplineData(data))
-      .catch((error) => console.error('Ошибка при загрузке данных:', error));
+    setDisciplineData(data);
   }, []);
 
   if (!disciplineData) {
@@ -30,9 +40,10 @@ const DisciplineCard = () => {
         {disciplineData.labs.map((lab, index) => (
           <li key={index} className={styles.labItem}>
             {lab.name}
-            <a href={lab.fileUrl} target="_blank" rel="noopener noreferrer">
+            {/* Картинка оборачивается в ссылку с маршрутом на страницу с лабораторными работами */}
+            <Link to={`/lab/${disciplineData.id}`}>
               <img src={icon} alt="file icon" className={styles.fileIcon} />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
