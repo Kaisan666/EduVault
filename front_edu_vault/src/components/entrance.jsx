@@ -34,8 +34,8 @@ const LoginForm = () => {
       // Перенаправляем пользователя на соответствующую страницу в зависимости от его роли
       if (responseData.role === 'Студент') {
         navigate('/main');
-      } else if (responseData.role === 'user') {
-        navigate('/dashboard');
+      } else if (responseData.role === 'Секретарь') {
+        navigate('/secretaryDashBoard');
       } else {
         navigate('/');
       }
