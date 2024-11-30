@@ -103,12 +103,15 @@ Student.belongsTo(User)
 User.hasOne(Teacher)
 Teacher.belongsTo(User)
 
-Department.hasMany(Teacher) 
-Teacher.belongsTo(Department)
+// Department.hasMany(Teacher) 
+// Teacher.belongsTo(Department)
 
 Role.hasMany(User)
 User.belongsTo(Role)
 
+
+Teacher.belongsToMany(Faculty, {through : "teacher_faculty"})
+Faculty.belongsToMany(Teacher, {through : "teacher_faculty"})
 
 
 Role.belongsToMany(Permission, {through : "role_permission"})

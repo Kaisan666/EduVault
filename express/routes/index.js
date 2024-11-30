@@ -7,12 +7,17 @@ import { studentRouter } from "./student.js";
 import { courseRouter } from "./course.js";
 import { secretaryRouter } from "./secretary.js";
 import { disciplineRouter } from "./discipline.js";
-
+import { checkrole } from "../middlewares/checkRoleMiddleware.js";
+import teacherRouter from "./teacher.js";
+import teacherFacultyRouter from "./facultyTeacher.js";
 const router = Router();
 
-router.use("/secretary", secretaryRouter)
+router.use("/teacher", teacherRouter)
+router.use("/teacher_faculty", teacherFacultyRouter)
 
-router.use(`/discipline`, disciplineRouter)
+router.use("/secretary", checkrole(["Админ", "Секретарь", "Преподаватель"]),secretaryRouter)
+
+router.use(`/discipline`,checkrole(["Админ", "Секретарь", "Студент", "Староста"]), disciplineRouter)
 
 /**
  * @swagger
@@ -30,7 +35,7 @@ router.use("/user", userRouter);
  *     summary: Group routes
  *     tags: [Group]
  */
-router.use("/group", groupRouter);
+router.use("/group", checkrole(["Админ", "Секретарь", "Преподаватель"]),groupRouter);
 
 /**
  * @swagger

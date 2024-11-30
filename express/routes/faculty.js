@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { facultyController } from "../controllers/facultyController.js";
+import { checkrole } from "../middlewares/checkRoleMiddleware.js";
 
 const facultyRouter = Router();
 
@@ -39,7 +40,7 @@ const facultyRouter = Router();
  *       500:
  *         description: Internal server error
  */
-facultyRouter.post("/create-faculty", facultyController.create);
+facultyRouter.post("/create-faculty",checkrole(["Админ", "Секретарь"]), facultyController.create);
 
 /**
  * @swagger
@@ -68,7 +69,7 @@ facultyRouter.post("/create-faculty", facultyController.create);
  *       500:
  *         description: Internal server error
  */
-facultyRouter.get("/all-faculties", facultyController.showAll);
+facultyRouter.get("/all-faculties",checkrole(["Админ", "Секретарь"]), facultyController.showAll);
 
 /**
  * @swagger
@@ -104,7 +105,7 @@ facultyRouter.get("/all-faculties", facultyController.showAll);
  *       500:
  *         description: Internal server error
  */
-facultyRouter.get("/:facultyId", facultyController.showOne);
+facultyRouter.get("/:facultyId",checkrole(["Админ", "Секретарь"]), facultyController.showOne);
 
 /**
  * @swagger
@@ -149,7 +150,7 @@ facultyRouter.get("/:facultyId", facultyController.showOne);
  *       500:
  *         description: Internal server error
  */
-facultyRouter.put('/:facultyId', facultyController.update);
+facultyRouter.put('/:facultyId',checkrole(["Админ", "Секретарь"]), facultyController.update);
 
 /**
  * @swagger
@@ -170,6 +171,8 @@ facultyRouter.put('/:facultyId', facultyController.update);
  *       500:
  *         description: Internal server error
  */
-facultyRouter.delete('/:facultyId', facultyController.delete);
+facultyRouter.delete('/:facultyId',checkrole(["Админ", "Секретарь"]), facultyController.delete);
+
+facultyRouter.get('/facultiesOfTeacher', checkrole(["Преподаватель"]), facultyController.teacherfaculty)
 
 export { facultyRouter };

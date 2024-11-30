@@ -1,12 +1,14 @@
 import { Router } from 'express';
-import { secretaryController } from '../controllers/secretaryController.js';
+import { teacherController } from '../controllers/teacherController.js';
+import { check } from '../middlewares/authMiddleware.js';
+import { checkrole } from '../middlewares/checkRoleMiddleware.js';
 
-const router = new Router();
+const teacherRouter = new Router();
 
-router.post('/secretaries', secretaryController.create);
-router.get('/secretaries', secretaryController.showAll);
-router.get('/secretaries/:id', secretaryController.showOne);
-router.put('/secretaries/:id', secretaryController.update);
-router.delete('/secretaries/:id', secretaryController.delete);
+teacherRouter.post('/create-teacher',checkrole(["Админ", "Секретарь"]), teacherController.create);
+teacherRouter.get('/show-teachers', checkrole(["Админ", "Секретарь"]), teacherController.showAll);
+// router.get('/secretaries/:id', secretaryController.showOne);
+teacherRouter.put('/edit-teacher/:teacherId', checkrole(["Админ", "Секретарь"]), teacherController.update);
+teacherRouter.delete('/delete-teacher/:teacherId', checkrole(["Админ", "Секретарь"]), teacherController.delete);
 
-export default router;
+export default teacherRouter;

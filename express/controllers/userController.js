@@ -3,8 +3,8 @@ import { sequelize } from "../db.js";
 import bcrypt from "bcrypt"
 // const jwt = require("jsonwebtoken")
 import jwt from 'jsonwebtoken';
-const generateJWT = (id, login, roleId) => {
-    return jwt.sign({id, login, roleId},
+const generateJWT = (id, login, roleName) => {
+    return jwt.sign({id, login, roleName},
         process.env.SECRET_KEY,
         {expiresIn : "24h"})
 }
@@ -47,12 +47,15 @@ class UserController {
         //         {replacements : {id : user[0][0].id}}
         //     )
         // }
-        const token = generateJWT(user[0][0].id, user[0][0].login, user[0][0].roleId)
+        // console.log(role[0][0].name)
+        const token = generateJWT(user[0][0].id, user[0][0].login, role[0][0].name)
         console.log(token)
-        return res.json({token : token, role : role[0][0].name})
+        return res.json({token})
     }
     async check(req, res) {
-
+        console.log(req)
+        const token = generateJWT(req.user.id, req.user.login, req.user.roleId)
+        return res.json({token})
     }
     async showOne(req, res) {
         const {userId} = req.params;

@@ -237,6 +237,18 @@ class FacultyController {
             res.status(500).json({ error: error.message });
         }
     }
+    async teacherfaculty(req, res) {
+        const {teacherId} = req.body
+        console.log(teacherId)
+
+        const faculties = await sequelize.query(
+            `
+            select "facultyId" from teacher_faculty where "teacherId" = :id
+            `,
+            {replacements : {id : teacherId}}
+        )
+        console.log(faculties)
+    }
 }
 
 export const facultyController = new FacultyController();

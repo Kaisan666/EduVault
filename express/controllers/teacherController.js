@@ -8,13 +8,12 @@ const generateJWT = (id, login, roleId) => {
         process.env.SECRET_KEY,
         {expiresIn : "24h"})
 }
-class StudentController {
+class TeacherController {
     async create(req, res) {
-        const { groupId } = req.params;
     const { firstName, lastName, middleName, login, password, roleId } = req.body;
 
     // Проверка наличия обязательных полей
-    if (!firstName || !lastName || !login || !password || !roleId || !groupId) {
+    if (!firstName || !lastName || !login || !password || !roleId) {
         return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
     }
 
@@ -37,17 +36,13 @@ class StudentController {
 
         const id = usercreation[0][0].id;
 
-        const studentcreation = await sequelize.query(
-            `INSERT INTO students ("userId", "groupId", "createdAt", "updatedAt") VALUES (:userId, :groupId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
-            { replacements: { userId: id, groupId } }
+        const teacherCreation = await sequelize.query(
+            `INSERT INTO teachers ("userId", "createdAt", "updatedAt") VALUES (:userId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+            { replacements: { userId: id } }
         );
 
-        const student = await sequelize.query(
-            `SELECT * FROM users JOIN students ON students."userId" = users."id" WHERE users."id" = :id`,
-            { replacements: { id } }
-        );
         const role = await sequelize.query(
-            `select name from roles where id = :id`,
+            `select name from teachers where id = :id`,
             {replacements : {id : roleId}}
         )
         console.log()
@@ -61,19 +56,17 @@ class StudentController {
 }
 
     async showAll(req, res) {
-        const {groupId} = req.params
         try {
             const result = await sequelize.query(`
-                select * from students s join users u on s."userId" = u.id where s."groupId" = :id
-                `,
-            {replacements : {id : groupId}})
+                select * from teachers
+                `)
             res.status(201).json(result[0])
         } catch (error) {
             res.status(500).json({error : error.message})
         }
     }
     async update(req, res) {
-        const {studentId} = req.params;
+        const {teacherId} = req.params;
         const updates = req.body;
         if (updates.length === 0){
             return res.status(400).json({error : "надо ввести хоть что то"})
@@ -84,7 +77,7 @@ class StudentController {
         const replacements = { ...updates, id: studentId, updatedAt: sequelize.fn('CURRENT_TIMESTAMP') };
 
         const result = await sequelize.query(
-            `UPDATE users AS s
+            `UPDATE teachers AS t
              SET ${fields}, "updatedAt" = :updatedAt
              WHERE id = :id
              RETURNING *;`,
@@ -96,16 +89,16 @@ class StudentController {
             res.status(500).json({error : error.message})
         }}
         async delete(req, res) {
-            const { studentId } = req.params;
+            const { teacherId } = req.params;
     
             const transaction = await sequelize.transaction();
     
             try {
                 // Удаление записи из таблицы students
                 const studentResult = await sequelize.query(
-                    'DELETE FROM students WHERE "userId" = :id RETURNING *;',
+                    'DELETE FROM teachers WHERE "userId" = :id RETURNING *;',
                     {
-                        replacements: { id: studentId },
+                        replacements: { id: teacherId },
                         type: QueryTypes.DELETE,
                         transaction: transaction
                     }
@@ -120,7 +113,7 @@ class StudentController {
                 const userResult = await sequelize.query(
                     'DELETE FROM users WHERE "id" = :id RETURNING *;',
                     {
-                        replacements: { id: studentId },
+                        replacements: { id: teacherId },
                         type: QueryTypes.DELETE,
                         transaction: transaction
                     }
@@ -139,4 +132,4 @@ class StudentController {
             }
         }
     }
-export const studentController = new StudentController()
+export const teacherController = new TeacherController()
