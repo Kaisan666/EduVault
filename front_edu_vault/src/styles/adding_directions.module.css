@@ -1,328 +1,207 @@
-/* Общие стили для контейнера */
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f4f6f9;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Контейнер факультета */
 .facultyContainer {
   display: flex;
-  padding: 20px;
-  transition: all 0.3s ease-in-out;
-  gap: 30px;
-}
-
-/* Список секретарей */
-.secretariesList {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Увеличиваем отступы */
-  align-items: center;
-}
-
-/* Элемент списка секретарей */
-.secretariesListItem {
-  background: linear-gradient(135deg, #ffffff, #ffffff); /* Градиентный фон */
-  padding: 20px 30px;
-  margin: 20px 0;
+  padding: 30px;
+  gap: 40px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   width: 100%;
-  max-width: 800px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid #4CAF50;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Легкая тень */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Плавное изменение */
+  min-height: 80vh;
 }
 
-.secretariesListItem:hover {
-  transform: translateY(-5px); /* Легкое поднятие */
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15); /* Увеличенная тень */
-  background-color: #ffffff; /* Светлый фон при наведении */
-}
-
-/* Контейнер главного содержимого */
-.wrapperOfMain {
-  width: 85%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Кнопка добавления секретаря */
-.addSecretaryBtn {
-  margin-left: auto;
-  margin-right: 150px;
-  height: 50px;
-  width: 150px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 30px; /* Более округлая форма */
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.addSecretaryBtn:hover {
-  background-color: #45a049; /* Более светлый зеленый при наведении */
-  transform: scale(1.05); /* Легкое увеличение */
-}
-
-/* Сайдбар */
+/* Боковая панель с направлениями */
 .sidebar {
   width: 250px;
-  background-color: #ffffffd9;
-  padding: 25px;
-  border-radius: 15px;
-  border: 1px solid #4CAF50;
-  height: 100vh;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
-}
-
-.sidebar:hover {
-  box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.2); /* Увеличенная тень при наведении */
-}
-
-.sidebar h3 {
-  font-size: 22px;
-  margin-bottom: 25px;
-  color: #4CAF50;
-  font-weight: 600;
-  letter-spacing: 1px;
+  background-color: #ffffff;  /* Светлый зеленый фон для боковой панели */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .directionItem {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px;
-  margin: 8px 0;
-  border-radius: 12px; /* Более округлые углы */
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
+  font-size: 18px;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #388e3c;  /* Темно-зеленый */
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .directionItem:hover {
-  background-color: #45a049;
-  transform: translateY(-2px); /* Легкое поднятие */
+  background-color: #2c6e31;  /* Более темный зеленый при наведении */
+  transform: translateX(5px);
 }
 
-/* Кнопка добавления направления */
+/* Кнопка для добавления направления */
 .addDirectionButton {
-  padding: 14px 22px;
-  background-color: #4CAF50;
+  margin-top: 30px;
+  padding: 10px 20px;
+  background-color: #81c784;  /* Светлый зеленый */
   color: white;
-  border: none;
-  border-radius: 12px;
   font-size: 16px;
-  font-weight: 700;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .addDirectionButton:hover {
-  background-color: #45a049;
-  transform: scale(1.05); /* Легкое увеличение */
+  background-color: #66bb6a;  /* Средний зеленый */
+  transform: scale(1.05);
 }
 
-/* Кнопка удаления */
-.deleteButton {
-  padding: 14px 22px;
-  background-color: #c82333;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.deleteButton:hover {
-  background-color: #9b1d21;
-  transform: scale(1.05); /* Легкое увеличение */
-}
-
-/* Модальные окна */
+/* Модальное окно */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4); /* Затемненный фон */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modalContent {
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
   padding: 40px;
-  border-radius: 15px;
-  width: 550px;
-  margin-top: 110px;
-  text-align: center;
-  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
-  transform: translateY(-100px); /* Модальное окно изначально за пределами экрана */
-  animation: modalFadeIn 0.5s forwards; /* Плавное появление */
-}
-
-@keyframes modalFadeIn {
-  0% {
-    transform: translateY(-100px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .modalHeading {
   font-size: 24px;
-  margin-bottom: 30px;
-  color: #4CAF50;
-  font-weight: 700;
+  color: #388e3c;  /* Темно-зеленый для заголовка */
+  margin-bottom: 20px;
 }
 
 .input {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 12px;
-  border: 1px solid #dfe1e5;
-  margin-bottom: 25px;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #81c784;  /* Светлый зеленый для границы */
+  border-radius: 6px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .input:focus {
-  border-color: #4CAF50;
-  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  border-color: #388e3c;  /* Темно-зеленый при фокусе */
 }
 
 /* Кнопки в модальном окне */
 .modalButtonContainer {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  justify-content: space-between;
+}
+
+.confirmButton,
+.cancelButton {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .confirmButton {
-  padding: 14px 22px;
-  background-color: #4CAF50;
+  background-color: #66bb6a;  /* Средний зеленый */
   color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .confirmButton:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
+  background-color: #388e3c;  /* Темный зеленый при наведении */
 }
 
 .cancelButton {
-  padding: 14px 22px;
-  background-color: #c21c2d;
+  background-color: #e57373;  /* Красноватый для отмены */
   color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .cancelButton:hover {
-  background-color: #9b1d21;
+  background-color: #c62828;  /* Темно-красный для отмены */
+}
+
+/* Список секретарей */
+.wrapperOfMain {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.secretariesList {
+  background-color: #ffffff;  /* Легкий зеленый фон для списка секретарей */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.secretariesListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.secretariesListItem div {
+  font-size: 16px;
+  color: #34495e;
+}
+
+.deleteButton {
+  background-color: #e57373;  /* Красный для кнопки удаления */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton:hover {
+  background-color: #c62828;  /* Темно-красный при наведении */
+}
+
+/* Кнопка для добавления секретаря */
+.addSecretaryBtn {
+  padding: 12px 20px;
+  background-color: #66bb6a;  /* Средний зеленый для кнопки добавления */
+  color: white;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.addSecretaryBtn:hover {
+  background-color: #388e3c;  /* Темный зеленый при наведении */
   transform: scale(1.05);
-}
-
-/* Медиазапросы для адаптации */
-@media (max-width: 768px) {
-  .facultyContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .sidebar {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-
-  .sidebar h3 {
-    font-size: 20px;
-  }
-
-  .directionItem {
-    font-size: 14px;
-  }
-
-  .addDirectionButton {
-    font-size: 14px;
-  }
-
-  .modalContent {
-    width: 90%;
-    padding: 35px;
-  }
-
-  .modalHeading {
-    font-size: 22px;
-  }
-
-  .input {
-    font-size: 14px;
-  }
-
-  .confirmButton, .cancelButton {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .facultyContainer {
-    padding: 10px;
-  }
-
-  .sidebar {
-    padding: 10px;
-  }
-
-  .sidebar h3 {
-    font-size: 18px;
-  }
-
-  .directionItem {
-    font-size: 12px;
-  }
-
-  .addDirectionButton {
-    font-size: 12px;
-  }
-
-  .modalContent {
-    width: 95%;
-    padding: 25px;
-  }
-
-  .modalHeading {
-    font-size: 20px;
-  }
-
-  .input {
-    font-size: 12px;
-  }
-
-  .confirmButton, .cancelButton {
-    font-size: 12px;
-  }
 }

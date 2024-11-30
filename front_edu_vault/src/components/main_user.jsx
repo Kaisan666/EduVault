@@ -10,14 +10,14 @@ const DisciplineList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Симуляция получения данных о факультетах
+       
         const fakeFaculties = [
           { id: 1, name: 'Факультет Информационных Технологий' },
           { id: 2, name: 'Факультет Машиностроения' }
         ];
         setFaculties(fakeFaculties);
 
-        // Симуляция получения данных о дисциплинах для первого факультета
+
         if (fakeFaculties.length > 0) {
           const facultyId = fakeFaculties[0].id;
           const fakeDisciplines = [
@@ -28,7 +28,11 @@ const DisciplineList = () => {
             { id: 5, name: 'Алгоритмы и структуры данных' },
             { id: 6, name: 'Алгоритмы и структуры данных' },
             { id: 7, name: 'Алгоритмы и структуры данных' },
-            { id: 8, name: 'Сетевые технологии' }
+            { id: 8, name: 'Сетевые технологии' },
+            { id: 9, name: 'Программирование' },
+            { id: 10, name: 'Программирование' },
+            { id: 11, name: 'Программирование' },
+            { id: 12, name: 'Программирование' }
           ];
           setDisciplines(fakeDisciplines);
         }
