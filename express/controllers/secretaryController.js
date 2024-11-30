@@ -12,7 +12,7 @@ const generateJWT = (id, login, roleId) => {
 class SecretaryController {
     async create(req, res) {
         const { facultyId } = req.params;
-    const { firstName, lastName, middleName, login, password, roleId } = req.body;
+    const { firstName, lastName, middleName, login, password, roleId} = req.body;
 
     // Проверка наличия обязательных полей
     if (!firstName || !lastName || !login || !password || !roleId || !facultyId) {
@@ -23,8 +23,8 @@ class SecretaryController {
 
     try {
         // Динамическое формирование SQL-запроса
-        let fields = ['"firstName"', '"lastName"', '"login"', '"password"'];
-        let values = { firstName, lastName, login, password: hashpass };
+        let fields = ['"firstName"', '"lastName"', '"login"', '"password"', '"roleId"'];
+        let values = { firstName, lastName, login, password: hashpass, roleId };
 
         if (middleName) {
             fields.push('"middleName"');

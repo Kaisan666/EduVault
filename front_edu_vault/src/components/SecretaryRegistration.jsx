@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/SecretaryRegistration.module.css';
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
 
   const {facultyId} = useParams()
+
   const [userData, setUserData] = useState({
     firstName : "",
     lastName : "",
@@ -16,8 +17,20 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
     facultyId : facultyId
   })
 
-
+  function closeRegistration(){
+    setUserData({
+      firstName : "",
+    lastName : "",
+    middleName : "",
+    roleId : 3,
+    password : "",
+    login : "",
+    facultyId : facultyId
+    })
+    hideAddSecretary()
+  }
   async function handleAddSecretary() {
+    console.log(userData)
     const newSecretary = {...userData}
     console.log(newSecretary)
     const response = await axios.post(`http://localhost:5000/api/secretary/create/${facultyId}`, newSecretary)
@@ -27,6 +40,8 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
     hideAddSecretary()
     console.log(`Добавить секретаря: Логин:, Пароль:`);
   };
+
+  
 
   return (<>
     {addSecretary ?(
@@ -76,7 +91,7 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
       <button className={styles.button} onClick={handleAddSecretary}>
         Добавить секретаря
       </button>
-      <button className={styles.closeButton} onClick={hideAddSecretary}>Закрыть</button>
+      <button className={styles.closeButton} onClick={() =>closeRegistration()}>Закрыть</button>
     </div>) : null}
     </>
   );
