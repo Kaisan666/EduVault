@@ -18,6 +18,7 @@ class UserController {
             select * from users where "login" = :login
             `,
         {replacements : {login : login}})
+        console.log(user[0][0].id)
         if (!user){
             return res.json({error : "Пользователь не найден"})
         }
@@ -25,9 +26,30 @@ class UserController {
         if (!comparePassword) {
             return res.json({error : "Неправильный пароль"})
         }
+        const role = await sequelize.query(
+            `
+            select "name" from users u join roles r on u."roleId" = r.id where u.id = :id
+            `,
+            {replacements : {id : user[0][0].id}}
+        )
+        // if (role === "Студент" || role === "Староста"){
+        // const facultyId = await sequelize.query(
+        //     `
+        //     select groupId from students s join users u on s."userId" = u.id where u.id = :id
+        //     `,
+        //     {replacements : {id : user[0][0].id}}
+        // )}
+        // else if (role === "Секретарь"){
+        //     const facultyId = await sequelize.query(
+        //         `
+        //         select facultyId from secretaries s join users u on s."userId" = u.id where u.id = :id
+        //         `,
+        //         {replacements : {id : user[0][0].id}}
+        //     )
+        // }
         const token = generateJWT(user[0][0].id, user[0][0].login, user[0][0].roleId)
         console.log(token)
-        return res.json({token})
+        return res.json({token : token, role : role[0][0].name})
     }
     async check(req, res) {
 
