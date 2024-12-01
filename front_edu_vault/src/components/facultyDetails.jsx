@@ -1,31 +1,32 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from '../styles/adding_directions.module.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SecretaryRegistration from './SecretaryRegistration';
 
-function FacultyDetails({addSecretary, setAddSecretary, hideRegister }) {
+function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
   const { facultyId } = useParams();
+  const navigate = useNavigate(); // Hook for navigation
   console.log(facultyId);
   const [directions, setDirections] = useState([]);
   const [newDirectionName, setNewDirectionName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [secretary, setSecretary] = useState([])
-
+  const [secretary, setSecretary] = useState([]);
 
   const handleDeleteGroup = async (secretaryId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/secretary/delete/${secretaryId}`)
+      await axios.delete(`http://localhost:5000/api/secretary/delete/${secretaryId}`);
       setSecretary(secretary.filter(secretary => secretary.id !== secretaryId));
     } catch (error) {
       console.error('Ошибка при удалении группы:', error);
     }
   };
-  const createSecretary = (newSecretary) =>{
-    setSecretary([...secretary, newSecretary])
-  }
-  // Загрузка всех специальностей для факультета при монтировании компонента
+
+  const createSecretary = (newSecretary) => {
+    setSecretary([...secretary, newSecretary]);
+  };
+
   useEffect(() => {
     const fetchDirections = async () => {
       try {
@@ -40,23 +41,25 @@ function FacultyDetails({addSecretary, setAddSecretary, hideRegister }) {
         console.error('Ошибка:', error);
       }
     };
-    const fetchSecretaries = async() =>{
-      try{
-        const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`)
-        const data = response.data
-        console.log(data)
+
+    const fetchSecretaries = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`);
+        const data = response.data;
+        console.log(data);
         if (response.status === 201) {
           setSecretary(data);
         } else {
-          console.error('Ошибка при загрузке направлений');
+          console.error('Ошибка при загрузке секретарей');
         }
       } catch (error) {
         console.error('Ошибка:', error);
       }
-    }
-    fetchSecretaries()
+    };
+
+    fetchSecretaries();
     fetchDirections();
-  }, []);
+  }, [facultyId]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -123,28 +126,38 @@ function FacultyDetails({addSecretary, setAddSecretary, hideRegister }) {
       )}
       
       <div className={styles.wrapperOfMain}>
-      <div className={styles.secretariesList}>
-        {secretary.map((secretary) => (
-            <div  key={secretary.id} className={styles.secretariesListItem}>
-            <div>
-              <div>Имя: {secretary.firstName}</div>
-              <div>Фамилия: {secretary.lastName}</div>
-              <div>Отчество: {secretary.middleName}</div>
-              <div>Логин: {secretary.login}</div>
-              <div>Пароль: {secretary.password}</div>
+        <div className={styles.secretariesList}>
+          {secretary.map((secretary) => (
+            <div key={secretary.id} className={styles.secretariesListItem}>
+              <div>
+                <div>Имя: {secretary.firstName}</div>
+                <div>Фамилия: {secretary.lastName}</div>
+                <div>Отчество: {secretary.middleName}</div>
+                <div>Логин: {secretary.login}</div>
+                <div>Пароль: {secretary.password}</div>
+              </div>
+              <button onClick={() => handleDeleteGroup(secretary.id)} className={styles.deleteButton}>
+                Удалить
+              </button>
             </div>
-            <button onClick={() => handleDeleteGroup(secretary.id)} className={styles.deleteButton}>
-              Удалить
-            </button>
-            </div>
-            
-        ))}
-      </div>
+          ))}
+        </div>
+        
         <SecretaryRegistration
-        create={createSecretary}
-         addSecretary={addSecretary}
-         hideAddSecretary={hideRegister}/>
-        <button className={styles.addSecretaryBtn} onClick={() => setAddSecretary(true)}>Добавить секретаря</button>
+          create={createSecretary}
+          addSecretary={addSecretary}
+          hideAddSecretary={hideRegister}
+        />
+        <button className={styles.addSecretaryBtn} onClick={() => setAddSecretary(true)}>
+          Добавить секретаря
+        </button>
+      </div>
+
+      {/* Add the Back Button */}
+      <div className={styles.backButtonContainer}>
+        <button onClick={() => navigate(-1)} className={styles.backButton}>
+          Назад
+        </button>
       </div>
     </div>
   );
