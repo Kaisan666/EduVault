@@ -44,8 +44,10 @@ const App = () => {
        
         <Route path="/" element={<Entrance />} />
         <Route path="/PersonalCabinet" element={<LK/>}/>
-        <Route path="/main" element={<ProtectedRoute component={Main} role="Студент" />} />
-        <Route path="/LabPage/:disciplineId" element={<ProtectedRoute component={LabWorksPage} role="Студент" />} />
+        {/*<Route path="/main" element={<ProtectedRoute component={Main} role="Студент" />} />*/}
+        <Route path="/main" element={<Main/>}/>
+        {/*<Route path="/LabPage/:disciplineId" element={<ProtectedRoute component={LabWorksPage} role="Студент" />} />*/}
+        <Route path="/LabPage/:disciplineId" element={<LabWorksPage/>} />
       </Routes>
     </Router>
   );
