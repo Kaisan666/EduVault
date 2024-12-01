@@ -21,7 +21,7 @@
 
 /* Акцент на названии дисциплины */
 .greenSquare {
-  background: linear-gradient(135deg, #6dbf59, #34a853);  /* Градиент зеленого */
+  background: linear-gradient(135deg, #3ca07aa4, #015442);  /* Градиент зеленого */
   color: white;
   border-radius: 12px;
   padding: 15px;
@@ -154,7 +154,7 @@
 }
 
 .labActions .button {
-  background-color: #dc3545;  /* Красная кнопка для удаления */
+  background-color: #e24f5e;  /* Красная кнопка для удаления */
 }
 
 .labActions .button:hover {
@@ -177,7 +177,7 @@
 
 .editForm button {
   margin-top: 10px;
-  background-color: #3498db;  /* Синий фон для кнопки сохранения */
+  background-color: #096842;  /* Синий фон для кнопки сохранения */
   color: white;
   padding: 12px 20px;
   font-size: 16px;
@@ -186,9 +186,6 @@
   cursor: pointer;
 }
 
-.editForm button:hover {
-  background-color: #2980b9;
-}
 
 /* Медиа-запрос для мобильных устройств */
 @media (max-width: 600px) {
@@ -227,4 +224,67 @@
     flex-direction: column;
     gap: 15px;
   }
+}
+
+
+/* Стиль псевдокнопки выбора файла */
+.uploadForm input[type="file"]::before {
+  content: "Выбрать файл";  /* Псевдоконтент для кнопки */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4caf89aa, #025540); /* Новый более яркий градиент */
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+  width: 500px;
+  text-align: center;
+  letter-spacing: 1px;
+  gap: 10px;  /* Добавлен промежуток между иконкой и текстом */
+}
+
+/* Иконка перед текстом */
+.uploadForm input[type="file"]::before {
+  content: "📂";
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+
+
+
+
+/* Эффект фокуса для доступности */
+.uploadForm input[type="file"]:focus-visible::before {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.6); /* Синяя обводка при фокусе */
+
+}
+
+/* Сообщение о выбранном файле */
+.uploadForm input[type="file"]:valid::after {
+  content: "Файл выбран!";
+  display: block;
+  color: #4CAF50; /* Зеленый цвет */
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Сообщение, если файл не выбран */
+.uploadForm input[type="file"]:empty::after {
+  content: "Ничего не выбрано...";
+  display: block;
+  color: #FF5722; /* Оранжевое сообщение об ошибке */
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+  font-weight: 500;
 }

@@ -2,18 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom'; // Импортируем Link
 import styles from '../styles/header.module.css'; 
 import logo from '../images/logo.png'; 
-import headerImage from '../images/header.png'; 
 import userIcon from '../images/user.png'; 
 
 const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.headerContainer}>
-                <img 
-                    src={headerImage} 
-                    alt="Заголовочное изображение" 
-                    className={styles.headerImage} 
-                />
                 <div className={styles.logoContainer}>
                     <img 
                         src={logo} 

@@ -1,94 +1,79 @@
 .header {
-    width: 100%;
-}
-
-.headerContainer {
+    background: linear-gradient(45deg, #00796b4e, #004d40); /* Градиент от зеленого к темно-зеленому */
+    padding: 20px 40px;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    position: relative;
+    align-items: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-}
-
-.headerImage {
-    width: 100%; 
-    height: 160px; 
-}
-
-.logoContainer {
-    position: absolute;
-    top: 20px;
-    left: 20px;
+  }
+  
+  .logoContainer {
     display: flex;
     align-items: center;
-    z-index: 10; 
-}
-
-.logo {
-    width: 40px;
-    height: 60px;
-    margin-top: 10px;
-}
-
-.brandName {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 10px;
-    color: #ffffff;
-    margin-top: 5px;
-}
-
-.logoutButton {
-    position: absolute;
-    top: 50px;
-    right: 40px;
-    background: none;
-    border: none;
+  }
+  
+  .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 15px;
+  }
+  
+  .brandName {
+    font-size: 28px;
+    font-weight: 600;
+    color: white; /* Цвет текста белый для контраста с темным фоном */
+    transition: color 0.3s ease;
+  }
+  
+  .brandName:hover {
+    color: #d1f7d1; /* Светло-зеленый цвет при наведении */
+  }
+  
+  .logoutButton {
+    display: flex;
+    align-items: center;
+  }
+  
+  .userIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
     cursor: pointer;
-}
-
-.userIcon {
-    width: 40px;
-    height: auto;
-}
-
-
-@media (max-width: 768px) {
-    .logoContainer {
-        top: 15px;
-        left: 15px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .userIcon:hover {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Адаптивность для мобильных устройств */
+  @media screen and (max-width: 768px) {
+    .header {
+      padding: 10px 20px;
     }
-
+  
+    .logo {
+      height: 35px;
+    }
+  
     .brandName {
-        font-size: 24px; 
+      font-size: 24px;
     }
-
-    .logoutButton {
-        top: 15px;
-        right: 15px;
+  
+    .userIcon {
+      width: 25px;
+      height: 25px;
     }
-
-    .headerImage {
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    .logoContainer {
-        top: 10px;
-        left: 10px;
-    }
-
-    .brandName {
-        font-size: 20px;
-    }
-
-    .logoutButton {
-        top: 10px;
-        right: 10px;
-    }
-
-    .headerImage {
-        height: 50px; 
-    }
-}
+  }
+  

@@ -1,68 +1,58 @@
 .footer {
-    width: 100%;
-    margin-top: 120px;
-}
-
-.footerContainer {
+    background: linear-gradient(45deg, #004d407a, #00796b); /* Градиент от темно-зеленого к зеленому */
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    position: relative;
-    width: 100%;
-}
-
-.footerImageContainer {
-    width: 100%;
-    height: auto;
-}
-
-.footerImage {
-    width: 100%; 
-    height: 190px; 
-    object-fit: cover;
-}
-
-.logoContainer {
-    position: absolute;
-    bottom: 20px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .footerContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center; /* Центрируем логотип внутри контейнера */
-    z-index: 10;
-    width: 100%; /* Обеспечиваем, что контейнер занимает всю ширину */
-}
+    width: 100%;
+  }
+  
+  .footerImageContainer {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 
-.logo {
-    width: 100px;
-    height: 80px;
-}
-
-@media (max-width: 768px) {
+  
+  .logoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .logo {
+    height: 40px;
+    width: auto;
+  }
+  
+  .footerImageContainer,
+  .logoContainer {
+    width: 100%;
+    text-align: center;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .footer {
+      padding: 20px 10px;
+    }
+  
     .footerImage {
-        height: 150px; 
+      height: 150px; /* Ограничиваем высоту изображения на мобильных */
     }
-
-    .logoContainer {
-        bottom: 15px;
-    }
-
+  
     .logo {
-        width: 60px; /* Уменьшаем размер логотипа на мобильных устройствах */
-        height: 50px;
+      height: 35px;
     }
-}
-
-@media (max-width: 480px) {
-    .footerImage {
-        height: 50px; 
-    }
-
-    .logoContainer {
-        bottom: 10px;
-    }
-
-    .logo {
-        width: 50px; /* Еще меньше для маленьких экранов */
-        height: 40px;
-    }
-}
+  }
+  

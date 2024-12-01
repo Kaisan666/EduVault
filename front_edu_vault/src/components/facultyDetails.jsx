@@ -7,12 +7,13 @@ import SecretaryRegistration from './SecretaryRegistration';
 
 function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
   const { facultyId } = useParams();
-  const navigate = useNavigate(); // Hook for navigation
-  console.log(facultyId);
+  const navigate = useNavigate();
   const [directions, setDirections] = useState([]);
   const [newDirectionName, setNewDirectionName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [secretary, setSecretary] = useState([]);
+  const [editingDirectionId, setEditingDirectionId] = useState(null);
+  const [editedDirectionName, setEditedDirectionName] = useState('');
 
   const handleDeleteGroup = async (secretaryId) => {
     try {
@@ -31,7 +32,6 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
     const fetchDirections = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/specialty/all-specialties/${facultyId}`);
-        console.log(response);
         if (response.status === 200) {
           setDirections(response.data);
         } else {
@@ -46,7 +46,6 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
       try {
         const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`);
         const data = response.data;
-        console.log(data);
         if (response.status === 201) {
           setSecretary(data);
         } else {
@@ -87,15 +86,84 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
     }
   }, [newDirectionName, facultyId]);
 
+  const handleEditDirection = async (directionId) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/specialty/update-specialty/${directionId}`, { name: editedDirectionName });
+      if (response.status === 200 || response.status === 201) {
+        setDirections((prevDirections) =>
+          prevDirections.map((direction) =>
+            direction.id === directionId ? { ...direction, name: editedDirectionName } : direction
+          )
+        );
+        setEditingDirectionId(null);
+        setEditedDirectionName('');
+      } else {
+        console.error('Ошибка при редактировании направления');
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  };
+
+  const handleDeleteDirection = async (directionId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/specialty/delete-specialty/${directionId}`);
+      setDirections(directions.filter(direction => direction.id !== directionId));
+    } catch (error) {
+      console.error('Ошибка при удалении направления:', error);
+    }
+  };
+
   return (
     <div className={styles.facultyContainer}>
       <div className={styles.sidebar}>
         {directions.map((direction) => (
-          <Link to={`/courses/${direction.id}`} key={direction.id}>
-            <div className={styles.directionItem}>
-              {direction.name}
+          <div key={direction.id} className={styles.directionItemWrapper}>
+            <Link to={`/courses/${direction.id}`}>
+              <div className={styles.directionItem}>
+                {direction.name}
+              </div>
+            </Link>
+
+            {/* Edit and Delete buttons for directions */}
+            <div className={styles.directionItemActions}>
+              {editingDirectionId === direction.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editedDirectionName}
+                    onChange={(e) => setEditedDirectionName(e.target.value)}
+                    className={styles.input}
+                    placeholder="Введите новое название"
+                  />
+                  <button onClick={() => handleEditDirection(direction.id)} className={styles.editButton}>
+                    Сохранить
+                  </button>
+                  <button onClick={() => setEditingDirectionId(null)} className={styles.cancelButton}>
+                    Отмена
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setEditingDirectionId(direction.id);
+                      setEditedDirectionName(direction.name);
+                    }}
+                    className={styles.editButton}
+                  >
+                    ✏️ Редактировать
+                  </button>
+                  <button
+                    onClick={() => handleDeleteDirection(direction.id)}
+                    className={styles.deleteButton}
+                  >
+                    🗑️ Удалить
+                  </button>
+                </>
+              )}
             </div>
-          </Link>
+          </div>
         ))}
         <button onClick={openModal} className={styles.addDirectionButton}>
           Добавить направление
