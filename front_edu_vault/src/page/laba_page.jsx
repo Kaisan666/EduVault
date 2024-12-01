@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Импортируем useParams для получения параметров из URL
+import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для получения параметров из URL и useNavigate для навигации
 import Header from '../components/header';
 import LabWorkCard from '../components/laba';
 import Footer from '../components/footer ';
@@ -9,6 +9,7 @@ const LabPage = () => {
   const [labWorks, setLabWorks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);  // Состояние для загрузки
   const [error, setError] = useState(null);  // Состояние для ошибок
+  const navigate = useNavigate(); // Хук для навигации назад
 
   useEffect(() => {
     setIsLoading(true);
@@ -42,6 +43,10 @@ const LabPage = () => {
 
   }, [disciplineId]); // Если disciplineId изменится, перезапустится запрос
 
+  const handleBackClick = () => {
+    navigate(-1); // Переходит на предыдущую страницу
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -66,6 +71,11 @@ const LabPage = () => {
     <div>
       <Header />
       <div className="labwork-container">
+        {/* Стрелка назад */}
+        <button onClick={handleBackClick} className="back-button">
+          ← Назад
+        </button>
+
         {labWorks.length > 0 ? (
           labWorks.map((lab) => (
             <LabWorkCard

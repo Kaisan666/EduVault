@@ -1,184 +1,230 @@
-/* Основной контейнер для всей страницы */
-.app {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  /* Основной блок с контентом */
-  main {
-    flex: 1; /* Занимает оставшееся место */
-    padding: 20px;
-  }
-  
-  .labwork-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  
-  /* Стили для карточки дисциплины */
+/* DisciplineCard.module.css */
+
+/* Основной контейнер карточки */
+.card {
+  background-color: #ffffff;  /* Белый фон */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 900px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Заголовок карточки */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Акцент на названии дисциплины */
+.greenSquare {
+  background: linear-gradient(135deg, #6dbf59, #34a853);  /* Градиент зеленого */
+  color: white;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Название дисциплины */
+.disciplineName {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: white;
+}
+
+/* ID дисциплины */
+.disciplineId {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Добавление новой лабораторной работы */
+.addLabForm {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.inputField {
+  width: 75%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.inputField:focus {
+  border-color: #6dbf59;  /* Зеленая граница при фокусе */
+}
+
+.button {
+  background-color: #34a853;  /* Зеленая кнопка */
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.button:hover {
+  background-color: #28a745;  /* Темный зеленый на ховер */
+}
+
+.button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Форма для загрузки файлов */
+.uploadForm {
+  margin-top: 25px;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.uploadForm input[type="file"] {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 70%;
+  margin-bottom: 15px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+}
+
+.uploadForm p {
+  font-size: 14px;
+  color: white; /* Белый цвет текста */
+  margin-top: 10px;
+}
+
+/* Список лабораторных работ */
+.labList {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.labItem {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.labItem:hover {
+  background-color: #f9f9f9;
+}
+
+.labItem span {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+}
+
+.fileIcon {
+  width: 24px;
+  height: 24px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+/* Кнопки для действий с лабораторной работой */
+.labActions {
+  display: flex;
+  gap: 10px;
+}
+
+.labActions .button {
+  background-color: #dc3545;  /* Красная кнопка для удаления */
+}
+
+.labActions .button:hover {
+  background-color: #c82333;
+}
+
+/* Форма редактирования лабораторной работы */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.editForm input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.editForm button {
+  margin-top: 10px;
+  background-color: #3498db;  /* Синий фон для кнопки сохранения */
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.editForm button:hover {
+  background-color: #2980b9;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 600px) {
   .card {
-    border: 2px solid #54804D;
-    border-radius: 28px;
-    padding: 16px;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 16px;
-    height: auto; /* Убираем фиксированную высоту */
-    min-width: 260px; /* Минимальная ширина */
-    overflow-y: auto;
-    position: relative;
+    padding: 15px;
   }
-  
-  /* Стили для header в карточке */
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
+
   .greenSquare {
-    display: flex;
+    padding: 10px;
+  }
+
+  .inputField {
+    width: 100%;
+  }
+
+  .uploadForm input[type="file"] {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .addLabForm {
     flex-direction: column;
-    background-color: #2f802e86;
-    padding: 30px;
-    border-radius: 28px;
-    width: 100%;
+    gap: 15px;
   }
-  
-  /* Стиль для названия дисциплины */
-  .disciplineName {
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
-  
-  /* Стили для списка лабораторных работ */
-  .labList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-  }
-  
+
   .labItem {
-    display: flex;
-    align-items: center;
-    margin: 15px 0;
-    font-size: 18px;
-    color: #4B9F3E;
-    width: 100%;
+    flex-direction: column;
+    gap: 15px;
   }
-  
-  .fileIcon {
-    width: 24px;
-    height: 24px;
-    margin-left: 8px;
-    vertical-align: middle;
+
+  .labActions {
+    flex-direction: column;
+    gap: 15px;
   }
-  
-  /* Адаптивность для мобильных устройств */
-  @media (max-width: 600px) {
-    .card {
-      margin: 8px;
-      padding: 12px;
-    }
-  
-    .greenSquare {
-      padding: 20px;
-    }
-  
-    .disciplineName {
-      font-size: 18px;
-    }
-  
-    .labItem {
-      font-size: 16px;
-    }
-  
-    .fileIcon {
-      width: 20px;
-      height: 20px;
-    }
-  }
-  
-  /* Адаптивность для планшетов и средних экранов */
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .card {
-      margin: 16px;
-      padding: 16px;
-    }
-  
-    .greenSquare {
-      padding: 25px;
-    }
-  
-    .disciplineName {
-      font-size: 22px;
-    }
-  
-    .labItem {
-      font-size: 20px;
-    }
-  
-    .fileIcon {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  
-  /* Адаптивность для ноутбуков и больших экранов */
-  @media (min-width: 1025px) and (max-width: 1440px) {
-    .card {
-      margin: 16px;
-      padding: 20px;
-    }
-  
-    .greenSquare {
-      padding: 30px;
-    }
-  
-    .disciplineName {
-      font-size: 24px;
-    }
-  
-    .labItem {
-      font-size: 22px;
-    }
-  
-    .fileIcon {
-      width: 28px;
-      height: 28px;
-    }
-  }
-  
-/* Адаптивность для больших экранов (ПК) */
-@media (min-width: 1441px) {
-    .card {
-      margin: 16px 30px; /* Уменьшаем отступы */
-      padding: 16px;     /* Уменьшаем внутренние отступы */
-    }
-  
-    .greenSquare {
-      padding: 25px;     /* Уменьшаем внутренние отступы в зеленом блоке */
-    }
-  
-    .disciplineName {
-      font-size: 24px;    /* Уменьшаем размер шрифта для названия дисциплины */
-    }
-  
-    .labItem {
-      font-size: 22px;    /* Уменьшаем размер шрифта для элемента списка */
-    }
-  
-    .fileIcon {
-      width: 28px;        /* Уменьшаем размер иконок */
-      height: 28px;       /* Уменьшаем размер иконок */
-    }
-  }
-  
+}

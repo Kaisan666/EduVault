@@ -1,112 +1,105 @@
-/* Общие стили для контейнера */
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Контейнер */
 .container {
   display: flex;
-  align-items: flex-start; /* Выравнивание элементов по левому краю */
-  justify-content: flex-start; /* Выравнивание по левому краю */
-  flex-wrap: wrap; /* Разрешение на перенос элементов на новую строку */
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Светлый фон для контейнера */
-}
-
-/* Стили для списка факультетов */
-.facultiesList {
-  display: flex;
-  width: 200px;
-  height: 90px;
-  justify-content: space-between;
-  background-color: #4CAF50; /* Основной зеленый цвет */
-  color: white;
-  padding: 5px 10px; /* Увеличен отступ по бокам для элементов */
-  margin: 5px 0;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: background-color 0.3s, transform 0.3s; /* Плавный переход при наведении */
-  box-sizing: border-box;
-}
-
-/* Кнопка удаления */
-.deleteBtn {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  margin-left: 70px;
-  margin-top: 17px;
-  border-radius: 5px;
-  height: 35px;
-  padding: 0 10px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.deleteBtn:hover {
-  background-color: #c82333;
-  transform: scale(1.05); /* Легкое увеличение */
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
 }
 
 /* Меню */
 .menu {
-  width: 350px;
-  overflow-y: auto;
-  height: calc(100vh - 40px); /* Учитываем отступы */
-  padding: 30px;
-  text-align: left; /* Выравнивание по левому краю */
-  background-color: #ffffff; /* Светлый фон для меню */
-  border: 2px solid #4CAF50; /* Основной зеленый цвет */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+  width: 100%;
+  max-width: 900px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+
 }
+
 
 .heading {
-  color: #4CAF50; /* Основной зеленый цвет */
-  font-size: 22px; /* Увеличен размер заголовка */
-  font-weight: bold;
-  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #345e43;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-/* Элементы в списке факультетов */
+/* Список факультетов */
+.facultiesList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #ecf0f1;
+}
+
 .facultyItem {
-  background-color: #4CAF50; /* Основной зеленый цвет */
-  color: white;
-  padding: 12px 15px; /* Увеличен отступ для элементов меню */
-  margin: 5px 0;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: background-color 0.3s, transform 0.3s; /* Плавный переход при наведении */
+  font-size: 20px;
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 12px;
+ 
 }
 
 .facultyItem:hover {
-  background-color: #45a049; /* Более темный зеленый цвет при наведении */
+  color: #1abc9c;
 }
 
-/* Контейнер для кнопок */
+/* Кнопка удаления */
+.deleteBtn {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  transform: scale(1.1); /* Увеличение кнопки при наведении */
+}
+
+/* Кнопка добавления */
 .buttonContainer {
-  display: flex;
-  justify-content: flex-start; /* Кнопки выравниваются по левому краю */
   margin-top: 20px;
-  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .addButton {
-  padding: 12px 24px; /* Увеличены отступы кнопки */
-  background-color: #4CAF50; /* Основной зеленый цвет */
+  background: linear-gradient(135deg, #34db39, #196323);
   color: white;
+  font-size: 20px;
+  padding: 15px 30px;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Плавный переход при наведении */
+  box-shadow: 0 8px 15px rgba(69, 219, 52, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .addButton:hover {
-  background-color: #45a049; /* Более темный зеленый цвет при наведении */
-  transform: scale(1.05); /* Увеличение при наведении */
-}
-
-.addButton:focus {
-  background-color: #155d21d8; /* Еще более темный зеленый при фокусировке */
+  background: linear-gradient(135deg, #29b93c, #d9f8d8);
+  transform: scale(1.1); /* Увеличение кнопки при наведении */
 }
 
 /* Модальное окно */
@@ -114,128 +107,100 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.8); /* Увеличена непрозрачность фона модального окна */
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .modalContent {
-  background-color: white; /* Белый фон для модального окна */
-  padding: 40px; /* Уменьшен отступ для компактности */
-  border-radius: 20px; /* Уменьшена ширина скругления */
-  width: 600px; /* Уменьшена ширина модального окна */
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  width: 450px;
   text-align: center;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.2); /* Улучшена тень для модального окна */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modalHeading {
-  font-size: 24px; /* Увеличен размер заголовка модального окна */
+  font-size: 26px;
+  color: #34495e;
   margin-bottom: 20px;
-  color: #4CAF50; /* Основной зеленый цвет */
+  font-weight: 600;
 }
 
-/* Поле ввода в модальном окне */
 .input {
-  width: 100%; /* Ширина на 100% с учетом padding */
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #4CAF50; /* Основной зеленый цвет для границы поля ввода */
-  border-radius: 5px; /* Скругленные углы для поля ввода */
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-/* Контейнер для кнопок в модальном окне */
+.input:focus {
+  border-color: #3498db;
+}
+
 .modalButtonContainer {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
-  color: #000;
 }
 
-/* Кнопка подтверждения */
 .confirmButton {
-  padding: 10px 20px;
-  background-color: #4CAF50; /* Основной зеленый цвет */
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
   color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  cursor: pointer;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: 8px;
+  font-size: 18px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .confirmButton:hover {
-   background-color: #45a049; /* Более темный зеленый цвет при наведении */
-   transform: scale(1.05); /* Увеличение при наведении */
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  transform: scale(1.05); /* Увеличение кнопки при наведении */
 }
 
-.confirmButton:focus {
-  background-color: #104b1eb5;
-}
-
-/* Кнопка отмены */
 .cancelButton {
-   padding: 10px 20px;
-   background-color: #dc3546; /* Красный цвет для кнопки отмены */
-   color: white;
-   border: none;
-   border-radius: 5px;
-   font-weight: bold;
-   margin-top: 8px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .cancelButton:hover {
-   background-color: #c82333; /* Более темный красный цвет при наведении */
-   transform: scale(1.05); /* Увеличение при наведении */
-}
-
-.cancelButton:focus {
-  background-color: #66131bd0;
-}
-
-/* Медиа-запросы для адаптивности */
-
-@media (max-width:768px) {
-    .container {
-        flex-direction: column; 
-        align-items: center; 
-    }
-    .menu {
-        width: calc(100% -40px);
-        max-height:400px; 
-    }
-    .buttonContainer {
-        margin-left:0;
-        margin-top:20px; 
-    }
-    .modalContent {
-        width:90%; 
-        padding:40px; 
-    }
-}
-
-@media (max-width:480px) {
-    .heading {
-        font-size:20px; 
-    }
-    .facultyItem {
-        font-size:16px; 
-    }
-    .addButton {
-        font-size:14px;
-    }
-    .modalContent {
-        width:95%; 
-        padding:30px; 
-    }
-    .modalHeading {
-        font-size:22px; 
-    }
-    .input {
-        font-size:14px; 
-    }
-    .confirmButton, .cancelButton {
-        font-size:14px; 
-    }
+  background: linear-gradient(135deg, #d35400, #e67e22);
+  transform: scale(1.05); /* Увеличение кнопки при наведении */
 }

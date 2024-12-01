@@ -15,30 +15,22 @@ a {
     color: inherit;
     text-decoration: none;
   }
-.disciplineBox {
-    border: 4px solid #29422881;
+  .disciplineBox {
+    border: 2px solid #3b7b34;
     border-radius: 40px;
-    padding: 20px; /* Уменьшены отступы */
+    padding: 0 10px; /* Убираем отступы сверху и снизу, оставляем только по бокам */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 800px; /* Уменьшена максимальная ширина */
+    width: 800px; /* Уменьшена максимальная ширина */
     margin: 0 auto;
-    height: 450px; /* Уменьшен размер */
+    height: 400px; /* Уменьшен размер */
     overflow-y: auto;
     position: relative;
 }
 
-.disciplineBox::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 28px;
-    width: 8px;
-    height: 10px;
-    background: transparent;
-    border-radius: 20px;
-}
+
+
 
 .disciplineBox::-webkit-scrollbar {
     width: 8px; /* Уменьшен размер скроллбара */
@@ -60,16 +52,23 @@ a {
 }
 
 .disciplineItem {
-    color: #ffffff;
-    border-radius: 20px;
-    padding: 40px 15px; /* Уменьшены отступы внутри элементов */
-    margin: 15px; /* Уменьшен отступ между элементами */
-    text-align: center;
-    font-size: 18px;
-    flex: 0 1 calc(33.333% - 20px); /* Уменьшен размер элементов */
-    box-sizing: border-box;
-    transition: transform 0.3s ease;
-}
+    color: #ffffff; /* Белый цвет текста */
+    background-color: #4caf50; /* Добавим красивый фон для контраста */
+    border-radius: 25px; /* Закругленные углы */
+    padding: 20px; /* Уменьшены отступы внутри элементов для симметрии */
+    margin: 15px; /* Равные отступы между элементами */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 16px; /* Одинаковый размер шрифта */
+    flex: 1 1 calc(33.333% - 20px); /* Элементы равны по ширине */
+    box-sizing: border-box; /* Все элементы рассчитываются по внутренним отступам */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные эффекты при наведении */
+  }
+  
+  /* Добавляем эффекты при наведении */
+  .disciplineItem:hover {
+    transform: scale(1.05); /* Увеличение элемента при наведении */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Легкая тень при наведении */
+  }
 
 .disciplineItem:nth-child(odd) {
     background-color: rgba(47, 128, 46, 0.486);

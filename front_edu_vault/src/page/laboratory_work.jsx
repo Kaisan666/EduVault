@@ -9,11 +9,20 @@ const labWorks = [
 ];
 
 const LabWorksPage = () => {
+  const handleBackClick = () => {
+    window.history.back(); // Возвращает на предыдущую страницу
+  };
+
   return (
     <div className="app">
       <Header />
       <main>
         <div className="labwork-list">
+          {/* Стрелка назад */}
+          <button onClick={handleBackClick} className="back-button">
+            ← Назад
+          </button>
+
           {/* Проходим по массиву labWorks и отображаем компоненты DisciplineCard */}
           {labWorks.length > 0 ? (
             labWorks.map(labWork => (

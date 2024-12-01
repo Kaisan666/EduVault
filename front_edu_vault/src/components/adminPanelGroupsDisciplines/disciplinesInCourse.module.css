@@ -1,6 +1,100 @@
-.disciplines{
-    margin-left: 50px;
-}
-.disciplinesList{
-    list-style: none;
-}
+/* Стили для контейнера дисциплин */
+.disciplines {
+    padding: 20px;
+    background-color: #ffffff; /* Светлый серый фон */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-left: 100px;
+  }
+  
+  .disciplinesList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .disciplineListItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff; /* Белый фон для каждого элемента */
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .disciplineListItem a {
+    color: #388e3c; /* Зеленый цвет для ссылок */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .disciplineListItem button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #388e3c; /* Зеленый цвет для кнопок */
+  }
+  
+  /* Стили для формы добавления дисциплины */
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 2px solid #388e3c; /* Зеленая граница */
+    border-radius: 8px;
+    background-color: #fafafa;
+  }
+  
+  .inputField:focus {
+    border-color: #2e7d32; /* Тот же зеленый цвет при фокусе */
+    outline: none;
+  }
+  
+  /* Стили для контейнера кнопок */
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .confirmButton, .cancelButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  
+  .confirmButton {
+    background-color: #388e3c; /* Зеленый фон */
+    color: white;
+  }
+  
+  .cancelButton {
+    background-color: #e57373; /* Красный фон для отмены */
+    color: white;
+  }
+  
+  .confirmButton, .cancelButton {
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirmButton:hover, .cancelButton:hover {
+    background-color: inherit; /* Убираем изменение цвета при наведении */
+  }
+  
+  /* Кнопка для начала добавления дисциплины */
+  button {
+    background-color: #388e3c; /* Зеленый фон */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  

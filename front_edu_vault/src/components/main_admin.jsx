@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-//import Header from '../components/header';
-//import Footer from '../components/footer ';
 import styles from '../styles/main_admin.module.css';
-
 
 function AdminMenu() {
   const [faculties, setFaculties] = useState([]);
@@ -47,7 +44,6 @@ function AdminMenu() {
 
       if (response.status === 200 || response.status === 201) {
         const savedFaculty = response.data[0];
-        console.log('Saved Faculty:', savedFaculty);
         setFaculties([...faculties, { id: savedFaculty.id, name: savedFaculty.name }]);
         closeModal();
       } else {
@@ -60,26 +56,23 @@ function AdminMenu() {
 
   const handleDeleteFaculty = async (facultyId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/faculty/${facultyId}`)
+      await axios.delete(`http://localhost:5000/api/faculty/${facultyId}`);
       setFaculties(faculties.filter(faculty => faculty.id !== facultyId));
     } catch (error) {
-      console.error('Ошибка при удалении группы:', error);
+      console.error('Ошибка при удалении факультета:', error);
     }
   };
 
   return (
     <div className={styles.container}>
-    
       <div className={styles.menu}>
         <h3 className={styles.heading}>Факультеты</h3>
         {faculties.map((faculty) => (
-          <div className={styles.facultiesList}>
-            <Link to={`/specialties/${faculty.id}`} key={faculty.id}>
-              <div className={styles.facultyItem}>
-                {faculty.name}
-              </div>
+          <div className={styles.facultiesList} key={faculty.id}>
+            <Link to={`/specialties/${faculty.id}`} className={styles.facultyItem}>
+              {faculty.name}
             </Link>
-          <button className={styles.deleteBtn} onClick={() => handleDeleteFaculty(faculty.id)}>удалить</button>
+            <button className={styles.deleteBtn} onClick={() => handleDeleteFaculty(faculty.id)}>удалить</button>
           </div>
         ))}
       </div>
@@ -106,7 +99,6 @@ function AdminMenu() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
