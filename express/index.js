@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import express from "express";
+import express, { response } from "express";
 import { sequelize } from "./db.js";
 import { models } from "./models.js";
 import { router } from "./routes/index.js";
@@ -20,11 +20,27 @@ app.use("/api", router);
 
 // Настройка Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
 const start = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
+        const response = await sequelize.query(`
+            select * from roles
+            `)
+        if (response[0].length === 0){
+            await sequelize.query(
+            `
+            INSERT INTO public.roles ("name","createdAt","updatedAt") VALUES
+	 ('Секретарь','2024-12-01 01:35:15.035595+03','2024-12-01 01:35:15.035595+03'),
+	 ('Студент','2024-12-01 01:35:15.035595+03','2024-12-01 01:35:15.035595+03'),
+	 ('Староста','2024-12-01 01:35:15.035595+03','2024-12-01 01:35:15.035595+03'),
+	 ('Админ','2024-12-01 01:35:15.035595+03','2024-12-01 01:35:15.035595+03'),
+	 ('Преподаватель','2024-12-01 01:35:15.035595+03','2024-12-01 01:35:15.035595+03');
+
+            `
+
+            )
+        }
         app.listen(PORT, () => console.log(`сервер на ${PORT}`));
     } catch (e) {
         console.log(e);
