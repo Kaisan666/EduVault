@@ -46,7 +46,7 @@ body {
 .directionItem {
   font-size: 18px;
   padding: 15px;
-  background: linear-gradient(135deg, #5eab5a, #377d34);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   color: #ffffff;
   border-radius: 8px;
   cursor: pointer;
@@ -77,12 +77,12 @@ body {
 }
 
 .editButton {
-  background-color: #4caf50;
+  background-color: #004d407a;
   color: #fff;
 }
 
 .editButton:hover {
-  background-color: #388e3c;
+  background-color:#004d407a;
   transform: scale(1.05);
 }
 
@@ -99,7 +99,7 @@ body {
 .addDirectionButton {
   margin-top: 30px;
   padding: 15px;
-  background: linear-gradient(135deg, #6bc774, #388e3c);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   color: white;
   font-size: 16px;
   border: none;
@@ -111,7 +111,7 @@ body {
 
 .addDirectionButton:hover {
   transform: scale(1.1);
-  background: linear-gradient(135deg, #388e3c, #6bc774);
+  background: linear-gradient(45deg, #004d407a, #00796b);
 }
 
 /* Модальное окно */
@@ -139,7 +139,7 @@ body {
 
 .modalHeading {
   font-size: 24px;
-  color: #388e3c;
+  color: #004d407a;
   margin-bottom: 20px;
 }
 
@@ -147,7 +147,7 @@ body {
   width: 100%;
   padding: 12px;
   font-size: 16px;
-  border: 2px solid #81c784;
+  border: 2px solid #004d405a;
   border-radius: 8px;
   margin-bottom: 20px;
   outline: none;
@@ -155,7 +155,7 @@ body {
 }
 
 .input:focus {
-  border-color: #388e3c;
+  border-color: #004d407a;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -167,7 +167,7 @@ body {
 
 .confirmButton {
   padding: 12px 20px;
-  background: linear-gradient(135deg, #66bb6a, #388e3c);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   color: white;
   border-radius: 30px;
   border: none;
@@ -177,7 +177,7 @@ body {
 
 .confirmButton:hover {
   transform: scale(1.1);
-  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  background: linear-gradient(45deg, #004d407a, #00796b);
 }
 
 .cancelButton {
@@ -246,7 +246,7 @@ body {
 /* Кнопка добавления секретаря */
 .addSecretaryBtn {
   padding: 15px 30px;
-  background: linear-gradient(135deg, #66bb6a, #388e3c);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   color: white;
   font-size: 18px;
   border-radius: 30px;
@@ -258,7 +258,7 @@ body {
 
 .addSecretaryBtn:hover {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  background: linear-gradient(45deg, #004d407a, #00796b);
 }
 
 /* Кнопка назад */
@@ -269,7 +269,7 @@ body {
 
 .backButton {
   padding: 12px 20px;
-  background-color: #81c784;
+  background-color:#004d404d;
   color: white;
   font-size: 16px;
   border-radius: 30px;
@@ -280,7 +280,7 @@ body {
 
 .backButton:hover {
   transform: scale(1.1);
-  background-color: #66bb6a;
+  background-color: #004d4041;
 }
 
 /* Модальное окно для редактирования */
@@ -308,7 +308,7 @@ body {
 
 .modalEditDirectionHeading {
   font-size: 24px;
-  color: #388e3c;
+  color: #004d407a;
   margin-bottom: 20px;
 }
 
@@ -316,7 +316,7 @@ body {
   width: 100%;
   padding: 12px;
   font-size: 16px;
-  border: 2px solid #81c784;
+  border: 2px solid#004d407a;
   border-radius: 8px;
   margin-bottom: 20px;
   outline: none;
@@ -324,7 +324,7 @@ body {
 }
 
 .modalEditDirectionInput:focus {
-  border-color: #388e3c;
+  border-color: #004d407a;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -336,7 +336,7 @@ body {
 
 .modalEditDirectionConfirmButton {
   padding: 12px 20px;
-  background: linear-gradient(135deg, #66bb6a, #388e3c);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   color: white;
   border-radius: 30px;
   border: none;
@@ -346,7 +346,7 @@ body {
 
 .modalEditDirectionConfirmButton:hover {
   transform: scale(1.1);
-  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  background: linear-gradient(45deg, #004d407a, #00796b);
 }
 
 .modalEditDirectionCancelButton {

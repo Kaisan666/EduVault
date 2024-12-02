@@ -154,7 +154,7 @@ h2 {
 
 .confirmButton {
   padding: 14px 25px;
-  background: linear-gradient(135deg, #66bb6a, #00796b);
+  background: linear-gradient(135deg, #054d40, #00796b);
   color: white;
   font-size: 18px;
   border-radius: 25px;
@@ -165,17 +165,17 @@ h2 {
 }
 
 .confirmButton:hover {
-  background: linear-gradient(135deg, #00796b, #66bb6a);
+  background: linear-gradient(135deg, #00796b, #01503a);
   transform: scale(1.05); /* Эффект увеличения */
 }
 
 .confirmButton:active {
-  background: linear-gradient(135deg, #004d40, #388e3c);
+  background: linear-gradient(135deg, #004d40, #003724);
 }
 
 .cancelButton {
   padding: 14px 25px;
-  background-color: #ff8a65;
+  background-color: #ff6565;
   color: white;
   font-size: 18px;
   border-radius: 25px;
@@ -186,7 +186,7 @@ h2 {
 }
 
 .cancelButton:hover {
-  background-color: #f4511e;
+  background-color: #c00606;
   transform: scale(1.05); /* Эффект увеличения */
 }
 
@@ -197,7 +197,7 @@ h2 {
 /* Кнопка добавления курса */
 .addButton {
   padding: 16px 28px;
-  background: linear-gradient(135deg, #66bb6a, #00796b);
+  background: linear-gradient(135deg, #034e3c, #00796b);
   color: white;
   font-size: 18px;
   border: none;
@@ -209,12 +209,12 @@ h2 {
 }
 
 .addButton:hover {
-  background: linear-gradient(135deg, #00796b, #66bb6a);
+  background: linear-gradient(45deg, #004d407a, #00796b);
   transform: scale(1.05); /* Эффект увеличения */
 }
 
 .addButton:active {
-  background: linear-gradient(135deg, #004d40, #388e3c);
+  background: linear-gradient(45deg, #004d407a, #00796b);
 }
 
 /* Адаптивность для мобильных устройств */

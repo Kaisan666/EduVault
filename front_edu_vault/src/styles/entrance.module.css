@@ -37,13 +37,13 @@ h2 {
 }
 
 .inputField:focus {
-  border-color: #4CAF50;  /* Цвет границы при фокусе */
+  border-color: #014632;  /* Цвет границы при фокусе */
   outline: none;
 }
 
 .submitButton {
   margin-top: 15px;
-  background-color: #4CAF50; /* Заменил на более яркий зеленый */
+  background-color: #014632; /* Заменил на более яркий зеленый */
   color: white;
   border: none;
   padding: 15px;
@@ -55,7 +55,7 @@ h2 {
 }
 
 .submitButton:hover {
-  background-color: #45a049; /* Темнее при наведении */
+  background-color: #014632; /* Темнее при наведении */
 }
 
 .submitButton:disabled {

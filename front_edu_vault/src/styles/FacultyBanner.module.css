@@ -3,7 +3,7 @@
   width: 100%;
   height: 100px;
   border: none;
-  color: #4CAF50;
+  color: #02452d;
   display: flex;
   justify-content: space-between; /* Make sure text and button are spaced */
   align-items: center;
@@ -27,7 +27,7 @@
 .logoutButton {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4CAF50; /* Green button */
+  background-color: #044c3e; /* Green button */
   color: white;
   border: none;
   border-radius: 8px;
@@ -43,7 +43,7 @@
 
 /* Эффект при наведении на кнопку */
 .logoutButton:hover {
-  background-color: #45a049; /* Lighter green on hover */
+  background-color:  #044c3e; /* Lighter green on hover */
   transform: scale(1.1); /* Slight scaling effect */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Slight shadow effect on hover */
 }

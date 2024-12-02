@@ -1,23 +1,63 @@
+/* Основной контейнер страницы */
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .main {
-    flex: 1;
-    padding: 20px;
-  }
-  .logoutButton {
-    background-color: rgb(21, 111, 56); /* Красный цвет фона */
-    color: white; /* Белый текст */
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px; /* Отступ сверху */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Чтобы гарантировать, что футер всегда будет внизу */
+  background-color: #f4f8f6; /* Светлый фон */
+}
 
-  
+/* Основной контент (между хедером и футером) */
+.main {
+  flex: 1; /* Это позволяет главному содержимому занимать всё доступное пространство */
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрирование контента по горизонтали */
+}
+
+/* Кнопка "Выйти" */
+.logoutButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #003c27af; /* Изумрудный цвет */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #003c27; /* Темнее при наведении */
+}
+
+/* Стили для Header (если нужны дополнительные отступы или стиль) */
+
+  .header {
+    background-color: #003e25; /* Изумрудный цвет фона */
+    color: white; /* Белый текст */
+    display: flex;
+    justify-content: space-between; /* Размещение элементов с интервалом */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    padding: 15px 30px; /* Отступы вокруг */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */}
+
+
+/* Стили для Footer */
+footer {
+  background-color: #ffffff; /* Изумрудный фон */
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Если необходимо стилизовать элементы внутри Header или Footer, можно добавить их классы */
+header .logo {
+  font-size: 28px;
+  font-weight: bold;
+}
