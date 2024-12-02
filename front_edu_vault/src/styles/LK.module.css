@@ -34,15 +34,6 @@
 
 /* Стили для Header (если нужны дополнительные отступы или стиль) */
 
-  .header {
-    background-color: #003e25; /* Изумрудный цвет фона */
-    color: white; /* Белый текст */
-    display: flex;
-    justify-content: space-between; /* Размещение элементов с интервалом */
-    align-items: center; /* Выравнивание элементов по центру по вертикали */
-    padding: 15px 30px; /* Отступы вокруг */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень */}
-
 
 /* Стили для Footer */
 footer {

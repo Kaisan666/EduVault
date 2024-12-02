@@ -9,8 +9,8 @@
   align-items: center;
   font-size: 28px;
   font-weight: 700;
-  background-color: #f0f8f4; /* Lighter background for a clean look */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  background-color:   #ffffff; /* Lighter background for a clean look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.347); /* Light shadow for depth */
   border-radius: 10px;
   padding: 10px 20px;
   box-sizing: border-box;

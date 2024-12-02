@@ -29,7 +29,7 @@ body {
 /* Боковая панель с направлениями */
 .sidebar {
   width: 320px;
-  background: linear-gradient(145deg, #f7fafc, #dee3eb);
+  background: linear-gradient(145deg, #ffffff, #ffffff);
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -216,7 +216,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: linear-gradient(135deg, #f7f9fc, #e4e8f0);
+  background: linear-gradient(135deg, #ffffff, #ffffff);
   border-radius: 10px;
   margin-bottom: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
