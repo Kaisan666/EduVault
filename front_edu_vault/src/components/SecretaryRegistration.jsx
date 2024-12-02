@@ -33,7 +33,9 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
     console.log(userData)
     const newSecretary = {...userData}
     console.log(newSecretary)
-    const response = await axios.post(`http://localhost:5000/api/secretary/create/${facultyId}`, newSecretary)
+    const response = await axios.post(`http://localhost:5000/api/secretary/create/${facultyId}`, newSecretary, {
+      withCredentials: true
+    })
     create(newSecretary)
     const data = response.data[0]
     console.log(data)

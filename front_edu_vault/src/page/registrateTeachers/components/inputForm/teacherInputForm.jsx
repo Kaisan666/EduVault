@@ -30,11 +30,11 @@ const TeacherInputForm = ({teacherList, setTeachersList, setAdding}) => {
   async function handleAddTeacher() {
     console.log(userData)
     const newTeacher = {...userData}
-    console.log(newSecretary)
-    const response = await axios.post(`http://localhost:5000/api/teacher/create-teacher/`, {
-      withCredentials: true
+    console.log(newTeacher)
+    const response = await axios.post(`http://localhost:5000/api/teacher/create-teacher/`, newTeacher,
+      {withCredentials: true
     })
-    setTeachersList({...teacherList, newTeacher})
+    setTeachersList([...teacherList, newTeacher])
     const data = response.data[0]
     console.log(data)
     closeRegistration()

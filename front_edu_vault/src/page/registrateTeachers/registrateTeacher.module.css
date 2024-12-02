@@ -5,3 +5,6 @@
     /* flex-direction: column; */
     /* margin-left: 50px; */
 }
+.secretariesList{
+    list-style: none;
+}

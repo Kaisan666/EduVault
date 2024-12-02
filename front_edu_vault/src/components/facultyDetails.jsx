@@ -17,7 +17,11 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
 
   const handleDeleteGroup = async (secretaryId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/secretary/delete/${secretaryId}`);
+      await axios.delete(`http://localhost:5000/api/secretary/delete/${secretaryId}`,
+        {
+          withCredentials: true
+        }
+      );
       setSecretary(secretary.filter(secretary => secretary.id !== secretaryId));
     } catch (error) {
       console.error('Ошибка при удалении группы:', error);
@@ -31,7 +35,11 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
   useEffect(() => {
     const fetchDirections = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/specialty/all-specialties/${facultyId}`);
+        const response = await axios.get(`http://localhost:5000/api/specialty/all-specialties/${facultyId}`,
+          {
+            withCredentials: true
+          }
+        );
         if (response.status === 200) {
           setDirections(response.data);
         } else {
@@ -44,7 +52,11 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
 
     const fetchSecretaries = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`);
+        const response = await axios.get(`http://localhost:5000/api/secretary/show-all/${facultyId}`,
+          {
+            withCredentials: true
+          }
+        );
         const data = response.data;
         if (response.status === 201) {
           setSecretary(data);
@@ -73,7 +85,9 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
     const newDirection = { name: newDirectionName };
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/specialty/create-specialty/${facultyId}`, newDirection);
+      const response = await axios.post(`http://localhost:5000/api/specialty/create-specialty/${facultyId}`, newDirection, {
+        withCredentials: true
+      });
       if (response.status === 200 || response.status === 201) {
         const savedDirection = response.data[0];
         setDirections((prevDirections) => [...prevDirections, savedDirection]);
@@ -107,7 +121,9 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
 
   const handleDeleteDirection = async (directionId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/specialty/delete-specialty/${directionId}`);
+      await axios.delete(`http://localhost:5000/api/specialty/delete-specialty/${directionId}`, {
+        withCredentials: true
+      });
       setDirections(directions.filter(direction => direction.id !== directionId));
     } catch (error) {
       console.error('Ошибка при удалении направления:', error);
