@@ -26,7 +26,6 @@ const App = () => {
   return (
     <Router>
       <Routes>
-
         <Route path="/secretaryDashBoard" element={<ProtectedRoute component={Secretary_Direction} role="Секретарь" />} />
         {/* <Route path="/adminDashboard" element={<ProtectedRoute component={AdminMenuF} role="admin" />} /> */}
         <Route path="/adminDashboard" element={<AdminMenuF/>}/>

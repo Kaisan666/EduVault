@@ -42,7 +42,7 @@ class TeacherController {
         );
 
         const role = await sequelize.query(
-            `select name from teachers where id = :id`,
+            `select name from roles where id = :id`,
             {replacements : {id : roleId}}
         )
         console.log()

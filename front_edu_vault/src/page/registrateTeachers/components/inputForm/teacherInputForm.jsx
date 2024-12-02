@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from '../styles/SecretaryRegistration.module.css';
+import styles from './teacherInputForm.module.css';
 import { useParams } from 'react-router-dom';
 
-const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
+const TeacherInputForm = ({teacherList, setTeachersList, setAdding}) => {
 
-  const {facultyId} = useParams()
+  // const {facultyId} = useParams()
 
   const [userData, setUserData] = useState({
     firstName : "",
     lastName : "",
     middleName : "",
-    roleId : 3,
+    roleId : 5,
     password : "",
-    login : "",
-    facultyId : facultyId
+    login : ""
   })
 
   function closeRegistration(){
@@ -22,29 +21,29 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
       firstName : "",
     lastName : "",
     middleName : "",
-    roleId : 3,
+    roleId : 5,
     password : "",
     login : "",
-    facultyId : facultyId
     })
-    hideAddSecretary()
+    setAdding(false)
   }
-  async function handleAddSecretary() {
+  async function handleAddTeacher() {
     console.log(userData)
-    const newSecretary = {...userData}
+    const newTeacher = {...userData}
     console.log(newSecretary)
-    const response = await axios.post(`http://localhost:5000/api/secretary/create/${facultyId}`, newSecretary)
-    create(newSecretary)
+    const response = await axios.post(`http://localhost:5000/api/teacher/create-teacher/`, {
+      withCredentials: true
+    })
+    setTeachersList({...teacherList, newTeacher})
     const data = response.data[0]
     console.log(data)
-    hideAddSecretary()
+    closeRegistration()
     console.log(`Добавить секретаря: Логин:, Пароль:`);
   };
 
   
 
   return (<>
-    {addSecretary ?(
     <div className={styles.container}>
       <input
         type="text"
@@ -88,13 +87,13 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
         value={userData.password}
         onChange={(e) => setUserData({...userData, password : e.target.value})}
       />
-      <button className={styles.button} onClick={handleAddSecretary}>
+      <button className={styles.button} onClick={handleAddTeacher}>
         Добавить секретаря
       </button>
       <button className={styles.closeButton} onClick={() =>closeRegistration()}>Закрыть</button>
-    </div>) : null}       
+    </div>
     </>
   );
 };
 
-export default SecretaryRegistration;
+export default TeacherInputForm;

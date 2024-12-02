@@ -9,15 +9,16 @@ import { secretaryRouter } from "./secretary.js";
 import { disciplineRouter } from "./discipline.js";
 import { checkrole } from "../middlewares/checkRoleMiddleware.js";
 import teacherRouter from "./teacher.js";
-import teacherFacultyRouter from "./facultyTeacher.js";
+import teacherSpecialtyRouter from "./specialtyTeacher.js";
+import { check } from "../middlewares/authMiddleware.js";
 const router = Router();
 
-router.use("/teacher", teacherRouter)
-router.use("/teacher_faculty", teacherFacultyRouter)
+router.use("/teacher",check,  teacherRouter)
+router.use("/teacher_faculty",check,  teacherSpecialtyRouter)
 
-router.use("/secretary", checkrole(["Админ", "Секретарь", "Преподаватель"]),secretaryRouter)
+router.use("/secretary", check, checkrole(["Админ", "Секретарь", "Преподаватель"]),secretaryRouter)
 
-router.use(`/discipline`,checkrole(["Админ", "Секретарь", "Студент", "Староста"]), disciplineRouter)
+router.use(`/discipline`,check, checkrole(["Админ", "Секретарь", "Студент", "Староста"]), disciplineRouter)
 
 /**
  * @swagger
@@ -35,7 +36,7 @@ router.use("/user", userRouter);
  *     summary: Group routes
  *     tags: [Group]
  */
-router.use("/group", checkrole(["Админ", "Секретарь", "Преподаватель"]),groupRouter);
+router.use("/group",check,  checkrole(["Админ", "Секретарь", "Преподаватель"]),groupRouter);
 
 /**
  * @swagger
@@ -44,7 +45,7 @@ router.use("/group", checkrole(["Админ", "Секретарь", "Препо�
  *     summary: Faculty routes
  *     tags: [Faculty]
  */
-router.use("/faculty", facultyRouter);
+router.use("/faculty",check,  facultyRouter);
 
 /**
  * @swagger
@@ -53,7 +54,7 @@ router.use("/faculty", facultyRouter);
  *     summary: Specialty routes
  *     tags: [Specialty]
  */
-router.use("/specialty", specialtyRouter);
+router.use("/specialty",check,  specialtyRouter);
 
 /**
  * @swagger
@@ -62,9 +63,9 @@ router.use("/specialty", specialtyRouter);
  *     summary: Student routes
  *     tags: [Student]
  */
-router.use("/student", studentRouter);
+router.use("/student",check,  studentRouter);
 
-router.use("/course", courseRouter)
+router.use("/course",check,  courseRouter)
 
 // router.use("/discipline",)
 // router.use("/laboratory",)

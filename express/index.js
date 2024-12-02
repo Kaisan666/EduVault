@@ -6,11 +6,15 @@ import { models } from "./models.js";
 import { router } from "./routes/index.js";
 import cors from "cors";
 import { swaggerUi, specs } from './swagger.js';
-
+import cookieParser from 'cookie-parser';
 const PORT = 5000;
 
 const app = express();
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:5173', // Замените на ваш фронтенд URL
+    credentials: true
+}));
 app.use(express.json());
 app.use("/api", router);
 

@@ -6,8 +6,10 @@ import Footer from '../components/footer ';
 import FacultyDetails from '../components/facultyDetails';
 
 const AdminDirectionSecretary = () => {
+  
   const [addSecretary, setAddSecretary] = useState(false)
   console.log(addSecretary)
+
   function registerSecretary(){
     setAddSecretary(true)
   }
@@ -23,7 +25,6 @@ const AdminDirectionSecretary = () => {
       addSecretary={addSecretary}
       setAddSecretary={registerSecretary}
       hideRegister = {hideRegister}/>
-      
       <Footer />
     </div>
   );

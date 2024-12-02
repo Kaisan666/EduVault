@@ -8,20 +8,20 @@ const generateJWT = (id, login, roleId) => {
         process.env.SECRET_KEY,
         {expiresIn : "24h"})
 }
-class TeacherFacultyController {
+class TeacherSpecialtyController {
     async create(req, res) {
-        const { facultyId } = req.params;
+        const { specialtyId } = req.params;
         const { teacherId } = req.body;
     
         try {
             // Проверка наличия обязательных полей
-            if (!teacherId || !facultyId) {
+            if (!teacherId || !specialtyId) {
                 return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
             }
     
             const insertion = await sequelize.query(
-                `INSERT INTO teacher_faculty ("teacherId", "facultyId", "createdAt", "updatedAt") VALUES (:teacherId, :facultyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
-                { replacements: { teacherId, facultyId } }
+                `INSERT INTO teacher_specialty ("teacherId", "specialtyId", "createdAt", "updatedAt") VALUES (:teacherId, :specialtyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+                { replacements: { teacherId, specialtyId } }
             );
     
             console.log(insertion);
@@ -33,12 +33,12 @@ class TeacherFacultyController {
     
 
     async showAll(req, res) {
-        const { facultyId } = req.params;
+        const { specialtyId } = req.params;
         try {
             // Получение идентификаторов преподавателей, связанных с факультетом
             const teachersIdResult = await sequelize.query(
-                `SELECT "teacherId" FROM teacher_faculty WHERE "facultyId" = :facultyId`,
-                { replacements: { facultyId } }
+                `SELECT "teacherId" FROM teacher_specialty WHERE "specialty" = :specialty`,
+                { replacements: { specialtyId } }
             );
     
             const teachersId = teachersIdResult[0].map(row => row.teacherId);
@@ -59,7 +59,7 @@ class TeacherFacultyController {
     }
     
     async update(req, res) {
-        const { facultyId } = req.params;
+        const { specialtyId } = req.params;
         const { teacherId } = req.body;
     
         // Проверка наличия обязательных полей
@@ -73,9 +73,9 @@ class TeacherFacultyController {
             const result = await sequelize.query(
                 `UPDATE teacher_faculty AS tf
                  SET "teacherId" = :teacherId, "updatedAt" = :updatedAt
-                 WHERE "facultyId" = :facultyId
+                 WHERE "specialtyId" = :specialtyId
                  RETURNING *;`,
-                { replacements: { teacherId, updatedAt, facultyId } }
+                { replacements: { teacherId, updatedAt, specialtyId } }
             );
     
             if (result[0].length === 0) {
@@ -89,18 +89,18 @@ class TeacherFacultyController {
     }
     
     async delete(req, res) {
-        const { facultyId } = req.params;
+        const { specialtyId } = req.params;
         const { teacherId } = req.body;
     
         // Проверка наличия обязательных полей
-        if (!facultyId || !teacherId) {
+        if (!specialtyId || !teacherId) {
             return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
         }
     
         try {
             await sequelize.query(
-                `DELETE FROM teacher_faculty WHERE "facultyId" = :facultyId AND "teacherId" = :teacherId`,
-                { replacements: { facultyId, teacherId } }
+                `DELETE FROM teacher_specialty WHERE "specialtyId" = :specialtyId AND "teacherId" = :teacherId`,
+                { replacements: { specialtyId, teacherId } }
             );
     
             res.status(200).json({ message: "Запись успешно удалена" });
@@ -110,4 +110,4 @@ class TeacherFacultyController {
     }
     
     }
-export const teacherFacultyController = new TeacherFacultyController()
+export const teacherSpecialtyController = new TeacherSpecialtyController()

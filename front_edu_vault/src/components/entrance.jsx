@@ -19,7 +19,11 @@ const LoginForm = () => {
     setError('');
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/user/login`, data);
+      const response = await axios.post(`http://localhost:5000/api/user/login`, data,
+        {withCredentials: true}
+      );
+      // const response = await axios.post(`http://localhost:5000/api/user/login`, data
+      // );
       const responseData = response.data;
       console.log(responseData);
 

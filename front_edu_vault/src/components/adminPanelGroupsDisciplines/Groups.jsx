@@ -44,7 +44,8 @@ const Groups = () => {
         try {
             const response = await axios.post(`http://localhost:5000/api/group/create-group/${courseId}`, {
                 name: newGroup
-            });
+            },
+            {withCredentials: true});
             const newGroupData = response.data[0]; // Полный объект группы
             console.log(newGroupData);
             setGroups([...groups, newGroupData]); // Добавляем весь объект группы

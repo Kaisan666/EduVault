@@ -10,7 +10,33 @@ const generateJWT = (id, login, roleName) => {
 }
 class UserController {
     async registration(req, res) {
-        
+        const {firstName, lastName, middleName, login, password, roleId} = req.body
+        const hashpass = await bcrypt.hash(password, 5);
+
+        try{let fields = ['"firstName"', '"lastName"', '"login"', '"password"', '"roleId"'];
+        let values = { firstName, lastName, login, password: hashpass, roleId };
+
+        if (middleName) {
+            fields.push('"middleName"');
+            values.middleName = middleName;
+        }
+
+        const usercreation = await sequelize.query(
+            `INSERT INTO users (${fields.join(', ')}, "createdAt", "updatedAt") VALUES (${Object.keys(values).map(key => `:${key}`).join(', ')}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+            { replacements: values }
+        );
+        const role = await sequelize.query(
+            `select name from roles where id = :id`,
+            {replacements : {id : roleId}}
+        )
+
+        const token = generateJWT(usercreation[0][0].id, usercreation[0][0].login, role[0][0].name);
+        // return res.json(token);
+        res.cookie('token', token, { httpOnly: true })
+    } catch(e){
+        res.status(500).json({error: e.message})
+    }
+
     }
     async login(req, res) {
         const {login, password} = req.body
@@ -32,25 +58,10 @@ class UserController {
             `,
             {replacements : {id : user[0][0].id}}
         )
-        // if (role === "Студент" || role === "Староста"){
-        // const facultyId = await sequelize.query(
-        //     `
-        //     select groupId from students s join users u on s."userId" = u.id where u.id = :id
-        //     `,
-        //     {replacements : {id : user[0][0].id}}
-        // )}
-        // else if (role === "Секретарь"){
-        //     const facultyId = await sequelize.query(
-        //         `
-        //         select facultyId from secretaries s join users u on s."userId" = u.id where u.id = :id
-        //         `,
-        //         {replacements : {id : user[0][0].id}}
-        //     )
-        // }
-        // console.log(role[0][0].name)
         const token = generateJWT(user[0][0].id, user[0][0].login, role[0][0].name)
         console.log(token)
-        return res.json({token})
+        res.cookie('token', token, { httpOnly: true, secure: false});
+        res.send({ error: null});
     }
     async check(req, res) {
         console.log(req)

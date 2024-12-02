@@ -110,8 +110,8 @@ Role.hasMany(User)
 User.belongsTo(Role)
 
 
-Teacher.belongsToMany(Faculty, {through : "teacher_faculty"})
-Faculty.belongsToMany(Teacher, {through : "teacher_faculty"})
+Teacher.belongsToMany(Specialty, {through : "teacher_specialty"})
+Specialty.belongsToMany(Teacher, {through : "teacher_specialty"})
 
 
 Role.belongsToMany(Permission, {through : "role_permission"})

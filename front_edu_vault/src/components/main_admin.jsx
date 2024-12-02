@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../styles/main_admin.module.css';
 
 function AdminMenu() {
   const [faculties, setFaculties] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newFacultyName, setNewFacultyName] = useState('');
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchFaculties = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/faculty/all-faculties');
-        if (response.status === 200) {
+        const response = await axios.get('http://localhost:5000/api/faculty/all-faculties',
+          {withCredentials: true});
+          if (response.status === 200) {
           setFaculties(response.data);
         } else {
           console.error('Ошибка при загрузке факультетов');
         }
       } catch (error) {
+        if (error.response && error.response.status === 401) {
+          console.log("ИДИ НАХУЙ");
+          navigate('/');
+        } else {
+          console.error('Ошибка:', error);
+        }
+
         console.error('Ошибка:', error);
       }
     };
@@ -40,7 +49,10 @@ function AdminMenu() {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/api/faculty/create-faculty', newFaculty);
+      const response = await axios.post('http://localhost:5000/api/faculty/create-faculty', newFaculty
+        ,
+        {withCredentials: true}
+      );
 
       if (response.status === 200 || response.status === 201) {
         const savedFaculty = response.data[0];
@@ -56,7 +68,8 @@ function AdminMenu() {
 
   const handleDeleteFaculty = async (facultyId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/faculty/${facultyId}`);
+      await axios.delete(`http://localhost:5000/api/faculty/${facultyId}`,
+        {withCredentials: true});
       setFaculties(faculties.filter(faculty => faculty.id !== facultyId));
     } catch (error) {
       console.error('Ошибка при удалении факультета:', error);

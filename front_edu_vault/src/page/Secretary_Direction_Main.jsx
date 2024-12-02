@@ -7,6 +7,8 @@ const Secretary_Direction = () => {
     <div>
       <FacultyBanner/>
       <Secretary_Direction_Main />
+      
+
     </div>
   );
 };
