@@ -1,230 +1,253 @@
-/* Контейнер для групп */
+/* Основной контейнер для групп */
 .groupsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9; /* Светлый фон */
-  min-height: 100vh;
-}
-.mainWrapper{
-  display: flex;
-  width: 100%;
-}
-/* Оформление для блока курса */
-.courseFrame {
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-  background-color: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  padding: 50px 40px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 15px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
   text-align: center;
+  overflow: hidden;
 }
 
-/* Заголовок блока курса */
+.groupsContainer:hover {
+  transform: none;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок курса */
 .courseFrame h1 {
+  font-size: 32px;
+  color: #00695c;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.courseFrame h1:hover {
+  color: #004d40;
+}
+
+/* Заголовок для групп */
+h2 {
   font-size: 28px;
-  margin: 0;
-  color: #4CAF50;
-  font-weight: bold;
+  color: #333;
+  margin-top: 35px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Кнопка "Назад" */
+.backButtonContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.backButton {
+  padding: 14px 30px;
+  background-color: #00796b;
+  color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #004d40;
+  transform: scale(1.05); /* Эффект увеличения */
+}
+
+.backButton:active {
+  background-color: #00362d;
+}
+
+/* Основной обертка для групп */
+.mainWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Обертка для списка групп */
+.groupsWrapper {
+  flex: 1;
+  margin-right: 40px;
 }
 
 /* Список групп */
 .groupsList {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  width: 100%;
-  max-width: 1000px; /* Увеличиваем максимальную ширину */
+  margin: 0;
 }
 
-/* Элемент группы */
 .groupItem {
-  background-color: #ffffff;
-  padding: 20px;
-  margin: 15px 0;
-  width: 100%;
-  max-width: 1000px;
-  border-radius: 8px;
-  text-align: left;
-  border: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+  background: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
-.groupItem:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.groupItem div {
+  font-size: 22px;
+  color: #00796b;
+  font-weight: 700;
 }
 
-/* Кнопка удаления группы */
+.groupItem div:hover {
+  color: #004d40;
+}
+
 .deleteButton {
-  background-color: #dc3545;
+  padding: 10px 18px;
+  background: #e57373;
   color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .deleteButton:hover {
-  background-color: #c82333;
-  transform: scale(1.05); /* Легкое увеличение */
+  background: #c62828;
+  transform: scale(1.05); /* Эффект увеличения */
+}
+
+.deleteButton:active {
+  background: #b71c1c;
 }
 
 /* Форма добавления группы */
 .addGroupForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
-  margin-top: 20px;
+  background: #f3f3f3;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
 }
 
-/* Поле ввода */
+.addGroupForm:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
 .inputField {
   width: 100%;
-  padding: 12px;
-  margin: 12px 0;
+  padding: 15px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 2px solid #00796b;
   border-radius: 8px;
-  transition: border 0.3s ease;
+  margin-bottom: 25px;
+  outline: none;
 }
 
 .inputField:focus {
-  border-color: #4CAF50; /* Зеленая рамка при фокусе */
+  border-color: #004d40;
 }
 
-/* Контейнер для кнопок */
+.inputField::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Кнопки подтверждения и отмены */
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
+  gap: 20px;
 }
 
-/* Оформление кнопок */
-.addButton,
-.confirmButton,
-.cancelButton {
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: bold;
+.confirmButton {
+  padding: 14px 25px;
+  background: linear-gradient(135deg, #66bb6a, #00796b);
+  color: white;
+  font-size: 18px;
+  border-radius: 25px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  letter-spacing: 1px;
+  width: 48%;
+  transition: transform 0.3s ease;
+}
+
+.confirmButton:hover {
+  background: linear-gradient(135deg, #00796b, #66bb6a);
+  transform: scale(1.05); /* Эффект увеличения */
+}
+
+.confirmButton:active {
+  background: linear-gradient(135deg, #004d40, #388e3c);
+}
+
+.cancelButton {
+  padding: 14px 25px;
+  background-color: #ff8a65;
+  color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  width: 48%;
+  transition: transform 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #f4511e;
+  transform: scale(1.05); /* Эффект увеличения */
+}
+
+.cancelButton:active {
+  background-color: #d32f2f;
 }
 
 /* Кнопка добавления группы */
 .addButton {
-  background-color: #38a050;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #66bb6a, #00796b);
   color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 35px;
+  transition: transform 0.3s ease;
 }
 
 .addButton:hover {
-  background-color: #2e7d32;
-  transform: scale(1.05); /* Легкое увеличение */
+  background: linear-gradient(135deg, #00796b, #66bb6a);
+  transform: scale(1.05); /* Эффект увеличения */
 }
 
-/* Кнопка подтверждения */
-.confirmButton {
-  background-color: #28a745;
-  color: white;
+.addButton:active {
+  background: linear-gradient(135deg, #004d40, #388e3c);
 }
 
-.confirmButton:hover {
-  background-color: #218838;
-  transform: scale(1.05); /* Легкое увеличение */
-}
-
-/* Кнопка отмены */
-.cancelButton {
-  background-color: #dc3545;
-  color: white;
-}
-
-.cancelButton:hover {
-  background-color: #c82333;
-  transform: scale(1.05); /* Легкое увеличение */
-}
-
-/* Медиа-запросы для адаптации */
-@media (max-width: 1200px) {
-  .courseFrame {
-    max-width: 100%;
-    padding: 25px;
-  }
-
-  .groupItem {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .courseFrame {
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+  .groupsContainer {
     padding: 20px;
   }
 
-  .courseFrame h1 {
-    font-size: 24px;
+  .inputField {
+    font-size: 14px;
+    padding: 12px;
   }
-  
-  .groupsList {
-    list-style-type: none;
-    padding: 0;
+
+  .buttonContainer {
+    flex-direction: column;
+  }
+
+  .confirmButton, .cancelButton {
+    font-size: 14px;
+    padding: 12px;
     width: 100%;
-    max-width: 200px;
-  }
-  .groupsWrapper{
-    margin-right: auto;
-    align-self: start;
-  }
-  .groupItem {
-    padding: 15px;
-    font-size: 14px;
-    margin: 15px 0;
-  }
-
-  .inputField,
-  .addButton,
-  .confirmButton,
-  .cancelButton {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .courseFrame {
-    padding: 15px;
-  }
-
-  .courseFrame h1 {
-    font-size: 20px;
-  }
-
-  .groupItem {
-    padding: 10px;
-    font-size: 12px;
-    margin: 10px 0;
-  }
-
-  .inputField,
-  .addButton,
-  .confirmButton,
-  .cancelButton {
-    font-size: 12px;
-    padding: 8px;
   }
 }

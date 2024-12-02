@@ -47,6 +47,8 @@ const App = () => {
         <Route path="/main" element={<Main/>}/>
         {/*<Route path="/LabPage/:disciplineId" element={<ProtectedRoute component={LabWorksPage} role="Студент" />} />*/}
         <Route path="/LabPage/:disciplineId" element={<LabWorksPage/>} />
+        
+        
       </Routes>
     </Router>
   );

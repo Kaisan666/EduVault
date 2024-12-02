@@ -1,210 +1,185 @@
-/* Основной контейнер для групп */
+/* Основной контейнер для страницы студентов */
 .groupsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 20px;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f6f9; /* Светлый фон */
-  min-height: 100vh;
-  box-sizing: border-box;
+  background: #ffffff;
+  padding: 50px 40px;
+  max-width: 1000px;
+  margin: 40px auto;
+  border-radius: 15px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
 }
 
-/* Оформление блока курса */
 .courseFrame {
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 30px;
   text-align: center;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-/* Заголовок блока курса */
-.courseFrame h1 {
-  font-size: 28px;
-  margin: 0;
-  color: #4CAF50; /* Зелёный цвет для заголовков */
-  font-weight: 600;
+h1, h2 {
+  font-size: 24px;
+  color: #00796b;
+  margin-bottom: 15px;
 }
 
-/* Список групп */
 .groupsList {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
-  width: 100%;
-  max-width: 1000px;
+  margin: 0;
 }
 
-/* Элемент группы */
 .groupItem {
-  background-color: #ffffff;
-  padding: 18px 25px;
-  margin: 15px 0;
-  width: 100%;
-  max-width: 1000px;
-  border-radius: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
+  background: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 20px;
 }
 
-.groupItem:hover {
-  transform: translateY(-5px); /* Эффект подъема при наведении */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+.groupItem div {
+  font-size: 16px;
+  color: #00796b;
 }
 
-/* Кнопка удаления */
-.deleteButton {
-  background-color: #dc3545;
+.groupItem div:hover {
+  color: #004d40;
+}
+
+button {
+  padding: 10px 18px;
+  background: #00796b;
   color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.deleteButton:hover {
-  background-color: #c82333;
-  transform: scale(1.05); /* Эффект увеличения при наведении */
+button:hover {
+  background: #004d40;
+  transform: scale(1.05); /* Эффект увеличения */
 }
 
-/* Форма добавления группы */
+button:active {
+  background: #00362d;
+}
+
+/* Форма добавления студента */
 .addGroupForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
   margin-top: 20px;
 }
 
-/* Поле ввода */
 .inputField {
   width: 100%;
-  padding: 12px;
-  margin: 12px 0;
+  padding: 15px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 2px solid #00796b;
   border-radius: 8px;
-  transition: border-color 0.3s ease;
+  margin-bottom: 15px;
+  outline: none;
 }
 
 .inputField:focus {
-  border-color: #4CAF50; /* Зеленая рамка при фокусе */
+  border-color: #004d40;
 }
 
-/* Контейнер кнопок */
+.inputField::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+/* Кнопки в форме добавления студента */
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 20px;
+  gap: 20px;
 }
 
-/* Оформление кнопок */
-.addButton,
-.confirmButton,
-.cancelButton {
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  letter-spacing: 1px;
-}
-
-/* Кнопка добавления группы */
-.addButton {
-  background-color: #38a050;
-  color: white;
-}
-
-.addButton:hover {
-  background-color: #2e7d32;
-  transform: scale(1.05);
-}
-
-/* Кнопка подтверждения */
 .confirmButton {
-  background-color: #28a745;
+  padding: 14px 25px;
+  background: linear-gradient(135deg, #66bb6a, #00796b);
   color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  width: 48%;
+  transition: transform 0.3s ease;
 }
 
 .confirmButton:hover {
-  background-color: #218838;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #00796b, #66bb6a);
+  transform: scale(1.05); /* Эффект увеличения */
 }
 
-/* Кнопка отмены */
+.confirmButton:active {
+  background: linear-gradient(135deg, #004d40, #388e3c);
+}
+
 .cancelButton {
-  background-color: #dc3545;
+  padding: 14px 25px;
+  background-color: #ff8a65;
   color: white;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  width: 48%;
+  transition: transform 0.3s ease;
 }
 
 .cancelButton:hover {
-  background-color: #c82333;
-  transform: scale(1.05);
+  background-color: #f4511e;
+  transform: scale(1.05); /* Эффект увеличения */
 }
 
-/* Медиа-запросы для адаптации */
-
-/* Экран больше 1200px */
-@media (max-width: 1200px) {
-  .groupItem {
-    max-width: 100%;
-  }
-  .courseFrame {
-    padding: 25px;
-  }
+.cancelButton:active {
+  background-color: #d32f2f;
 }
 
-/* Экран 768px и меньше */
-@media (max-width: 768px) {
-  .groupItem {
-    padding: 15px;
-    font-size: 14px;
-    margin: 15px 0;
+/* Кнопка добавления студента */
+.addButton {
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #66bb6a, #00796b);
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 35px;
+  transition: transform 0.3s ease;
+}
+
+.addButton:hover {
+  background: linear-gradient(135deg, #00796b, #66bb6a);
+  transform: scale(1.05); /* Эффект увеличения */
+}
+
+.addButton:active {
+  background: linear-gradient(135deg, #004d40, #388e3c);
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+  .groupsContainer {
+    padding: 20px;
   }
 
-  .inputField,
-  .addButton,
-  .confirmButton,
-  .cancelButton {
+  .inputField {
     font-size: 14px;
-    padding: 10px;
+    padding: 12px;
   }
 
   .buttonContainer {
     flex-direction: column;
-    align-items: center;
   }
-}
 
-/* Экран 480px и меньше */
-@media (max-width: 480px) {
-  .groupItem {
+  .confirmButton, .cancelButton {
+    font-size: 14px;
     padding: 12px;
-    font-size: 12px;
-    margin: 12px 0;
-  }
-
-  .inputField,
-  .addButton,
-  .confirmButton,
-  .cancelButton {
-    font-size: 12px;
-    padding: 8px;
+    width: 100%;
   }
 }
