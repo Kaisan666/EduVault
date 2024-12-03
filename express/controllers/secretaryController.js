@@ -56,6 +56,7 @@ class SecretaryController {
     }
 }
     async showAll(req, res) {
+        console.log({"АЛО" : req.user})
         const {facultyId} = req.params
         try {
             const result = await sequelize.query(`

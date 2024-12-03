@@ -110,8 +110,8 @@ Role.hasMany(User)
 User.belongsTo(Role)
 
 
-Teacher.belongsToMany(Specialty, {through : "teacher_specialty"})
-Specialty.belongsToMany(Teacher, {through : "teacher_specialty"})
+Teacher.belongsToMany(Discipline, {through : "teacher_discipline"})
+Discipline.belongsToMany(Teacher, {through : "teacher_discipline"})
 
 
 Role.belongsToMany(Permission, {through : "role_permission"})
@@ -132,8 +132,8 @@ Specialty.belongsTo(Faculty)
 Course.hasMany(Discipline)
 Discipline.belongsTo(Course)
 
-Discipline.belongsToMany(Laboratory, {through : "discipline_laboratory"})
-Laboratory.belongsToMany(Discipline, {through : "discipline_laboratory"})
+Discipline.hasMany(Laboratory)
+Laboratory.belongsTo(Discipline)
 
 Laboratory.belongsToMany(File, {through : File_laboratory})
 File.belongsToMany(Laboratory, {through : File_laboratory})

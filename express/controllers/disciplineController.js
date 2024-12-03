@@ -1,5 +1,6 @@
 import { QueryTypes } from "sequelize";
 import { sequelize } from "../db.js";
+import { response } from "express";
 
 class DisciplineController {
     async create(req, res) {
@@ -82,6 +83,74 @@ class DisciplineController {
             res.status(500).json({error : error.message})
         }
     }
+    async showDisciplines(req, res) {
+        const { userId: userId, userLogin: userLogin, userRole: userRole } = req.user;
+        console.log(userRole);
+      
+        try {
+          if (userRole === "Студент" || userRole === "Староста") {
+            console.log(123);
+            const studentIdResult = await sequelize.query(
+              `
+              SELECT s.id FROM students s
+              JOIN users u ON s."userId" = u.id
+              WHERE u.id = :userId
+              `,
+              { replacements: {userId : userId } }
+            );
+      
+            // Логирование результата запроса
+            // console.log(studentIdResult);
+      
+            // Извлечение id из результата запроса
+            const studentId = studentIdResult[0][0].id;
+            const studentGroupResult = await sequelize.query(
+                `
+                SELECT g.id
+                FROM groups g
+                JOIN students s ON g.id = s."groupId"
+                WHERE s.id = :studentId
+                `,
+                { replacements: { studentId } }
+              );
+              
+            const groupId = studentGroupResult[0][0].id
+
+            const studentCourseResult = await sequelize.query(
+                `
+                SELECT c.id
+                FROM courses c
+                JOIN groups g ON c.id = g."courseId"
+                WHERE g.id = :groupId
+                `,
+                { replacements: { groupId } }
+              );
+            console.log(studentCourseResult[0])
+            const courseId = studentCourseResult[0][0].id
+
+            const studentDisciplinesResult = await sequelize.query(
+                `
+                SELECT d."id", d."name"
+              FROM disciplines d
+              JOIN courses c ON c.id = d."courseId"
+              WHERE c.id = :courseId
+                `,{ replacements: { courseId } }
+              );
+            console.log(studentDisciplinesResult[0])
+
+            console.log(studentId);
+            return res.status(201).json(studentDisciplinesResult[0])
+          }
+          else if (userRole === "Преподаватель"){
+            
+          }
+        } catch (error) {
+          console.error('Error executing query:', error);
+        }
+      
+        res.json("123");
+      }
+      
 
 
 }

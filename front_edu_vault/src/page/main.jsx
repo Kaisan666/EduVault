@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider, useTheme } from '../components/Context'; 
 import Header from '../components/header';
-import DisciplineList from '../components/main_user';
-import Footer from '../components/footer ';
+import DisciplineList from '../components/DisciplineList';
+import Footer from '../components/footer';
 import styles from '../styles/main.module.css'; 
 //import Switcher from '../components/switcher';
 

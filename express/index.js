@@ -7,6 +7,7 @@ import { router } from "./routes/index.js";
 import cors from "cors";
 import { swaggerUi, specs } from './swagger.js';
 import cookieParser from 'cookie-parser';
+import createAdmin from './createAdminUser.js';
 const PORT = 5000;
 
 const app = express();
@@ -41,6 +42,7 @@ const start = async () => {
 
             )
         }
+        createAdmin()
         app.listen(PORT, () => console.log(`сервер на ${PORT}`));
     } catch (e) {
         console.log(e);

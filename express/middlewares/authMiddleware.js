@@ -1,17 +1,15 @@
 import jwt from 'jsonwebtoken';
 
 export function check(req, res, next){
-    console.log('Headers:', req.headers);
-        console.log('Cookies:', req.cookie);
+    // console.log('Cookies в аус:', req.cookies);
     if (req.method === "OPTIONS"){
         next()
     }
     try {
         // const token = req.headers.authorization.split(" ")[1]
         const token = req.cookies.token
-        console.log('Headers:', req.headers);
-        console.log('Cookies:', req.cookie);
-        console.log(token)
+        // console.log('Cookies:', req.cookies);
+        // console.log(token)
         if (!token){
             res.status(401).json({error : "Пользователь не авторизован"})
         }

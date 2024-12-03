@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Хук для навигации
 import Header from '../components/header';
-import Footer from '../components/footer ';
+import Footer from '../components/footer';
 import PersonalCabinet from '../components/PersonalCabinet';
 import styles from '../styles/LK.module.css';
 

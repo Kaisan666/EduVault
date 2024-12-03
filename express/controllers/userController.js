@@ -3,8 +3,8 @@ import { sequelize } from "../db.js";
 import bcrypt from "bcrypt"
 // const jwt = require("jsonwebtoken")
 import jwt from 'jsonwebtoken';
-const generateJWT = (id, login, roleName) => {
-    return jwt.sign({id, login, roleName},
+const generateJWT = (data) => {
+    return jwt.sign(data,
         process.env.SECRET_KEY,
         {expiresIn : "24h"})
 }
@@ -58,15 +58,43 @@ class UserController {
             `,
             {replacements : {id : user[0][0].id}}
         )
-        const token = generateJWT(user[0][0].id, user[0][0].login, role[0][0].name)
+        if (role[0][0].name === "Студент" || role[0][0].name === "Староста"){
+            const studentIdResult = await sequelize.query(
+                `
+                SELECT s.id FROM students s
+                JOIN users u ON s."userId" = u.id
+                WHERE u.id = :userId
+                `,
+                { replacements: {userId : user[0][0].id } }
+              );
+              const studentId = studentIdResult[0][0].id;
+              console.log("Айди студента", studentId)
+              const studentGroupResult = await sequelize.query(
+                  `
+                  SELECT g.id, g."name"
+                  FROM groups g
+                  JOIN students s ON g.id = s."groupId"
+                  WHERE s.id = :studentId
+                  `,
+                  { replacements: { studentId } }
+                );
+                
+              const groupName = studentGroupResult[0][0].name
+              console.log(groupName)
+              const token = generateJWT({userId : user[0][0].id, userLogin : user[0][0].login, userRole : role[0][0].name, userGroup : groupName})
+              res.cookie('token', token, { httpOnly: true, secure: false});
+              return res.status(201).json({message : "вы успешно вошли"})
+            }
+            else{
+            const token = generateJWT({ userId :user[0][0].id, userLogin : user[0][0].login, userRole : role[0][0].name})
         console.log(token)
         res.cookie('token', token, { httpOnly: true, secure: false});
-        res.send({ error: null});
+        res.send({ error: null});}
     }
     async check(req, res) {
-        console.log(req)
-        const token = generateJWT(req.user.id, req.user.login, req.user.roleId)
-        return res.json({token})
+        // console.log(req.user)
+        // const token = generateJWT(req.user.id, req.user.login, req.user.roleId)
+        return res.json(req.user)
     }
     async showOne(req, res) {
         const {userId} = req.params;

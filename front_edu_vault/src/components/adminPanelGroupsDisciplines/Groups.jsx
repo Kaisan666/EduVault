@@ -21,7 +21,9 @@ const Groups = () => {
 
   const fetchCourseDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/course/${courseId}`);
+      const response = await axios.get(`http://localhost:5000/api/course/${courseId}`,
+        {withCredentials : true}
+      );
       const data = response.data;
       setCourseDetails(data.number);
     } catch (error) {
@@ -31,7 +33,9 @@ const Groups = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/group/show-all/${courseId}`);
+      const response = await axios.get(`http://localhost:5000/api/group/show-all/${courseId}`, {
+        withCredentials : true
+      });
       const data = response.data;
       setGroups(data);
     } catch (error) {

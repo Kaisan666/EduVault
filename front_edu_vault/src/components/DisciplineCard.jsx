@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link for routing to lab detai
 import styles from '../styles/DisciplineCard.module.css'; // Your CSS module file
 import icon from '../images/icon.png'; // Your file icon image
 
-const DisciplineCard = () => {
+const DisciplineCard = ({title, id}) => {
   const [disciplineData, setDisciplineData] = useState(null);
   const [newLabName, setNewLabName] = useState('');
   const [editingLabIndex, setEditingLabIndex] = useState(null);
@@ -104,7 +104,7 @@ const DisciplineCard = () => {
     <div className={styles.card}>
       <div className={styles.header}>
         <div className={styles.greenSquare}>
-          <span className={styles.disciplineName}>{disciplineData.name}</span>
+          <span className={styles.disciplineName}>{title}</span>
           <span className={styles.disciplineId}>ID: {disciplineData.id}</span>
         </div>
       </div>
@@ -165,7 +165,7 @@ const DisciplineCard = () => {
                 <span>{lab.name}</span>
                 <Link to={`/lab/${disciplineData.id}`}>
                   <img src={icon} alt="file icon" className={styles.fileIcon} />
-                </Link>
+                </Link>                               
                 {/* Edit and Delete buttons for authorized roles */}
                 {(userRole === 'starosta' || userRole === 'professor' || userRole === 'secretary') && (
                   <div className={styles.labActions}>

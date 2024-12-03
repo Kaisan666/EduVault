@@ -20,7 +20,9 @@ const Courses = () => {
 
   const fetchFacultyDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/specialty/show-one/${specialtyId}`);
+      const response = await axios.get(`http://localhost:5000/api/specialty/show-one/${specialtyId}`,
+        {withCredentials : true}
+      );
       console.log(specialtyId);
       const data = response.data;
       console.log(data);
@@ -32,7 +34,9 @@ const Courses = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/course/all-courses/${specialtyId}`);
+      const response = await axios.get(`http://localhost:5000/api/course/all-courses/${specialtyId}`,{
+        withCredentials : true
+      });
       const data = response.data;
       setCourses(data);
     } catch (error) {
@@ -45,7 +49,7 @@ const Courses = () => {
       try {
         const response = await axios.post(`http://localhost:5000/api/course/create-course/${specialtyId}`, {
           number: newCourse
-        });
+        }, {withCredentials : true});
         const data = response.data[0];
         console.log(response.data[0]);
         const newCourseData = data;

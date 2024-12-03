@@ -42,6 +42,7 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
         );
         if (response.status === 200) {
           setDirections(response.data);
+          console.log(directions)
         } else {
           console.error('Ошибка при загрузке направлений');
         }
@@ -102,7 +103,7 @@ function FacultyDetails({ addSecretary, setAddSecretary, hideRegister }) {
 
   const handleEditDirection = async (directionId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/specialty/update-specialty/${directionId}`, { name: editedDirectionName });
+      const response = await axios.put(`http://localhost:5000/api/specialty/update/${directionId}`, { name: editedDirectionName }, {withCredentials : true});
       if (response.status === 200 || response.status === 201) {
         setDirections((prevDirections) =>
           prevDirections.map((direction) =>

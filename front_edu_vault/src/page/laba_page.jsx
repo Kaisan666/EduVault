@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для получения параметров из URL и useNavigate для навигации
 import Header from '../components/header';
 import LabWorkCard from '../components/laba';
-import Footer from '../components/footer ';
+import Footer from '../components/footer';
 
 const LabPage = () => {
+  
   const { disciplineId } = useParams(); // Получаем параметр disciplineId из URL
   const [labWorks, setLabWorks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);  // Состояние для загрузки
@@ -42,9 +43,9 @@ const LabPage = () => {
     }, 1000); // Подождем 1 секунду, чтобы симулировать задержку загрузки
 
   }, [disciplineId]); // Если disciplineId изменится, перезапустится запрос
-
+  
   const handleBackClick = () => {
-    navigate(-1); // Переходит на предыдущую страницу
+    navigate(-1); 
   };
 
   if (isLoading) {
@@ -96,5 +97,5 @@ const LabPage = () => {
     </div>
   );
 };
-
+  
 export default LabPage;

@@ -11,7 +11,7 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
     firstName : "",
     lastName : "",
     middleName : "",
-    roleId : 3,
+    roleId : 1,
     password : "",
     login : "",
     facultyId : facultyId
@@ -22,7 +22,7 @@ const SecretaryRegistration = ({addSecretary, hideAddSecretary, create}) => {
       firstName : "",
     lastName : "",
     middleName : "",
-    roleId : 3,
+    roleId : 1,
     password : "",
     login : "",
     facultyId : facultyId

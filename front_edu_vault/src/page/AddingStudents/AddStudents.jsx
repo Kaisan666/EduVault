@@ -11,7 +11,7 @@ export default function AddStudent() {
     firstName: "",
     lastName: "",
     middleName: "",
-    roleId: 1,
+    roleId: 2,
     login: "",
     password: "",
     groupId : groupId
@@ -25,7 +25,7 @@ export default function AddStudent() {
 
   const fetchGroup = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/group/${groupId}`);
+      const response = await axios.get(`http://localhost:5000/api/group/${groupId}`,{withCredentials : true});
       const data = response.data;
       setGroup(data.name);
     } catch (error) {
@@ -35,7 +35,7 @@ export default function AddStudent() {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/student/all-students/${groupId}`);
+      const response = await axios.get(`http://localhost:5000/api/student/all-students/${groupId}`, {withCredentials : true});
       const data = response.data;
       console.log(data);
       setStudents(data);
@@ -48,7 +48,7 @@ export default function AddStudent() {
      {
       try {
         console.log(newStudent)
-        const response = await axios.post(`http://localhost:5000/api/student/create-student/${groupId}`, newStudent);
+        const response = await axios.post(`http://localhost:5000/api/student/create-student/${groupId}`, newStudent, {withCredentials : true});
         console.log(response.data)
         const newStudentData = response.data[0]; // Полный объект группы
         console.log(newStudentData);
@@ -57,7 +57,7 @@ export default function AddStudent() {
           firstName: "",
           lastName: "",
           middleName: "",
-          roleId: 1,
+          roleId: 2,
           login: "",
           password: "",
           groupId : groupId
@@ -70,7 +70,7 @@ export default function AddStudent() {
   };
 
   const deleteStudent = (userId) =>{
-    axios.delete(`http://localhost:5000/api/student/delete/${userId}`)
+    axios.delete(`http://localhost:5000/api/student/delete/${userId}`, {withCredentials : true})
     setStudents(students.filter(student => student.id !== userId));
   }
 
@@ -80,7 +80,7 @@ export default function AddStudent() {
       firstName: "",
       lastName: "",
       middleName: "",
-      roleId: 1,
+      roleId: 2,
       login: "",
       password: "",
       groupId : groupId
@@ -102,7 +102,7 @@ export default function AddStudent() {
               <div>Отчество: {student.middleName}</div>
               <div>Логин: {student.login}</div>
               <div>Пароль: {student.password}</div>
-              <div>{student.roleId === 1 ? "Студент" : "Староста"}</div>
+              <div>{student.roleId === 2 ? "Студент" : "Староста"}</div>
             </div>
             <button onClick={() => deleteStudent(student.id)} className={styles.deleteButton}>
               Удалить
@@ -149,8 +149,8 @@ export default function AddStudent() {
           />
           <input
             type="checkbox"
-            checked={newStudent.roleId === 2}
-            onChange={(e) => setNewStudent(prev => ({ ...prev, roleId: e.target.checked ? 2 : 1 }))}
+            checked={newStudent.roleId === 3}
+            onChange={(e) => setNewStudent(prev => ({ ...prev, roleId: e.target.checked ? 2 : 3 }))}
             className={styles.inputField}
           /> Староста
           <div className={styles.buttonContainer}>

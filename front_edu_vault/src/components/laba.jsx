@@ -40,7 +40,7 @@ const LabWorkCard = ({ labId, labTitle, pdfUrl, description, deadline, reportUrl
       </div>
       {reportUrl && (
         <div className="report">
-          <a href={reportUrl} target="_blank" rel="noopener noreferrer">Обратный отчет</a>
+          <a href={reportUrl} target="_blank" rel="noopener noreferrer">Обратный отсчет</a>
         </div>
       )}
     </div>

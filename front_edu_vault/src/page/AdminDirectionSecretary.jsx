@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FacultyBanner from '../components/FacultyBanner';
 
-import Footer from '../components/footer ';
+import Footer from '../components/footer';
 //import Header from '../components/header';
 import FacultyDetails from '../components/facultyDetails';
 

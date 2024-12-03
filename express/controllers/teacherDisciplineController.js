@@ -10,18 +10,18 @@ const generateJWT = (id, login, roleId) => {
 }
 class TeacherSpecialtyController {
     async create(req, res) {
-        const { specialtyId } = req.params;
-        const { teacherId } = req.body;
+        const {teacherId} = req.user
+        const { disciplineId } = req.params;
     
         try {
             // Проверка наличия обязательных полей
-            if (!teacherId || !specialtyId) {
+            if (!teacherId || !disciplineId) {
                 return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
             }
     
             const insertion = await sequelize.query(
-                `INSERT INTO teacher_specialty ("teacherId", "specialtyId", "createdAt", "updatedAt") VALUES (:teacherId, :specialtyId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
-                { replacements: { teacherId, specialtyId } }
+                `INSERT INTO teacher_discipline ("teacherId", "disciplineId", "createdAt", "updatedAt") VALUES (:teacherId, :disciplineId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+                { replacements: { teacherId, disciplineId } }
             );
     
             console.log(insertion);
@@ -37,7 +37,7 @@ class TeacherSpecialtyController {
         try {
             // Получение идентификаторов преподавателей, связанных с факультетом
             const teachersIdResult = await sequelize.query(
-                `SELECT "teacherId" FROM teacher_specialty WHERE "specialty" = :specialty`,
+                `SELECT "teacherId" FROM teacher_discipline WHERE "specialty" = :discipline`,
                 { replacements: { specialtyId } }
             );
     
@@ -73,7 +73,7 @@ class TeacherSpecialtyController {
             const result = await sequelize.query(
                 `UPDATE teacher_faculty AS tf
                  SET "teacherId" = :teacherId, "updatedAt" = :updatedAt
-                 WHERE "specialtyId" = :specialtyId
+                 WHERE "disciplineId" = :disciplineId
                  RETURNING *;`,
                 { replacements: { teacherId, updatedAt, specialtyId } }
             );

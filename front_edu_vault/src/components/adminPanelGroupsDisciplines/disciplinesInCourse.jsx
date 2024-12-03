@@ -12,7 +12,9 @@ export default function DisciplinesInCourse() {
 
   const fetchDisciplines = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/discipline/show-all/${courseId}`);
+      const response = await axios.get(`http://localhost:5000/api/discipline/show-all/${courseId}`, {
+        withCredentials : true
+      });
       const data = response.data;
       setDisciplines(data);
     } catch (error) {
@@ -34,7 +36,7 @@ export default function DisciplinesInCourse() {
       try {
         const response = await axios.post(`http://localhost:5000/api/discipline/create-discipline/${courseId}`, {
           name: newDiscipline
-        });
+        }, {withCredentials : true});
         const newDisciplineData = response.data[0]; // Полный объект дисциплины
         console.log(newDisciplineData);
         setDisciplines([...disciplines, newDisciplineData]); // Добавляем весь объект дисциплины
@@ -47,7 +49,9 @@ export default function DisciplinesInCourse() {
   };
   const handleDeleteGroup = async (disciplineId) => {  
     try {
-        await axios.delete(`http://localhost:5000/api/discipline/delete/${disciplineId}`)
+        await axios.delete(`http://localhost:5000/api/discipline/delete/${disciplineId}`, {
+          withCredentials : true
+        })
       setDisciplines(disciplines.filter(discipline => discipline.id !== disciplineId));
     } catch (error) {
       console.error('Ошибка при удалении группы:', error);

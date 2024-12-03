@@ -9,10 +9,13 @@ import { secretaryRouter } from "./secretary.js";
 import { disciplineRouter } from "./discipline.js";
 import { checkrole } from "../middlewares/checkRoleMiddleware.js";
 import teacherRouter from "./teacher.js";
-import teacherSpecialtyRouter from "./specialtyTeacher.js";
+import teacherSpecialtyRouter from "./disciplineTeacher.js";
 import { check } from "../middlewares/authMiddleware.js";
+import { laboratoryRouter } from "./laboraty.js";
 const router = Router();
 
+
+router.use("/laboratory",check,  laboratoryRouter)
 router.use("/teacher",check,  teacherRouter)
 router.use("/teacher_faculty",check,  teacherSpecialtyRouter)
 
