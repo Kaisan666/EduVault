@@ -105,7 +105,7 @@ const DisciplineCard = ({title, id}) => {
       <div className={styles.header}>
         <div className={styles.greenSquare}>
           <span className={styles.disciplineName}>{title}</span>
-          <span className={styles.disciplineId}>ID: {disciplineData.id}</span>
+          {/* <span className={styles.disciplineId}>ID: {id}</span> */}
         </div>
       </div>
 
@@ -163,7 +163,7 @@ const DisciplineCard = ({title, id}) => {
             ) : (
               <>
                 <span>{lab.name}</span>
-                <Link to={`/lab/${disciplineData.id}`}>
+                <Link to={`/lab/${id}`}>
                   <img src={icon} alt="file icon" className={styles.fileIcon} />
                 </Link>                               
                 {/* Edit and Delete buttons for authorized roles */}

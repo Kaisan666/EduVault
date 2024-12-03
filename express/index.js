@@ -8,6 +8,8 @@ import cors from "cors";
 import { swaggerUi, specs } from './swagger.js';
 import cookieParser from 'cookie-parser';
 import createAdmin from './createAdminUser.js';
+import upload from './multerConfig.js'; // Импортируем из нового файла
+
 const PORT = 5000;
 
 const app = express();
@@ -17,10 +19,11 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
+
 app.use("/api", router);
 
-// Настройка Swagger
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 const start = async () => {
     try {
         await sequelize.authenticate();

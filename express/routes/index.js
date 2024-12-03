@@ -12,9 +12,11 @@ import teacherRouter from "./teacher.js";
 import teacherSpecialtyRouter from "./disciplineTeacher.js";
 import { check } from "../middlewares/authMiddleware.js";
 import { laboratoryRouter } from "./laboraty.js";
+import { labFileRouter } from "./labFile.js";
+
 const router = Router();
 
-
+router.use("/file", labFileRouter)
 router.use("/laboratory",check,  laboratoryRouter)
 router.use("/teacher",check,  teacherRouter)
 router.use("/teacher_faculty",check,  teacherSpecialtyRouter)
