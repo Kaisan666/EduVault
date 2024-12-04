@@ -10,6 +10,23 @@ const LabWorksPage = () => {
   const [labName, setLabName] = useState("");
   const [labs, setLabs] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  async function fetchUserInfo() {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/user/auth`, { withCredentials: true });
+      setUserData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  }
+
+  useEffect(() => {
+    if (!userData) {
+      fetchUserInfo();
+    }
+  }, [userData]);
 
   const handleBackClick = () => {
     window.history.back(); // Возвращает на предыдущую страницу
@@ -27,6 +44,7 @@ const LabWorksPage = () => {
     if (labName.trim()) {
       try {
         const response = await axios.post(`http://localhost:5000/api/laboratory/create-laboratory/${disciplineId}`, { name: labName }, { withCredentials: true });
+        console.log(response.data)
         setLabs([...labs, response.data]);
         setLabName("");
         setIsAdding(false);
@@ -39,7 +57,7 @@ const LabWorksPage = () => {
   const handleAddClick = () => {
     setIsAdding(true);
   };
-
+console.log(labs)
   return (
     <div className="app">
       <Header />
@@ -75,7 +93,7 @@ const LabWorksPage = () => {
           {/* Проходим по массиву labs и отображаем компоненты DisciplineCard */}
           {labs.length > 0 ? (
             labs.map((lab) => (
-              <DisciplineCard key={lab.id} title={lab.name} id = {lab.id}/>
+              <DisciplineCard userData={userData} key={lab.id} title={lab.name} id = {lab.id}/>
             ))
           ) : (
             <p>Нет доступных лабораторных работ</p>

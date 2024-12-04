@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing to lab detail page
-import styles from '../styles/DisciplineCard.module.css'; // Your CSS module file
-import icon from '../images/icon.png'; // Your file icon image
+import { Link } from 'react-router-dom';
+import styles from '../styles/DisciplineCard.module.css';
+import icon from '../images/icon.png';
+import axios from 'axios';
 
-const DisciplineCard = ({title, id}) => {
+
+
+const DisciplineCard = ({ title, id, userData }) => {
+  const supportedFileTypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain']; // MIME-типы
+  const supportedExtensions = ['.xlsx', '.xls', '.pdf', '.docx', '.txt'];
   const [disciplineData, setDisciplineData] = useState(null);
   const [newLabName, setNewLabName] = useState('');
   const [editingLabIndex, setEditingLabIndex] = useState(null);
   const [editedLabName, setEditedLabName] = useState('');
-  const [file, setFile] = useState(null); // For the selected file
-  const [isUploading, setIsUploading] = useState(false); // Track upload progress
-  const [uploadMessage, setUploadMessage] = useState(''); // Upload progress message
+  const [fileList, setFileList] = useState([]);
+  const [file, setFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadMessage, setUploadMessage] = useState('');
 
-  // Simulating user role, in a real app, you should get this from authentication context
-  const userRole = 'starosta'; // Example user role (could be 'starosta', 'professor', or 'secretary')
+  // Fetch files from the server
+  async function fetchFiles() {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/file/show-all/${id}`);
+      const files = response.data; // Сервер возвращает объект
+      console.log("ГОВНО", response.data)
+      if (Array.isArray(files)) {
+        setFileList(files); // Если это массив, установим его напрямую
+      } else if (response.data.length === 0){
+        setFileList(null)
+      }
+      else {
+        setFileList([files]); // Если объект, оборачиваем в массив
+      }
+      console.log("Хуй", fileList)
+    } catch (error) {
+      console.error('Error fetching files:', error);
+      setFileList([]); // Очистим список файлов при ошибке
+    }
+  }
+  
 
   // Simulated lab data loading (replace with actual data fetching in real app)
   useEffect(() => {
-    const data = {
-      id: 1,
-      name: 'Программирование на Python',
-      labs: [
-        { name: 'Лабораторная работа 1' },
-        { name: 'Лабораторная работа 2' }
-      ]
-    };
-    setDisciplineData(data);
+    fetchFiles();
   }, []);
 
   // Add a new lab
@@ -77,116 +94,129 @@ const DisciplineCard = ({title, id}) => {
     }
   };
 
-  // Handle file upload
-  const handleFileUpload = () => {
+  // Handle form submission for file upload
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+  
     if (!file) {
       setUploadMessage('Пожалуйста, выберите файл для загрузки.');
       return;
     }
-
+  
+    if (!supportedFileTypes.includes(file.type)) {
+      setUploadMessage('Файл неподдерживаемого формата. Допустимы: Excel, PDF, Word, TXT.');
+      return;
+    }
+  
+    if (!newLabName.trim()) {
+      setUploadMessage('Введите название файла.');
+      return;
+    }
+  
+    // Получаем расширение файла
+    const fileExtension = supportedExtensions.find((ext) =>
+      file.name.toLowerCase().endsWith(ext)
+    );
+  
+    if (!fileExtension) {
+      setUploadMessage('Файл должен быть в формате Excel, PDF, Word или TXT.');
+      return;
+    }
+  
+    // Добавляем расширение к названию файла
+    const newFileName = newLabName.trim() + fileExtension;
+  
     setIsUploading(true);
     setUploadMessage('Загружаем файл...');
-
-    // Simulate file upload process (replace with actual file upload logic)
-    setTimeout(() => {
+  
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('newFileName', newFileName);
+  
+    try {
+      const response = await axios.post(`http://localhost:5000/api/file/upload-file/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      if (response.status === 200) {
+        setUploadMessage('Файл успешно загружен!');
+        setFile(null);
+        setNewLabName('');
+        fetchFiles(); // Обновляем список файлов после успешной загрузки
+      } else {
+        setUploadMessage('Ошибка при загрузке файла.');
+      }
+    } catch (error) {
+      setUploadMessage('Ошибка при загрузке файла.');
+    } finally {
       setIsUploading(false);
-      setUploadMessage('Файл успешно загружен!');
-      setFile(null); // Clear selected file after upload
-    }, 2000);
+    }
   };
 
   // Loading state before the data is available
-  if (!disciplineData) {
-    return <div>Загрузка...</div>;
-  }
+  // if (!disciplineData) {
+  //   return <div>Загрузка...</div>;
+  // }
 
   return (
     <div className={styles.card}>
       <div className={styles.header}>
         <div className={styles.greenSquare}>
           <span className={styles.disciplineName}>{title}</span>
-          {/* <span className={styles.disciplineId}>ID: {id}</span> */}
         </div>
       </div>
-
-      {/* Add lab section visible for roles starosta, professor, and secretary */}
-      {(userRole === 'starosta' || userRole === 'professor' || userRole === 'secretary') && (
-        <div className={styles.addLabForm}>
-        </div>
+      {(userData.userRole === 'Староста' || userData.userRole === 'Преподаватель' || userData.userRole === 'Секретарь' || userData.userRole === 'Админ') && (
+        <form className={styles.uploadForm} onSubmit={handleFormSubmit}>
+        <h3>Загрузить файл</h3>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept=".xlsx,.xls,.pdf,.docx,.txt" // Ограничение на уровне браузера
+          disabled={isUploading}
+        />
+        <input
+          type="text"
+          value={newLabName}
+          onChange={(e) => setNewLabName(e.target.value)}
+          placeholder="Введите название файла (без расширения)"
+          className={styles.inputField}
+        />
+        <button
+          type="submit"
+          disabled={isUploading || !file}
+          className={styles.button}
+        >
+          {isUploading ? 'Загрузка...' : 'Загрузить файл'}
+        </button>
+        {uploadMessage && <p>{uploadMessage}</p>}
+      </form>
       )}
 
-      {/* File upload form visible for roles starosta, professor, and secretary */}
-      {(userRole === 'starosta' || userRole === 'professor' || userRole === 'secretary') && (
-        <div className={styles.uploadForm}>
-          <h3>Загрузить лабораторную работу</h3>
-          <input 
-            type="file" 
-            onChange={handleFileChange} 
-            disabled={isUploading} 
-          />
-          <button 
-            onClick={handleFileUpload} 
-            disabled={isUploading || !file}
-            className={styles.button}
-          >
-            {isUploading ? 'Загрузка...' : 'Загрузить файл'}
-          </button>
-          {uploadMessage && <p>{uploadMessage}</p>}
-        </div>
-      )}
-
-      {/* List of labs */}
       <ul className={styles.labList}>
-        {disciplineData.labs.map((lab, index) => (
-          <li key={index} className={styles.labItem}>
-            {editingLabIndex === index ? (
-              <div className={styles.editForm}>
-                <input 
-                  type="text" 
-                  value={editedLabName} 
-                  onChange={(e) => setEditedLabName(e.target.value)} 
-                  className={styles.inputField}
-                />
-                <button 
-                  onClick={handleSaveEdit} 
-                  className={styles.button}
-                >
-                  Сохранить
-                </button>
-                <button 
-                  onClick={() => setEditingLabIndex(null)} 
-                  className={styles.button}
-                >
-                  Отменить
-                </button>
-              </div>
-            ) : (
-              <>
-                <span>{lab.name}</span>
-                <Link to={`/lab/${id}`}>
-                  <img src={icon} alt="file icon" className={styles.fileIcon} />
-                </Link>                               
-                {/* Edit and Delete buttons for authorized roles */}
-                {(userRole === 'starosta' || userRole === 'professor' || userRole === 'secretary') && (
-                  <div className={styles.labActions}>
-                    <button 
-                      onClick={() => handleEditLab(index)} 
-                      className={styles.button}
-                    >
-                      Редактировать
-                    </button>
-                    <button 
-                      onClick={() => handleDeleteLab(index)} 
-                      className={styles.button}
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </li>
-        ))}
+        {fileList && fileList.length > 0 ? (
+          fileList.map(file => (
+            <li key={`${file.id}-${file.name}`} className={styles.labItem}>
+              <span>{file.name}</span>
+              <Link to={`/lab/${file.id}`}>
+                <img src={icon} alt="file icon" className={styles.fileIcon} />
+              </Link>
+              {(userData.userRole === 'Староста' || userData.userRole === 'Преподаватель' || userData.userRole === 'Секретарь' || userData.userRole === 'Админ') && (
+                <div className={styles.labActions}>
+                  <button onClick={() => handleEditLab(file.id)} className={styles.button}>
+                    Редактировать
+                  </button>
+                  <button onClick={() => handleDeleteLab(file.id)} className={styles.button}>
+                    Удалить
+                  </button>
+                </div>
+              )}
+            </li>
+          ))
+        ) : (
+          <li className={styles.labItem}>Файлы отсутствуют</li>
+        )}
       </ul>
     </div>
   );

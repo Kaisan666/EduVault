@@ -135,8 +135,10 @@ Discipline.belongsTo(Course)
 Discipline.hasMany(Laboratory)
 Laboratory.belongsTo(Discipline)
 
-Laboratory.belongsToMany(File, {through : File_laboratory})
-File.belongsToMany(Laboratory, {through : File_laboratory})
+// Laboratory.belongsToMany(File, {through : File_laboratory})
+// Laboratory.belongsToMany(File, {through : File_laboratory})
+Laboratory.hasMany(File)
+File.belongsTo(Laboratory)
 
 export const models = {
     User,

@@ -14,7 +14,7 @@ class LaboratoryController {
                 `INSERT INTO laboratories ("name", "disciplineId", "createdAt", "updatedAt") 
                  VALUES (:name, :id, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`, // Прямо указываем CURRENT_TIMESTAMP
                 {replacements: {id : disciplineId, name: name,}});
-                return res.status(201).json(addLab[0])
+                return res.status(201).json(addLab[0][0])
         } catch(e){
             res.status(500).json({error : e.message})
         }

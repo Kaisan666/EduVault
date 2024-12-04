@@ -1,58 +1,106 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Импортируем useParams для получения параметров из URL и useNavigate для навигации
-import Header from '../components/header';
-import LabWorkCard from '../components/laba';
-import Footer from '../components/footer';
+import { useParams, useNavigate } from 'react-router-dom'; // Для работы с параметрами маршрута и навигацией
+import axios from 'axios'; // Для HTTP-запросов
+
+import Header from '../components/header'; // Компонент заголовка
+import Footer from '../components/footer'; // Компонент подвала
+
+import { renderAsync } from 'docx-preview';
+import * as XLSX from 'xlsx';
 
 const LabPage = () => {
-  
-  const { disciplineId } = useParams(); // Получаем параметр disciplineId из URL
-  const [labWorks, setLabWorks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);  // Состояние для загрузки
-  const [error, setError] = useState(null);  // Состояние для ошибок
-  const navigate = useNavigate(); // Хук для навигации назад
+  const { fileId } = useParams(); // Получаем параметр fileId из URL
+  const [fileData, setFileData] = useState(null); // Данные файла
+  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
+  const [error, setError] = useState(null); // Состояние ошибок
+  const navigate = useNavigate(); // Хук для навигации
+
+  // Функция загрузки файла
+  const fetchFile = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get(`http://localhost:5000/api/file/show-one/${fileId}`);
+      setFileData(response.data);
+    } catch (err) {
+      setError('Ошибка при загрузке файла.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const downloadFile = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/file/download-file/${fileId}`, {
+        responseType: 'blob' // Убедитесь, что данные возвращаются в виде blob
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', fileData.name); // Устанавливаем имя файла для скачивания
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (err) {
+      setError('Ошибка при скачивании файла.');
+    }
+  };
 
   useEffect(() => {
-    setIsLoading(true);
-    setError(null);
+    fetchFile();
+  }, [fileId]); // Перезагрузка при изменении fileId
 
-    // Заменяем реальный запрос на фейковые данные
-    const fakeData = [
-      {
-        id: 1,
-        labTitle: 'Лабораторная работа 1',
-        pdfUrl: 'https://example.com/lab1.pdf',
-        description: 'Описание лабораторной работы 1',
-        deadline: '2024-12-31T23:59:59Z',
-        reportUrl: 'https://example.com/report1.pdf',
-      },
-      {
-        id: 2,
-        labTitle: 'Лабораторная работа 2',
-        pdfUrl: 'https://example.com/lab2.pdf',
-        description: 'Описание лабораторной работы 2',
-        deadline: '2024-12-15T23:59:59Z',
-        reportUrl: 'https://example.com/report2.pdf',
-      },
-    ];
+  // Функция для отображения превью файла
+  const renderFilePreview = () => {
+    if (!fileData) return <p>Файл отсутствует.</p>;
 
-    // Имитация загрузки данных с сервера
-    setTimeout(() => {
-      setLabWorks(fakeData);
-      setIsLoading(false);
-    }, 1000); // Подождем 1 секунду, чтобы симулировать задержку загрузки
+    const { name, data } = fileData;
+    const mimeType = getMimeType(name);
 
-  }, [disciplineId]); // Если disciplineId изменится, перезапустится запрос
-  
+    if (mimeType === 'application/pdf') {
+      return (
+        <iframe
+          src={`data:application/pdf;base64,${btoa(
+            new Uint8Array(data.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+          )}`}
+          width="100%"
+          height="600px"
+          title="PDF Preview"
+        />
+      );
+    } else if (mimeType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+      const container = document.getElementById('docx-container');
+      renderAsync(new Blob([new Uint8Array(data.data)]), container);
+      return <div id="docx-container" />;
+    } else if (mimeType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+      const workbook = XLSX.read(new Uint8Array(data.data), { type: 'array' });
+      const sheetName = workbook.SheetNames[0];
+      const sheet = XLSX.utils.sheet_to_html(workbook.Sheets[sheetName]);
+      return <div dangerouslySetInnerHTML={{ __html: sheet }} />;
+    } else if (mimeType === 'text/plain') {
+      return <pre>{new TextDecoder().decode(new Uint8Array(data.data))}</pre>;
+    } else {
+      return <p>Формат файла не поддерживается для предпросмотра.</p>;
+    }
+  };
+
+  // Определение MIME-типа файла
+  const getMimeType = (fileName) => {
+    if (fileName.endsWith('.pdf')) return 'application/pdf';
+    if (fileName.endsWith('.docx')) return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if (fileName.endsWith('.xlsx')) return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    if (fileName.endsWith('.txt')) return 'text/plain';
+    return 'unknown';
+  };
+
   const handleBackClick = () => {
-    navigate(-1); 
+    navigate(-1); // Возврат на предыдущую страницу
   };
 
   if (isLoading) {
     return (
       <div>
         <Header />
-        <p>Загружаем лабораторные работы...</p>
+        <p>Загрузка файла...</p>
         <Footer />
       </div>
     );
@@ -62,7 +110,7 @@ const LabPage = () => {
     return (
       <div>
         <Header />
-        <p style={{ color: 'red' }}>Ошибка загрузки: {error}</p>
+        <p style={{ color: 'red' }}>{error}</p>
         <Footer />
       </div>
     );
@@ -71,31 +119,17 @@ const LabPage = () => {
   return (
     <div>
       <Header />
-      <div className="labwork-container">
-        {/* Стрелка назад */}
+      <div className="file-preview-container">
         <button onClick={handleBackClick} className="back-button">
           ← Назад
         </button>
-
-        {labWorks.length > 0 ? (
-          labWorks.map((lab) => (
-            <LabWorkCard
-              key={lab.id}
-              labId={lab.id}
-              labTitle={lab.labTitle}
-              pdfUrl={lab.pdfUrl}
-              description={lab.description}
-              deadline={lab.deadline}
-              reportUrl={lab.reportUrl}
-            />
-          ))
-        ) : (
-          <p>Лабораторные работы не найдены для данной дисциплины.</p>
-        )}
+        <button onClick={downloadFile}>Скачать</button>
+        <h2>Предпросмотр файла</h2>
+        {renderFilePreview()}
       </div>
       <Footer />
     </div>
   );
 };
-  
+
 export default LabPage;

@@ -37,7 +37,7 @@ const App = () => {
         <Route path="/PersonalCabinet" element={<LK/>}/>
         <Route path="/main" element={<Main/>}/>
         <Route path="/LabsPage/:disciplineId" element={<LabWorksPage/>} />
-        <Route path="/lab/:disciplineId" element={<LabPage/>}/>
+        <Route path="/lab/:fileId" element={<LabPage/>}/>
         
         
       </Routes>
