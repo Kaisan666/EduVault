@@ -78,7 +78,7 @@ class UserController {
     
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name, userGroup: groupName });
                 res.cookie('token', token, { httpOnly: true, secure: false });
-                return res.status(201).json({ message: "вы успешно вошли" });
+                return res.status(201).json({ message: "вы успешно вошли" ,  userRole: role[0][0].name});
             } 
             else {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
