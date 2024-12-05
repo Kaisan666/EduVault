@@ -25,9 +25,10 @@ export const AuthProvider = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = async (username, password) => {
+  const login = async (login, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/user/login', { username, password }, { withCredentials: true });
+      const response = await axios.post('http://localhost:5000/api/user/login', { login, password }, { withCredentials: true });
+      console.log(response.data)
       setIsAuthenticated(true);
       setUserRole(response.data.userRole); // Используем данные, возвращаемые сервером
     } catch (error) {

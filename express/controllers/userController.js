@@ -79,11 +79,12 @@ class UserController {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name, userGroup: groupName });
                 res.cookie('token', token, { httpOnly: true, secure: false });
                 return res.status(201).json({ message: "вы успешно вошли" });
-            } else {
+            } 
+            else {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
                 console.log(token);
                 res.cookie('token', token, { httpOnly: true, secure: false });
-                res.json({ userRole: user.role }); // Возвращаем роль пользователя
+                return res.status(201).json({ userRole: role[0][0].name }); // Возвращаем роль пользователя
             }
         } catch (error) {
             console.error("Ошибка при выполнении запроса:", error);

@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/authContext';
 import { useNavigate } from 'react-router-dom';
+import styles from "../styles/entrance.module.css"
 
 const Entrance = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, userRole} = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,7 +19,16 @@ const Entrance = () => {
   };
 
   if (isAuthenticated) {
-    navigate('/main'); // Перенаправление на главную страницу, если пользователь уже аутентифицирован
+    console.log(userRole)
+    if (userRole === "Студент" || userRole === "Староста" || userRole === "Преподаватель"){
+      navigate('/main')
+    }
+    else if (userRole === 'Админ'){
+      navigate('/adminDashboard')
+    }
+    else if (userRole === "Секретарь") {
+      navigate('/specialties/1')
+    }
   }
 
   return (
