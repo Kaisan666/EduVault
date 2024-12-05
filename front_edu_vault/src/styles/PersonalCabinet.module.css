@@ -1,43 +1,56 @@
+/* PersonalCabinet.module.css */
+
+/* Контейнер компонента */
 .container {
   display: flex;
-  justify-content: flex-start; /* Сдвигаем все влево */
+  justify-content: center;
   align-items: center;
-  min-height: 60vh;
-  padding: 10px;
-  background-color: #ffffff; /* Светлый фон для контраста */
-}
-
-.infoContainer {
-  background-color: #ffffff; /* Белый фон для блока информации */
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
-  width: 400px;
-  margin-left: 20px; /* Отступ слева */
-  transition: transform 0.3s ease; /* Плавный эффект при наведении */
+  background-color: #f4f8f6; /* Светлый фон для контраста */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.infoContainer:hover {
-  transform: translateY(-5px); /* Подъем блока при наведении */
+/* Контейнер с информацией */
+.infoContainer {
+  background-color: #ffffff; /* Белый фон для контента */
+  border-radius: 15px;
+  padding: 25px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-left: 5px solid #034329; /* Изумрудная линия слева */
 }
 
-h2 {
-  font-size: 2rem;
-  color: #388e3c; /* Темно-зеленый цвет */
+/* Заголовок */
+.infoContainer h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #388e7b; /* Изумрудный цвет */
   margin-bottom: 20px;
 }
 
-p {
-  font-size: 1.2rem;
-  color: #4caf50; /* Зеленый цвет */
+/* Параграфы */
+.infoContainer p {
+  font-size: 18px;
+  color: #555555;
+  margin: 10px 0;
 }
 
-strong {
-  color: #2e7d32; /* Более темный зеленый цвет для выделения */
+/* Сильные элементы (судя по стилю, это акцентные элементы) */
+.infoContainer p strong {
+  color: #388e6c; /* Изумрудный цвет для сильных элементов */
 }
 
-.loading,
+/* Стили для состояния загрузки */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #388e6c;
+}
+
 .error {
-  font-size: 1.5rem;
+  text-align: center;
+  font-size: 18px;
   color: #d32f2f; /* Красный цвет для ошибок */
 }

@@ -1,10 +1,23 @@
-/* Основной контейнер для страницы меню администратора */
+/* Основной контейнер */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-right: auto; */
-  
+  padding: 20px;
+  gap: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Заголовок */
+.heading {
+  font-size: 30px;
+  color: #00796b;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 /* Меню */
@@ -14,16 +27,8 @@
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-}
-
-.menu {
   text-align: center;
-}
-
-.heading {
-  font-size: 30px;
-  color: #00796b;
-  margin-bottom: 30px;
+  padding: 20px;
 }
 
 .facultiesList {
@@ -47,23 +52,41 @@
   color: #004d40;
 }
 
-.deleteBtn {
-  padding: 8px 16px;
-  background-color: #bb4a42;
-  color: white;
+/* Кнопки */
+.deleteBtn, .confirmButton, .cancelButton {
+  padding: 12px 24px;
+  font-size: 16px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
+.deleteBtn {
+  background-color: #bb4a42;
+  color: white;
+}
+
 .deleteBtn:hover {
   background-color: #d32f2f;
 }
 
-.buttonContainer {
-  text-align: center;
-  margin-top: 20px;
+.confirmButton {
+  background-color: #035a38;
+  color: white;
+}
+
+.confirmButton:hover {
+  background-color: #157e62;
+}
+
+.cancelButton {
+  background-color: #c2524a;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #b14f4f;
 }
 
 .addButton {
@@ -75,16 +98,14 @@
   border-radius: 30px;
   cursor: pointer;
   width: 100%;
-  transition: transform 0.3s ease;
 }
 
 .addButton:hover {
-  background: linear-gradient(135deg,#43ab80a0, #013122);
-  transform: scale(1.05); /* Эффект увеличения */
+  background: linear-gradient(135deg, #43ab80a0, #013122);
 }
 
 .addButton:active {
-  background: linear-gradient(135deg,#43ab80a0, #013a28);
+  background: linear-gradient(135deg, #43ab80a0, #013a28);
 }
 
 /* Модальное окно */
@@ -129,41 +150,10 @@
   border-color: #004d40;
 }
 
+/* Контейнер кнопок в модальном окне */
 .modalButtonContainer {
   display: flex;
   justify-content: space-between;
-}
-
-.confirmButton {
-  padding: 12px 24px;
-  background-color: #035a38;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  width: 48%;
-  transition: background-color 0.3s ease;
-}
-
-.confirmButton:hover {
-  background-color: #157e62;
-}
-
-.cancelButton {
-  padding: 12px 24px;
-  background-color: #c2524a;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  width: 48%;
-  transition: background-color 0.3s ease;
-}
-
-.cancelButton:hover {
-  background-color: #b14f4f;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -177,8 +167,8 @@
     align-items: flex-start;
   }
 
-  .deleteBtn {
-    padding: 6px 12px;
+  .deleteBtn, .confirmButton, .cancelButton {
+    padding: 10px 20px;
     font-size: 14px;
   }
 
@@ -195,11 +185,5 @@
   .input {
     font-size: 14px;
     padding: 10px;
-  }
-
-  .confirmButton, .cancelButton {
-    font-size: 14px;
-    padding: 10px 20px;
-    width: 48%;
   }
 }

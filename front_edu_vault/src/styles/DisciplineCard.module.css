@@ -263,7 +263,7 @@
 /* Эффект фокуса для доступности */
 .uploadForm input[type="file"]:focus-visible::before {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.6); /* Синяя обводка при фокусе */
+  box-shadow: 0 0 0 3px rgba(0, 62, 46, 0.6); /* Синяя обводка при фокусе */
 
 }
 
@@ -271,7 +271,7 @@
 .uploadForm input[type="file"]:valid::after {
   content: "Файл выбран!";
   display: block;
-  color: #4CAF50; /* Зеленый цвет */
+  color: #034a3b; /* Зеленый цвет */
   font-size: 14px;
   margin-top: 8px;
   text-align: center;

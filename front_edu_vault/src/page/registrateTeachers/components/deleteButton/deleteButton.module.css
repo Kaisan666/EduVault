@@ -1,0 +1,35 @@
+/* Основной стиль кнопки */
+.deleteButton {
+    background: linear-gradient(135deg, #e74c3c, #c0392b); /* Красный градиент */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  }
+  
+  /* Hover эффект */
+  .deleteButton:hover {
+    background: linear-gradient(135deg, #c0392b, #e74c3c);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  /* Эффект нажатия */
+  .deleteButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Медиа-запрос для мобильных устройств */
+  @media (max-width: 768px) {
+    .deleteButton {
+      font-size: 14px;
+      padding: 10px 15px;
+    }
+  }
+  

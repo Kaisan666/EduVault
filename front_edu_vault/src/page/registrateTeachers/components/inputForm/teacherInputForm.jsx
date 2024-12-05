@@ -88,7 +88,7 @@ const TeacherInputForm = ({teacherList, setTeachersList, setAdding}) => {
         onChange={(e) => setUserData({...userData, password : e.target.value})}
       />
       <button className={styles.button} onClick={handleAddTeacher}>
-        Добавить секретаря
+        Добавить
       </button>
       <button className={styles.closeButton} onClick={() =>closeRegistration()}>Закрыть</button>
     </div>
