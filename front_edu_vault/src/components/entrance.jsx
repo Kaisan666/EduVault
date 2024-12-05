@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../styles/entrance.module.css';
 import logo from '../images/logo_entrance.png';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LoginForm = () => {
   const [data, setData] = useState({
@@ -13,37 +14,65 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = Cookies.get('token');
+      if (token) {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/user/auth`, {
+            withCredentials: true})
+          if (response.data.userRole === "Студент" || response.data.userRole === "Староста") {
+            navigate('/main');
+          } else if (response.data.userRole === "Админ") {
+            navigate('/adminDashboard');
+          } else if (response.data.userRole === "Секретарь") {
+            navigate('/secretaryDashboard');
+          } else {
+            navigate('/main');
+          }
+        } catch (err) {
+          console.error('Ошибка при проверке аутентификации:', err);
+        }
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await axios.post(`http://localhost:5000/api/user/login`, data,
-        {withCredentials: true}
-      );
-      // const response = await axios.post(`http://localhost:5000/api/user/login`, data
-      // );
+      const response = await axios.post(`http://localhost:5000/api/user/login`, data, { withCredentials: true });
+      const auth = await axios.get(`http://localhost:5000/api/user/auth`, { withCredentials: true });
+
+      console.log(auth.data.userRole);
+
+      let targetRoute = '/main';
+      if (auth.data.userRole === "Админ") {
+        targetRoute = '/adminDashboard';
+      } else if (auth.data.userRole === "Секретарь") {
+        targetRoute = '/secretaryDashboard';
+      }
+
+      console.log(auth.data);
       const responseData = response.data;
+
       console.log(responseData);
 
       if (response.status !== 200) {
         throw new Error(responseData.message || 'Ошибка при входе');
       }
 
-      // Сохраняем токен и роль в localStorage
-      localStorage.setItem('authToken', responseData.token);
-      localStorage.setItem('userRole', responseData.role);
-      localStorage.setItem("facultyId", responseData.facultyId)
+      // Сохраняем токен и роль в куки
+      Cookies.set('token', responseData.token, { httpOnly: true, secure: false });
+      Cookies.set('userRole', responseData.role, { httpOnly: true, secure: false });
+      Cookies.set("facultyId", responseData.facultyId, { httpOnly: true, secure: false });
 
       // Перенаправляем пользователя на соответствующую страницу в зависимости от его роли
-      if (responseData.role === 'Студент') {
-        navigate('/main');
-      } else if (responseData.role === 'Секретарь') {
-        navigate('/secretaryDashBoard');
-      } else {
-        navigate('/');
-      }
+      navigate(targetRoute);
 
     } catch (err) {
       setError('Неверный логин или пароль');

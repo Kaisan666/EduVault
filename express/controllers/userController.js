@@ -39,58 +39,58 @@ class UserController {
 
     }
     async login(req, res) {
-        const {login, password} = req.body
-        const user = await sequelize.query(`
-            select * from users where "login" = :login
-            `,
-        {replacements : {login : login}})
-        console.log(user[0][0].id)
-        if (!user){
-            return res.json({error : "Пользователь не найден"})
-        }
-        let comparePassword = bcrypt.compareSync(password, user[0][0].password)
-        if (!comparePassword) {
-            return res.json({error : "Неправильный пароль"})
-        }
-        const role = await sequelize.query(
-            `
-            select "name" from users u join roles r on u."roleId" = r.id where u.id = :id
-            `,
-            {replacements : {id : user[0][0].id}}
-        )
-        if (role[0][0].name === "Студент" || role[0][0].name === "Староста"){
-            const studentIdResult = await sequelize.query(
-                `
-                SELECT s.id FROM students s
-                JOIN users u ON s."userId" = u.id
-                WHERE u.id = :userId
-                `,
-                { replacements: {userId : user[0][0].id } }
-              );
-              const studentId = studentIdResult[0][0].id;
-              console.log("Айди студента", studentId)
-              const studentGroupResult = await sequelize.query(
-                  `
-                  SELECT g.id, g."name"
-                  FROM groups g
-                  JOIN students s ON g.id = s."groupId"
-                  WHERE s.id = :studentId
-                  `,
-                  { replacements: { studentId } }
-                );
-                
-              const groupName = studentGroupResult[0][0].name
-              console.log(groupName)
-              const token = generateJWT({userId : user[0][0].id, userLogin : user[0][0].login, userRole : role[0][0].name, userGroup : groupName})
-              res.cookie('token', token, { httpOnly: true, secure: false});
-              return res.status(201).json({message : "вы успешно вошли"})
+        try {
+            const { login, password } = req.body;
+            const user = await sequelize.query(
+                `select * from users where "login" = :login`,
+                { replacements: { login: login } }
+            );
+    
+            if (!user[0][0]) {
+                return res.json({ error: "Пользователь не найден" });
             }
-            else{
-            const token = generateJWT({ userId :user[0][0].id, userLogin : user[0][0].login, userRole : role[0][0].name})
-        console.log(token)
-        res.cookie('token', token, { httpOnly: true, secure: false});
-        res.send({ error: null});}
+    
+            let comparePassword = bcrypt.compareSync(password, user[0][0].password);
+            if (!comparePassword) {
+                return res.json({ error: "Неправильный пароль" });
+            }
+    
+            const role = await sequelize.query(
+                `select "name" from users u join roles r on u."roleId" = r.id where u.id = :id`,
+                { replacements: { id: user[0][0].id } }
+            );
+    
+            if (role[0][0].name === "Студент" || role[0][0].name === "Староста") {
+                const studentIdResult = await sequelize.query(
+                    `SELECT s.id FROM students s JOIN users u ON s."userId" = u.id WHERE u.id = :userId`,
+                    { replacements: { userId: user[0][0].id } }
+                );
+                const studentId = studentIdResult[0][0].id;
+                console.log("Айди студента", studentId);
+    
+                const studentGroupResult = await sequelize.query(
+                    `SELECT g.id, g."name" FROM groups g JOIN students s ON g.id = s."groupId" WHERE s.id = :studentId`,
+                    { replacements: { studentId } }
+                );
+    
+                const groupName = studentGroupResult[0][0].name;
+                console.log(groupName);
+    
+                const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name, userGroup: groupName });
+                res.cookie('token', token, { httpOnly: true, secure: false });
+                return res.status(201).json({ message: "вы успешно вошли" });
+            } else {
+                const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
+                console.log(token);
+                res.cookie('token', token, { httpOnly: true, secure: false });
+                res.send({ error: null });
+            }
+        } catch (error) {
+            console.error("Ошибка при выполнении запроса:", error);
+            res.status(500).json({ error: "Внутренняя ошибка сервера" });
+        }
     }
+    
     async check(req, res) {
         // console.log(req.user)
         // const token = generateJWT(req.user.id, req.user.login, req.user.roleId)
