@@ -21,27 +21,31 @@ import Groups from './components/adminPanelGroupsDisciplines/Groups';
 import LK from './page/lk';
 import Courses from './components/courses';
 import AddStudents from './page/AddingStudents/AddStudents';
+import { AuthProvider } from './context/authContext';
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/secretaryDashBoard" element={<Secretary_Direction/>}/>
-        <Route path="/adminDashboard" element={<AdminMenuF/>}/>
-        <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
-        <Route path="/courses/:specialtyId" element={<Courses />} />
-        <Route path="/groups/:courseId" element={<Groups/>}/>
-        <Route path="/students/:groupId" element={<AddStudents/>}/>
-       
-        <Route path="/" element={<Entrance/>} />
-        <Route path="/PersonalCabinet" element={<LK/>}/>
-        <Route path="/main" element={<Main/>}/>
-        <Route path="/LabsPage/:disciplineId" element={<LabWorksPage/>} />
-        <Route path="/lab/:fileId" element={<LabPage/>}/>
-        
-        
-      </Routes>
-    </Router>
+
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/secretaryDashBoard" element={<Secretary_Direction/>}/>
+          <Route path="/adminDashboard" element={<AdminMenuF/>}/>
+          <Route path="/specialties/:facultyId" element={<AdminDirectionSecretary />} />
+          <Route path="/courses/:specialtyId" element={<Courses />} />
+          <Route path="/groups/:courseId" element={<Groups/>}/>
+          <Route path="/students/:groupId" element={<AddStudents/>}/>
+      
+          <Route path="/" element={<Entrance/>} />
+          <Route path="/PersonalCabinet" element={<LK/>}/>
+          <Route path="/main" element={<Main/>}/>
+          <Route path="/LabsPage/:disciplineId" element={<LabWorksPage/>} />
+          <Route path="/lab/:fileId" element={<LabPage/>}/>
+      
+      
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 

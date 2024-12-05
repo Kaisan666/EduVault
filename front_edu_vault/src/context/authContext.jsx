@@ -12,10 +12,10 @@ export const AuthProvider = ({ children }) => {
     // Проверка аутентификации при загрузке приложения
     const checkAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/user/auth'); // Используем ваш маршрут
+        const response = await axios.get('http://localhost:5000/api/user/auth', { withCredentials: true });
         if (response.data) {
           setIsAuthenticated(true);
-          setUserRole(response.data.roleName); // Предполагаем, что роль находится в поле roleName
+          setUserRole(response.data.userRole); // Используем данные, возвращаемые сервером
         }
       } catch (error) {
         console.error('Failed to check authentication', error);
@@ -27,9 +27,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', { username, password }); // Замените на ваш путь
+      const response = await axios.post('http://localhost:5000/api/user/login', { username, password }, { withCredentials: true });
       setIsAuthenticated(true);
-      setUserRole(response.data.roleName); // Предполагаем, что роль находится в поле roleName
+      setUserRole(response.data.userRole); // Используем данные, возвращаемые сервером
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout'); // Замените на ваш путь
+      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
       setIsAuthenticated(false);
       setUserRole(null);
     } catch (error) {

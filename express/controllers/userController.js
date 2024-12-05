@@ -83,7 +83,7 @@ class UserController {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
                 console.log(token);
                 res.cookie('token', token, { httpOnly: true, secure: false });
-                res.send({ error: null });
+                res.json({ userRole: user.role }); // Возвращаем роль пользователя
             }
         } catch (error) {
             console.error("Ошибка при выполнении запроса:", error);
