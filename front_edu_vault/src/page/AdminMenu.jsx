@@ -11,11 +11,8 @@ function AdminMenuF() {
     <>
       <Header />
       <main className={styles.main}>
-
         <AdminMenu/>
-        <TeacherRegistration/>
-
-        
+        <TeacherRegistration/>        
       </main>
       <Footer />
       </>

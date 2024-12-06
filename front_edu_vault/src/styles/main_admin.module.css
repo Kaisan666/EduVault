@@ -4,52 +4,71 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  gap: 20px;
+  gap: 24px;
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 960px;
   margin: auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* Заголовок */
 .heading {
-  font-size: 30px;
-  color: #00796b;
-  margin-bottom: 30px;
+  font-size: 32px;
+  color: #00695c;
+  margin-bottom: 32px;
   text-align: center;
+  font-weight: bold;
 }
 
 /* Меню */
 .menu {
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   text-align: center;
-  padding: 20px;
+  padding: 24px;
+  transition: transform 0.3s ease;
+}
+
+.menu:hover {
+  transform: translateY(-5px);
 }
 
 .facultiesList {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  margin: 12px 0;
+  padding: 16px;
+  margin: 16px 0;
   background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.facultiesList:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .facultyItem {
   font-size: 18px;
   color: #00796b;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .facultyItem:hover {
   color: #004d40;
+  text-decoration: underline;
 }
 
 /* Кнопки */
@@ -57,55 +76,62 @@
   padding: 12px 24px;
   font-size: 16px;
   border: none;
-  border-radius: 30px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .deleteBtn {
-  background-color: #bb4a42;
+  background-color: #d32f2f;
   color: white;
 }
 
 .deleteBtn:hover {
   background-color: #d32f2f;
+  transform: scale(1.05);
 }
 
 .confirmButton {
-  background-color: #035a38;
+  background-color: #00796b;
   color: white;
 }
 
 .confirmButton:hover {
-  background-color: #157e62;
+  background-color: #00796b;
+  transform: scale(1.05);
 }
 
 .cancelButton {
-  background-color: #c2524a;
+  background-color: #d32f2f;
   color: white;
 }
 
 .cancelButton:hover {
-  background-color: #b14f4f;
+  background-color: #c62828;
+  transform: scale(1.05);
 }
 
 .addButton {
-  padding: 16px 28px;
-  background: linear-gradient(135deg, #43ab80a0, #025c3f);
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #00796b, #014a42);
   color: white;
   font-size: 18px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   width: 100%;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .addButton:hover {
-  background: linear-gradient(135deg, #43ab80a0, #013122);
+  background: linear-gradient(135deg,  #00796b, #014a42);
+  transform: translateY(-3px);
 }
 
 .addButton:active {
-  background: linear-gradient(135deg, #43ab80a0, #013a28);
+  background: linear-gradient(135deg, #00796b, #115951);
+  transform: translateY(0);
 }
 
 /* Модальное окно */
@@ -115,7 +141,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,16 +150,31 @@
 
 .modalContent {
   background: white;
-  padding: 40px;
-  border-radius: 12px;
+  padding: 32px;
+  border-radius: 16px;
   width: 400px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: scaleUp 0.3s ease;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modalHeading {
   font-size: 24px;
   color: #00796b;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .input {
@@ -142,24 +183,27 @@
   font-size: 16px;
   border: 2px solid #00796b;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .input:focus {
   border-color: #004d40;
+  box-shadow: 0 0 5px rgba(0, 77, 64, 0.5);
 }
 
 /* Контейнер кнопок в модальном окне */
 .modalButtonContainer {
   display: flex;
   justify-content: space-between;
+  gap: 16px;
 }
 
 /* Адаптивность для мобильных устройств */
 @media screen and (max-width: 768px) {
   .container {
-    padding: 20px;
+    padding: 16px;
   }
 
   .facultiesList {
@@ -174,12 +218,12 @@
 
   .addButton {
     font-size: 16px;
-    padding: 14px 24px;
+    padding: 12px 20px;
   }
 
   .modalContent {
     width: 80%;
-    padding: 30px;
+    padding: 24px;
   }
 
   .input {

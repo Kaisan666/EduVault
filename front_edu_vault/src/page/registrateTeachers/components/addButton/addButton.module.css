@@ -1,37 +1,31 @@
 /* Основной стиль кнопки */
 .deleteButton {
+  background: linear-gradient(45deg, #00796b, #00483f);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-    background: linear-gradient(45deg, #004d407a, #00796b);
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-  }
-  
-  /* Hover эффект */
-  .deleteButton:hover {
-   
-    background: linear-gradient(45deg, #004d407a, #00796b);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+/* Hover эффект */
+.deleteButton:hover {
+  background: linear-gradient(45deg, #00796b, #00483f);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
 
-  }
-  
-  /* Эффект нажатия */
-  .deleteButton:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Медиа-запрос для мобильных устройств */
-  @media (max-width: 768px) {
-    .deleteButton {
+/* Эффект нажатия */
+.deleteButton:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+  .deleteButton {
       font-size: 14px;
       padding: 10px 15px;
-    }
   }
-  
+}

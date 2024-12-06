@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Импортируем Link
 import styles from '../styles/header.module.css'; 
-import logo from '../images/logo.png'; 
+ 
 import userIcon from '../images/user.png'; 
 
 const Header = () => {
@@ -9,11 +9,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.headerContainer}>
                 <div className={styles.logoContainer}>
-                    <img 
-                        src={logo} 
-                        alt="Логотип" 
-                        className={styles.logo} 
-                    />
+                   
                     <span className={styles.brandName}>EduVault</span>
                 </div>
                 <div className={styles.logoutButton}>

@@ -1,79 +1,92 @@
 .header {
-    background: linear-gradient(45deg, #00796b4e, #004d40); /* Градиент от зеленого к темно-зеленому */
-    padding: 20px 40px;
-    max-width: 1200px;
-    margin: 20px auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: box-shadow 0.3s ease;
+  background: linear-gradient(45deg, #08402de4, #026f4ecb,#014328c4);
+  background-size: 400% 400%; /* Масштаб для плавного перелива */
+  padding: 20px 70px;
+  max-width: 1450px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+  animation: gradientAnimation 3s ease infinite; /* Подключаем анимацию */
+}
+
+@keyframes gradientAnimation {
+  0% {
+      background-position: 0% 50%;
   }
-  
-  .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  50% {
+      background-position: 100% 50%;
   }
-  
-  .logoContainer {
-    display: flex;
-    align-items: center;
+  100% {
+      background-position: 0% 50%;
   }
-  
-  .logo {
-    height: 40px;
-    width: auto;
-    margin-right: 15px;
-  }
-  
-  .brandName {
-    font-size: 28px;
-    font-weight: 600;
-    color: white; /* Цвет текста белый для контраста с темным фоном */
-    transition: color 0.3s ease;
-  }
-  
-  .brandName:hover {
-    color: #d1f7d1; /* Светло-зеленый цвет при наведении */
-  }
-  
-  .logoutButton {
-    display: flex;
-    align-items: center;
-  }
-  
-  .userIcon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .userIcon:hover {
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Адаптивность для мобильных устройств */
-  @media screen and (max-width: 768px) {
-    .header {
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+  margin-right: 15px;
+}
+
+.brandName {
+  font-size: 28px;
+  font-weight: 600;
+  color: white; /* Цвет текста белый для контраста с темным фоном */
+  transition: color 0.3s ease;
+}
+
+.brandName:hover {
+  color: #d1f7d1; /* Светло-зеленый цвет при наведении */
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+}
+
+.userIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.userIcon:hover {
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+  .header {
       padding: 10px 20px;
-    }
-  
-    .logo {
+  }
+
+  .logo {
       height: 35px;
-    }
-  
-    .brandName {
+  }
+
+  .brandName {
       font-size: 24px;
-    }
-  
-    .userIcon {
+  }
+
+  .userIcon {
       width: 25px;
       height: 25px;
-    }
   }
-  
+}

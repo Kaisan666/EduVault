@@ -73,7 +73,7 @@ body {
   border-radius: 25px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  
 }
 
 .editButton {
@@ -105,7 +105,7 @@ body {
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  
   width: 100%;
 }
 
@@ -236,7 +236,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   border: none;
-  transition: transform 0.3s ease, background 0.3s ease;
+  
 }
 
 .deleteButton:hover {
