@@ -4,18 +4,16 @@ import axios from 'axios'; // Для HTTP-запросов
 
 import Header from '../components/header'; // Компонент заголовка
 import Footer from '../components/footer'; // Компонент подвала
-
 import { renderAsync } from 'docx-preview';
 import * as XLSX from 'xlsx';
 
 const LabPage = () => {
-  const { fileId } = useParams(); // Получаем параметр fileId из URL
-  const [fileData, setFileData] = useState(null); // Данные файла
-  const [isLoading, setIsLoading] = useState(true); // Состояние загрузки
-  const [error, setError] = useState(null); // Состояние ошибок
-  const navigate = useNavigate(); // Хук для навигации
+  const { fileId } = useParams();
+  const [fileData, setFileData] = useState(null); 
+  const [isLoading, setIsLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const navigate = useNavigate(); 
 
-  // Функция загрузки файла
   const fetchFile = async () => {
     try {
       setIsLoading(true);

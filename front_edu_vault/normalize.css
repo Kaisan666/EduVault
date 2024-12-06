@@ -14,7 +14,9 @@ html {
     margin: 0;
     height: 100vh;
   }
-  
+  .docx-wrapper{
+    background : black;
+    }
 a{
   text-decoration: none;
 }

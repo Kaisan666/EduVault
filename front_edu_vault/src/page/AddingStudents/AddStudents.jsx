@@ -148,11 +148,11 @@ export default function AddStudent() {
             className={styles.inputField}
           />
           <input
-            type="checkbox"
-            checked={newStudent.roleId === 3}
-            onChange={(e) => setNewStudent(prev => ({ ...prev, roleId: e.target.checked ? 2 : 3 }))}
-            className={styles.inputField}
-          /> Староста
+              type="checkbox"
+              checked={newStudent.roleId === 3}
+              onChange={(e) => setNewStudent(prev => ({ ...prev, roleId: e.target.checked ? 3 : 2 }))}
+              className={styles.inputField}
+            /> Староста
           <div className={styles.buttonContainer}>
             <button onClick={handleAddStudent} className={styles.confirmButton}>
               Добавить студента
