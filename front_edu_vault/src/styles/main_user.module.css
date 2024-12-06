@@ -1,103 +1,123 @@
 /* Контейнер для списка дисциплин */
 .disciplineContainer {
-    background: var(--container-bg);
-    padding: 40px;
-    max-width: 1200px;
-    margin: 40px auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+  background: var(--container-bg);
+  padding: 40px;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Более мягкая тень */
+
+}
+
+.disciplineContainer:hover {
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2); /* Усиленная тень */
+}
+
+/* Заголовок для факультета */
+.lab {
+  font-size: 32px; /* Увеличил размер шрифта */
+  color: var(--primary-text);
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700; /* Увеличил толщину */
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.lab:hover {
+  letter-spacing: 1px; /* Добавил эффект увеличения межбуквенного интервала */
+}
+
+/* Контейнер для дисциплин */
+.disciplineBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px; /* Увеличен зазор для "воздушности" */
+  margin-top: 20px;
+}
+
+/* Элемент дисциплины */
+.disciplineItem {
+  background-color: var(--item-bg);
+  padding: 24px; /* Немного больше отступов */
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Более заметная тень */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.disciplineItem:hover {
+  transform: translateY(-8px) scale(1.03); /* Немного больше динамики */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Увеличенная тень на hover */
+  background-color: var(--link-hover-color); /* Изменение цвета фона */
+}
+
+/* Ссылки на дисциплины */
+.disciplineLink {
+  text-decoration: none;
+  color: var(--link-color);
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.disciplineLink:hover {
+  color: var(--link-hover-color);
+  text-shadow: 0 0 8px var(--link-hover-color); /* Легкое свечение на hover */
+}
+
+.disciplineLink:active {
+  color: var(--link-active-color);
+}
+
+/* Цвета для светлой и темной темы */
+body.light {
+  --container-bg: #f9f9fb;
+  --primary-text: #004d40;
+  --item-bg: #ffffff;
+  --link-color: #00796b;
+  --link-hover-color: #004d40;
+  --link-active-color: #388e3c;
+}
+
+body.dark {
+  --container-bg: #1e1e1e;
+  --primary-text: #b2dfdb;
+  --item-bg: #292929;
+  --link-color: #80cbc4;
+  --link-hover-color: #26a69a;
+  --link-active-color: #4caf50;
+}
+
+/* Стиль для индикатора загрузки */
+.loading {
+  font-size: 20px;
+  color: var(--primary-text);
+  text-align: center;
+  margin-top: 50px;
+  animation: fadeIn 1s ease infinite alternate;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0.6;
   }
-  
-  /* Заголовок для факультета */
-  .lab {
-    font-size: 28px;
-    color: var(--primary-text);
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  to {
+      opacity: 1;
   }
-  
-  /* Контейнер для дисциплин */
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
   .disciplineBox {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  /* Элемент дисциплины */
-  .disciplineItem {
-    background-color: var(--item-bg);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .disciplineItem:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Ссылки на дисциплины */
-  .disciplineLink {
-    text-decoration: none;
-    color: var(--link-color);
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .disciplineLink:hover {
-    color: var(--link-hover-color);
-  }
-  
-  .disciplineLink:active {
-    color: var(--link-active-color);
-  }
-  
-  /* Цвета для светлой и темной темы */
-  body.light {
-    --container-bg: #f4f4f9;
-    --primary-text: #00796b;
-    --item-bg: #ffffff;
-    --link-color: #00796b;
-    --link-hover-color: #004d40;
-    --link-active-color: #388e3c;
-  }
-  
-  body.dark {
-    --container-bg: #121212;
-    --primary-text: #80cbc4;
-    --item-bg: #2c2c2c;
-    --link-color: #80cbc4;
-    --link-hover-color: #26a69a;
-    --link-active-color: #388e3c;
-  }
-  
-  /* Стиль для индикатора загрузки */
-  .loading {
-    font-size: 20px;
-    color: var(--primary-text);
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  /* Адаптивность для мобильных устройств */
-  @media screen and (max-width: 768px) {
-    .disciplineBox {
       grid-template-columns: 1fr;
-      gap: 15px;
-    }
-  
-    .lab {
-      font-size: 24px;
-    }
-  
-    .disciplineLink {
-      font-size: 16px;
-    }
+      gap: 20px;
   }
-  
+
+  .lab {
+      font-size: 26px; /* Уменьшил размер шрифта */
+  }
+
+  .disciplineLink {
+      font-size: 16px;
+  }
+}

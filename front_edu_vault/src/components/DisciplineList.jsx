@@ -50,10 +50,10 @@ const DisciplineList = () => {
     <div className={styles.disciplineContainer}>
       {group && group.length > 0 && (
         <h2 className={styles.lab}>
-          {`ФАКУЛЬТЕТ: ${group}`}
+          {`ГРУППА: ${group}`}
         </h2>
       )}
-      <h2 className={styles.lab}>ЛАБОРАТОРНЫЕ РАБОТЫ</h2>
+      <h2 className={styles.lab}></h2>
 
       <div className={styles.disciplineBox}>
         {disciplines.length > 0 ? (

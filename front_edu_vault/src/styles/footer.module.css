@@ -1,59 +1,72 @@
 .footer {
-    background: linear-gradient(45deg, #004d407a, #00796b); /* Градиент от темно-зеленого к зеленому */
-    padding: 40px 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    border-radius: 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 150px;
-    transition: box-shadow 0.3s ease;
+  background: linear-gradient(45deg, #08402de4, #026f4ecb,#014328c4);
+  background-size: 400% 400%; /* Масштаб для плавного перелива */
+  padding: 20px 10px;
+  max-width: 1450px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  transition: box-shadow 0.3s ease;
+  animation: gradientAnimation 3s ease infinite; /* Подключаем анимацию с переливом */
+}
+
+@keyframes gradientAnimation {
+  0% {
+      background-position: 0% 50%;
   }
-  
-  .footerContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  50% {
+      background-position: 100% 50%;
   }
-  
-  .footerImageContainer {
-    width: 100%;
-    margin-bottom: 20px;
+  100% {
+      background-position: 0% 50%;
+  }
+}
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.footerImageContainer {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.footerImageContainer,
+.logoContainer {
+  width: 100%;
+  text-align: center;
+}
+
+/* Адаптивность для мобильных устройств */
+@media screen and (max-width: 768px) {
+  .footer {
+      padding: 20px 10px;
   }
 
-  
-  .logoContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .logo {
-    height: 40px;
-    width: auto;
-  }
-  
-  .footerImageContainer,
-  .logoContainer {
-    width: 100%;
-    text-align: center;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .footer {
-      padding: 20px 10px;
-    }
-  
-    .footerImage {
+  .footerImage {
       height: 150px; /* Ограничиваем высоту изображения на мобильных */
-    }
-  
-    .logo {
-      height: 35px;
-    }
   }
-  
+
+  .logo {
+      height: 35px;
+  }
+}
