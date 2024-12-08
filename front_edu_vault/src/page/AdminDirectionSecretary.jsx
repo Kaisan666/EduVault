@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FacultyBanner from '../components/FacultyBanner';
 
 import Footer from '../components/footer';
-//import Header from '../components/header';
+import Header from '../components/header';
 import FacultyDetails from '../components/facultyDetails';
 
 const AdminDirectionSecretary = () => {
@@ -19,6 +19,7 @@ const AdminDirectionSecretary = () => {
 
   return (
     <div>
+      <Header/>
      
       <FacultyBanner />
       <FacultyDetails

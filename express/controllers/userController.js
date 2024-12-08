@@ -79,7 +79,17 @@ class UserController {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name, userGroup: groupName });
                 res.cookie('token', token, { httpOnly: true, secure: false });
                 return res.status(201).json({ message: "вы успешно вошли" ,  userRole: role[0][0].name});
-            } 
+            }
+            else if(role[0][0].name === "Преподаватель") {
+                const user = await sequelize.query(
+                    `
+                    select u."id", u."login" from teachers t join users u on t."userId" = u."id"
+                    `
+                )
+                const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
+                res.cookie('token', token, { httpOnly: true, secure: false });
+                return res.status(201).json({ userRole: role[0][0].name }); // Возвращаем роль пользователя
+            }
             else {
                 const token = generateJWT({ userId: user[0][0].id, userLogin: user[0][0].login, userRole: role[0][0].name });
                 console.log(token);
@@ -100,11 +110,23 @@ class UserController {
     async showOne(req, res) {
         const {userId} = req.params;
         try {
-            const result = await sequelize.query(`
+            const user = await sequelize.query(`
                 select * from users where id = :id
                 `,
             {replacements : {id : userId}})
-            res.status(201).json(result[0])
+            
+            if (user[0][0].roleId === 3 || user[0][0].roleId === 2){
+                const studentInfo = await sequelize.query(
+                    `
+                    select u."firstName", u."lastName", u."middleName", g."name" as "groupName", sp."name" as "specialtyName", c."number", f."name" as "facultyName" from users u join students s on s."userId" = u."id" join groups g on s."groupId" = g."id" join courses c on g."courseId" = c."id" join specialties sp on c."specialtyId" = sp."id"
+                    join faculties f on sp."facultyId" = f."id"  where u.id = :id
+                    `,
+                    {replacements : {id : userId}}
+                )
+                console.log(studentInfo[0][0])
+                return res.status(201).json(studentInfo[0][0])
+            }
+            res.status(201).json(user[0][0])
         } catch (error) {
             res.status(500).json({error : error.message})
         }
@@ -115,6 +137,20 @@ class UserController {
     }
     async deleteUser(req, res) {
 
+    }
+    async logout(req, res){
+        try {
+            // Устанавливаем куки с истекшим сроком действия для удаления
+            res.cookie('token', '', {
+                httpOnly: true,
+                expires: new Date(0), // Устанавливаем дату в прошлом
+                path: '/' // Убедитесь, что куки удаляются из всех путей
+            });
+            res.send({ message: 'Вы успешно вышли из аккаунта' });
+        } catch (error) {
+            console.error('Ошибка при выходе из аккаунта:', error);
+            res.status(500).send({ message: 'Ошибка сервера' });
+        }
     }
 
 

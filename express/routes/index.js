@@ -23,7 +23,7 @@ router.use("/teacher_faculty",check,  teacherSpecialtyRouter)
 
 router.use("/secretary", check, checkrole(["Админ", "Секретарь", "Преподаватель"]),secretaryRouter)
 
-router.use(`/discipline`,check, checkrole(["Админ", "Секретарь", "Студент", "Староста"]), disciplineRouter)
+router.use(`/discipline`,check, checkrole(["Админ", "Секретарь", "Студент", "Староста", "Преподаватель"]), disciplineRouter)
 
 /**
  * @swagger

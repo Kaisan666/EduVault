@@ -3,10 +3,10 @@ import { teacherSpecialtyController } from '../controllers/teacherDisciplineCont
 
 const teacherSpecialtyRouter = new Router();
 
-teacherSpecialtyRouter.post('/giveTeacherDiscipline', teacherSpecialtyController.create);
-teacherSpecialtyRouter.get('/show-faculties_teachers/:facultyId', teacherSpecialtyController.showAll);
+teacherSpecialtyRouter.post('/giveTeacherDiscipline/:disciplineId', teacherSpecialtyController.create);
+teacherSpecialtyRouter.get('/getTeachersByDiscipline/:disciplineId', teacherSpecialtyController.showAll);
 // router.get('/secretaries/:id', secretaryController.showOne);
 teacherSpecialtyRouter.put('/edit-teacher/:teacherId', teacherSpecialtyController.update);
-teacherSpecialtyRouter.delete('/delete-teacher/:teacherId', teacherSpecialtyController.delete);
+teacherSpecialtyRouter.delete('/removeTeacherDiscipline/:disciplineId/:teacherId', teacherSpecialtyController.delete);
 
 export default teacherSpecialtyRouter;

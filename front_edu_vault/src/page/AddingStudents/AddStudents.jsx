@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styles from "./Students.module.css";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
+
 
 export default function AddStudent() {
+  const navigate = useNavigate()
   const { groupId } = useParams();
   const [group, setGroup] = useState('');
   const [students, setStudents] = useState([]);
@@ -88,6 +92,9 @@ export default function AddStudent() {
   };
 
   return (
+    <>
+    <Header/>
+    <button onClick={() => navigate(-1)}>Назад</button>
     <div className={styles.groupsContainer}>
       <div className={styles.courseFrame}>
         <h1>Группа: {group}</h1>
@@ -168,5 +175,7 @@ export default function AddStudent() {
         </button>
       )}
     </div>
+    <Footer/>
+    </>
   );
 }

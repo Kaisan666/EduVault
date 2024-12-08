@@ -15,6 +15,17 @@ const User = sequelize.define("user", {
 const Student = sequelize.define("student", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true}
 })
+const Teacher_discipline = sequelize.define('teacher_discipline', {
+    teacherId: { type: DataTypes.INTEGER, allowNull: false },
+    disciplineId: { type: DataTypes.INTEGER, allowNull: false }
+}, {
+    indexes: [
+        {
+            unique: true,
+            fields: ['teacherId', 'disciplineId']
+        }
+    ]
+});
 
 const Group = sequelize.define("group", {
     id : {type : DataTypes.INTEGER, primaryKey: true, autoIncrement : true},
@@ -110,8 +121,8 @@ Role.hasMany(User)
 User.belongsTo(Role)
 
 
-Teacher.belongsToMany(Discipline, {through : "teacher_discipline"})
-Discipline.belongsToMany(Teacher, {through : "teacher_discipline"})
+Teacher.belongsToMany(Discipline, {through : Teacher_discipline})
+Discipline.belongsToMany(Teacher, {through : Teacher_discipline})
 
 
 Role.belongsToMany(Permission, {through : "role_permission"})
@@ -155,5 +166,6 @@ Teacher,
 Department,
 Role,
 Permission,
-Secretary
+Secretary,
+Teacher_discipline
 }

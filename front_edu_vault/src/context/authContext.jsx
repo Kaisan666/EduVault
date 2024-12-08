@@ -1,12 +1,15 @@
 // src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [userLogin, setUserLogin] = useState(null)
+  const [userId, setUserId] = useState(null)
 
   useEffect(() => {
     // Проверка аутентификации при загрузке приложения
@@ -14,8 +17,11 @@ export const AuthProvider = ({ children }) => {
       try {
         const response = await axios.get('http://localhost:5000/api/user/auth', { withCredentials: true });
         if (response.data) {
+          console.log(response.data)
           setIsAuthenticated(true);
           setUserRole(response.data.userRole); // Используем данные, возвращаемые сервером
+          setUserLogin(response.data.userLogin)
+          setUserId(response.data.userId)
         }
       } catch (error) {
         console.error('Failed to check authentication', error);
@@ -38,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout', {}, { withCredentials: true });
+      await axios.post('http://localhost:5000/api/user/logout', {}, { withCredentials: true });
       setIsAuthenticated(false);
       setUserRole(null);
     } catch (error) {
@@ -47,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userRole, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, userRole, login, logout, userLogin, userId}}>
       {children}
     </AuthContext.Provider>
   );

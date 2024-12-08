@@ -142,7 +142,12 @@ class DisciplineController {
             return res.status(201).json(studentDisciplinesResult[0])
           }
           else if (userRole === "Преподаватель"){
-            
+            const teachersDiscipline = await sequelize.query(
+                `
+                select d."id", d."name" from users u join teachers t on t."userId" = u."id" join teacher_disciplines td on td."teacherId" = t."id" join disciplines d on td."disciplineId" = d."id" where u."id" = :id
+                `, {replacements : {id : userId}}
+            )
+            return res.status(201).json(teachersDiscipline[0])
           }
         } catch (error) {
           console.error('Error executing query:', error);

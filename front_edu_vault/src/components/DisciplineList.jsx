@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'; // Импортируем Link для маршрутизации
 import styles from '../styles/main_user.module.css';
 import axios from 'axios';
+import { useAuth } from '../context/authContext';
 
 const DisciplineList = () => {
+  const {userRole, userLogin, userId} = useAuth();
   const [userData, setUserData] = useState(null);
   const [group, setGroup] = useState(null);
   const [disciplines, setDisciplines] = useState([]);
@@ -21,14 +23,14 @@ const DisciplineList = () => {
   }
 
   useEffect(() => {
-    fetchUserInfo();
+    // fetchUserInfo();
   }, []);
 
   useEffect(() => {
     async function fetchDisciplines() {
-      if (userData && (userData.userRole === "Студент" || userData.userRole === "Староста")) {
+      {
         try {
-          const response = await axios.get(`http://localhost:5000/api/discipline/disciplines-all`, { withCredentials: true });
+          const response = await axios.get(`http://localhost:5000/api/discipline/disciplines-all`,{ withCredentials: true });
           console.log(response.data);
           setDisciplines(response.data);
         } catch (error) {
@@ -36,7 +38,8 @@ const DisciplineList = () => {
         } finally {
           setLoading(false);
         }
-      }
+      } 
+
     }
 
     fetchDisciplines();

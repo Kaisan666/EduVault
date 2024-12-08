@@ -5,7 +5,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import DisciplinesInCourse from './disciplinesInCourse';
-
+import Header from '../header';
+import Footer from '../footer';
 const Groups = () => {
   const { courseId } = useParams();
   const navigate = useNavigate(); // Hook for navigation
@@ -76,6 +77,8 @@ const Groups = () => {
   };
 
   return (
+    <>
+    <Header/>
     <div className={styles.groupsContainer}>
       <div className={styles.courseFrame}>
         <h1>Курс: {courseDetails}</h1>
@@ -131,6 +134,8 @@ const Groups = () => {
         <DisciplinesInCourse />
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

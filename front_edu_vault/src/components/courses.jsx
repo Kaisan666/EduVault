@@ -4,6 +4,8 @@ import styles from '../styles/Courses.module.css';
 import axios from 'axios';
 import { useParams, useNavigate } from "react-router";
 import { Link } from 'react-router-dom';
+import Header from './header';
+import Footer from './footer';
 
 const Courses = () => {
   const { specialtyId } = useParams();
@@ -85,6 +87,9 @@ const Courses = () => {
   };
 
   return (
+
+    <>
+    <Header/>
     <div className={styles.coursesContainer}>
       <div className={styles.directionFrame}>
         <h1>{facultyDetails}</h1>
@@ -137,6 +142,8 @@ const Courses = () => {
         </button>
       )}
     </div>
+    <Footer/>
+    </>
   );
 };
 

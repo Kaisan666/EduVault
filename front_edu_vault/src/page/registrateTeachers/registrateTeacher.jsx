@@ -36,7 +36,7 @@ const TeacherRegistration = () => {
   useEffect(() => {
     async function getTeachers() {
       try {
-        const response = await axios.get(`http://localhost:5000/api/teacher/show-teachers`, { withCredentials: true });
+        const response = await axios.get(`http://localhost:5000/api/teacher/show-all`, { withCredentials: true });
         console.log(response.data);
         setTeachers(response.data);
       } catch (error) {

@@ -10,9 +10,10 @@ const generateJWT = (id, login, roleId) => {
 }
 class TeacherSpecialtyController {
     async create(req, res) {
-        const {teacherId} = req.user
         const { disciplineId } = req.params;
-    
+        const {teacherId} = req.body
+        console.log(req)
+        
         try {
             // Проверка наличия обязательных полей
             if (!teacherId || !disciplineId) {
@@ -20,7 +21,7 @@ class TeacherSpecialtyController {
             }
     
             const insertion = await sequelize.query(
-                `INSERT INTO teacher_discipline ("teacherId", "disciplineId", "createdAt", "updatedAt") VALUES (:teacherId, :disciplineId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
+                `INSERT INTO teacher_disciplines ("teacherId", "disciplineId", "createdAt", "updatedAt") VALUES (:teacherId, :disciplineId, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) RETURNING *`,
                 { replacements: { teacherId, disciplineId } }
             );
     
@@ -33,26 +34,14 @@ class TeacherSpecialtyController {
     
 
     async showAll(req, res) {
-        const { specialtyId } = req.params;
+        const { disciplineId } = req.params;
         try {
             // Получение идентификаторов преподавателей, связанных с факультетом
             const teachersIdResult = await sequelize.query(
-                `SELECT "teacherId" FROM teacher_discipline WHERE "specialty" = :discipline`,
-                { replacements: { specialtyId } }
+                `select t."id", u."lastName", u."firstName", u."middleName" from teacher_disciplines td join teachers t on td."teacherId" = t."id" join users u on t."userId" = u."id" where td."disciplineId" = :id`,
+                { replacements: { id : disciplineId } }
             );
-    
-            const teachersId = teachersIdResult[0].map(row => row.teacherId);
-    
-            // Получение информации о преподавателях
-            const teachers = await sequelize.query(
-                `SELECT * FROM teachers WHERE id IN (:teachersId)`,
-                { replacements: { teachersId } }
-            );
-    
-            console.log(teachersIdResult);
-            console.log(teachers);
-    
-            return res.json(teachers[0]);
+            return res.status(201).json(teachersIdResult[0])
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
@@ -89,20 +78,19 @@ class TeacherSpecialtyController {
     }
     
     async delete(req, res) {
-        const { specialtyId } = req.params;
-        const { teacherId } = req.body;
-    
+        const { disciplineId, teacherId } = req.params;
+
         // Проверка наличия обязательных полей
-        if (!specialtyId || !teacherId) {
+        if (!disciplineId || !teacherId) {
             return res.status(400).json({ error: "Необходимо задать все обязательные поля" });
         }
-    
+
         try {
             await sequelize.query(
-                `DELETE FROM teacher_specialty WHERE "specialtyId" = :specialtyId AND "teacherId" = :teacherId`,
-                { replacements: { specialtyId, teacherId } }
+                `DELETE FROM teacher_disciplines WHERE "disciplineId" = :disciplineId AND "teacherId" = :teacherId`,
+                { replacements: { disciplineId, teacherId } }
             );
-    
+
             res.status(200).json({ message: "Запись успешно удалена" });
         } catch (error) {
             res.status(500).json({ error: error.message });

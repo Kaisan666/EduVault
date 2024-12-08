@@ -58,7 +58,7 @@ class TeacherController {
     async showAll(req, res) {
         try {
             const result = await sequelize.query(`
-                select * from teachers t join users u on t."userId" = u.id
+                select t."id", u."firstName", u."lastName", u."middleName" from teachers t join users u on t."userId" = u.id
                 `)
             res.status(201).json(result[0])
         } catch (error) {

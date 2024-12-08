@@ -1,31 +1,41 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Хук для навигации
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom'; // Хук для навигации
 import Header from '../components/header';
 import Footer from '../components/footer';
 import PersonalCabinet from '../components/PersonalCabinet';
 import styles from '../styles/LK.module.css';
+import { useAuth } from '../context/authContext';
+import axios from 'axios';
 
 const LK = () => {
   const navigate = useNavigate(); // Хук для навигации
-
+  const { logout, isAuthenticated, userRole, userLogin, userId} = useAuth();
+  const [data, setData] = useState()
+  const {userIdUrl} = useParams()
+  console.log(userId, userIdUrl)
   // Функция для выхода из личного кабинета
   const handleLogout = () => {
     // Удаляем информацию о пользователе (например, токен)
-    localStorage.removeItem('authToken'); // Удаляем токен или другие данные
+    logout()
 
     // Перенаправляем на страницу входа
     navigate('/');
   };
+  useEffect(() =>{
+    // const response = await axios.get(``)
+  }, [])
+
+
 
   return (
     <div className={styles.container}>
       <Header />
       <main className={styles.main}>
-        <PersonalCabinet />
-        {/* Кнопка "Выйти" */}
-        <button onClick={handleLogout} className={styles.logoutButton}>
+        <PersonalCabinet userIdUrl ={userIdUrl} />
+        {userId == userIdUrl ? <button onClick={handleLogout} className={styles.logoutButton}>
           Выйти
-        </button>
+        </button> : null}
+        
       </main>
       <Footer />
     </div>

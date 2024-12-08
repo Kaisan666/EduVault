@@ -8,10 +8,10 @@ export function check(req, res, next){
     try {
         // const token = req.headers.authorization.split(" ")[1]
         const token = req.cookies.token
-        // console.log('Cookies:', req.cookies);
+        console.log('Cookies:', req.cookies.token);
         // console.log(token)
         if (!token){
-            res.status(401).json({error : "Пользователь не авторизован"})
+            res.status(401).json({error : "Пользователь не авторизованaaaaaaaaaaa"})
         }
         const decoded = jwt.verify(token, process.env.SECRET_KEY) 
         req.user = decoded

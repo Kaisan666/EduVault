@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/PersonalCabinet.module.css';
+import axios from 'axios';
 
-const PersonalCabinet = () => {
+const PersonalCabinet = ({userIdUrl}) => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,19 +10,10 @@ const PersonalCabinet = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const data = {
-          lastName: 'Иванов',
-          firstName: 'Иван',
-          middleName: 'Иванович',
-          faculty: 'Факультет информатики',
-          direction: 'Программирование',
-          course: 3,
-          group: 'ИВТ-301'
-        };
-
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        setUserData(data);
+        const response = await axios.get(`http://localhost:5000/api/user/user/${userIdUrl}`)
+        console.log(response.data)
+        setUserData(response.data);
+        
       } catch (error) {
         console.error('Error fetching user data:', error);
         setError(error.message);
@@ -40,15 +32,16 @@ const PersonalCabinet = () => {
   if (error) {
     return <div>Ошибка: {error}</div>;
   }
+  console.log(userData)
 
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <h2>{`${userData.lastName} ${userData.firstName} ${userData.middleName}`}</h2>
-        <p><strong>Факультет:</strong> {userData.faculty}</p>
-        <p><strong>Направление:</strong> {userData.direction}</p>
-        <p><strong>Курс:</strong> {userData.course}</p>
-        <p><strong>Группа:</strong> {userData.group}</p>
+        <p><strong>Факультет:</strong> {userData.facultyName}</p>
+        <p><strong>Направление:</strong> {userData.specialtyName}</p>
+        <p><strong>Курс:</strong> {userData.number}</p>
+        <p><strong>Группа:</strong> {userData.groupName}</p>
       </div>
     </div>
   );

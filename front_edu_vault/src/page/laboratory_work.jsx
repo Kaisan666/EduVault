@@ -4,6 +4,7 @@ import DisciplineCard from '../components/DisciplineCard';
 import Footer from '../components/footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import styles from "./inputForm.module.css"
 
 const LabWorksPage = () => {
   const { disciplineId } = useParams();
@@ -61,26 +62,29 @@ console.log(labs)
   return (
     <div className="app">
       <Header />
-      <main>
+      <main style={{display : "flex", flexDirection : "column"}}>
         {isAdding ? (
           <div>
             <form
+            
+            className={styles.inputForm}
               onSubmit={(e) => {
                 e.preventDefault();
                 handleAddLab();
               }}
             >
               <input
+              className={styles.inputField}
                 type="text"
                 placeholder="Введите название/номер лабораторной работы"
                 value={labName}
                 onChange={(e) => setLabName(e.target.value)}
               />
-              <button type="submit">Добавить</button>
+              <button type="submit" style={{width : "300px"}}>Добавить</button>
             </form>
           </div>
         ) : (
-          <button onClick={handleAddClick} className="add-button">
+          <button onClick={handleAddClick} style={{margin : "0 auto"}}>
             + Добавить лабораторную работу
           </button>
         )}
